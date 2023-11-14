@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:29 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/13 14:19:52 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:07:48 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ int	main(void)
 {
 	char	*input;
 	int		i;
-	// t_token	*token;
-	t_tokenList	*tokenList;
+	t_token	*token;
 
-	tokenList = (t_tokenList *)malloc(sizeof(t_tokenList));
+	token = (t_token *)malloc(sizeof(t_token));
 	while (1)
 	{
 	//	input = readline("\x1B[34mminishell\n> \x1B[0m");
@@ -41,11 +40,17 @@ int	main(void)
 			break ;
 		}
 	//	lexer(input, token);
-		lexer(input, tokenList);
+		lexer(input, token);
 		i = 0;
-		printf("Tokens: %d\n", tokenList->count);
-		while (i < tokenList->count)
-			printf("%s\n", tokenList->tokens[i++]);
+		printf("Tokens: %d\n", token->count);
+		while (i <= token->count)
+		{
+			if (token->content[i])
+				printf("Arg: %s\n", token->content[i]);
+			if (token->tokens[i])
+				printf("Token: %s\n", token->tokens[i]);
+			i++;
+		}	
 		free(input);
 	}
 	return (0);

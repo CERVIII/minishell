@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/13 14:33:14 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:51:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,14 @@ typedef enum e_token_type
 
 typedef struct s_token
 {
+	char	**tokens;
 	char	**content;
-	char	**content2;
-	int		type;
+	char	*cpyinput;
+	int		count;
+	int		*len;
 }	t_token;
 
-
-typedef struct s_tokenList
-{
-	char	**tokens;
-	char 	**content;
-	int		count;
-}	t_tokenList;
-
-int	lexer(char *input, t_tokenList *tokenList);
-//int	lexer(char *input, t_token *tokens);
+void	ft_strlen_token(char *input, t_token *token);
+int		lexer(char *input, t_token *token);
 
 #endif
