@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/14 14:51:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:00:56 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ typedef struct s_token
 {
 	char	**tokens;
 	char	**content;
-	char	*cpyinput;
+	char	*cpinp;
 	int		count;
 	int		*len;
 }	t_token;
 
+void	ft_freetoken(t_token *token);
 void	ft_strlen_token(char *input, t_token *token);
 int		lexer(char *input, t_token *token);
 
