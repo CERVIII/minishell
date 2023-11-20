@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/15 12:00:56 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:37:10 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	char	**tokens;
-	char	**content;
-	char	*cpinp;
 	int		count;
-	int		*len;
+	int		len;
 }	t_token;
 
 void	ft_freetoken(t_token *token);

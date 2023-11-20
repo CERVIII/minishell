@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:29 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/15 12:01:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:55:05 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,19 @@ static void	leaks(void)
 char	*prompt(void)
 {
 	char	*end;
+	char	*cwd;
 
-	end = ft_strjoin(BLUE, "minishell/\n");
+	cwd = NULL;
+	end = ft_strjoin(BLUE, getcwd(cwd, sizeof(cwd)));
+	free(end);
+	end = ft_strjoin(end, "\n");
+	free(end);
 	end = ft_strjoin(end, GREEN);
+	free(end);
 	end = ft_strjoin(end, "> ");
+	free(end);
 	end = ft_strjoin(end, NORMAL);
+
 	return (end);
 }
 
@@ -41,39 +49,37 @@ void	ft_freetoken(t_token *token)
 		free(token->tokens[i++]);
 	free(token->tokens);
 	free(token->cpinp);
-	free(token->len);
 }
 
 int	main(void)
 {
 	char	*input;
+	char	*str;
 	int		i;
 	t_token	*token;
 
 	token = (t_token *)malloc(sizeof(t_token));
 	while (1)
 	{
-	//	input = readline("\x1B[34mminishell\n> \x1B[0m");
-		input = readline(prompt());
-		if (!input)
+		atexit(leaks);
+//		input = readline("\x1B[34mminishell\n> \x1B[0m");
+		str = prompt();
+		input = readline(str);
+		if (!input || !ft_strcmp(input, "exit"))
 		{
-			printf("%sSaliendo de minishell...\n%s", RED, NORMAL);
+			printf("%sSaliendo de minishell...%s\n", RED, NORMAL);
+			free(str);
+			free(input);
 			break ;
 		}
 		lexer(input, token);
 		i = 0;
 		printf("Tokens: %d\n", token->count);
-		while (i <= token->count)
-		{
-			if (token->content[i])
-				printf("Arg: %s\n", token->content[i]);
-			if (token->tokens[i])
-				printf("Token: %s\n", token->tokens[i]);
-			i++;
-		}
-		ft_freetoken(token);
+		while (token->tokens[i])
+			printf("Token: %s\n", token->tokens[i++]);
+//		ft_freetoken(token);
+		free(str);
 		free(input);
-		atexit(leaks);
 	}
 	return (0);
 }
