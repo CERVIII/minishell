@@ -1,95 +1,95 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 14:26:45 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/21 11:16:05 by pcervill         ###   ########.fr       */
+/*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
+/*   Updated: 2023/11/21 14:36:49 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-
 void	create_token(char *input, t_token *token)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	token_index;
+	int		i;
+	int		j;
+	int		k;
+	char	*tokens;
+	t_token	*tmp;
 
-	token->tokens = calloc(token->count + 1, sizeof(char *));
+	tokens = NULL;
 	i = 0;
-	token_index = 0;
 	while (input[i])
 	{
-		//token_operator(input, token, i, token_index);
 		if ((input[i] == '>' && input[i + 1] == '>')
 			|| (input[i] == '<' && input[i + 1] == '<'))
 		{
-			token->tokens[token_index] = (char *)calloc(3, sizeof(char));
-			token->tokens[token_index][0] = input[i];
-			token->tokens[token_index][1] = input[i + 1];
-			token_index++;
-			i += 2;
+			tokens = (char *)ft_calloc(3, sizeof(char));
+			tokens[0] = input[i++];
+			tokens[1] = input[i++];
 		}
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
-			token->tokens[token_index] = (char *)calloc(2, sizeof(char));
-			token->tokens[token_index][0] = input[i++];
-			token_index++;
+			tokens = (char *)ft_calloc(2, sizeof(char));
+			tokens[0] = input[i++];
 		}
-		if (input[i] != '|' && input[i] != '<' && input[i] != '>')
+		else if (input[i] != '|' && input[i] != '<' && input[i] != '>')
 		{
 			j = i;
+			while (input[j] && input[j] != '|'
+				&& input[j] != '<' && input[j] != '>')
+				j++;
+			tokens = ft_calloc(((j - i) + 1), sizeof(char));
 			k = 0;
-			token->len = 0;
-			while (input[i] && input[i] != '|'
-				&& input[i] != '<' && input[i] != '>')
-			{
-				token->len++;
-				i++;
-			}
-			token->tokens[token_index] = calloc((token->len + 1), sizeof(char));
-			while (k < (token->len))
-				token->tokens[token_index][k++] = input[j++];
-			token_index++;
+			while (i < j)
+				tokens[k++] = input[i++];
+		}
+		if (tokens != NULL)
+		{
+			tmp = NULL;
+			tmp = ft_token_new(tokens);
+			ft_add_token_last(token, tmp);
+			free(tokens);
 		}
 	}
 	return ;
 }
 
-void	ft_strlen_token(char *input, t_token *token)
+int	ft_strlen_token(char *input)
 {
 	int	i;
+	int	count;
 
 	i = 0;
-	token->count = 0;
+	count = 0;
 	while (input[i])
 	{
 		if ((input[i] == '>' && input[i + 1] == '>')
 			|| (input[i] == '<' && input[i + 1] == '<'))
 		{
-			token->count++;
+			count++;
 			i += 1;
 		}
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
-			token->count++;
+			count++;
 		else if ((input[i] != '|' && input[i] != '<' && input[i] != '>')
 			&& (input[i + 1] == '|' || input[i + 1] == '<'
 				|| input[i + 1] == '>' || !input[i + 1]))
-			token->count++;
+			count++;
 		i++;
 	}
-	return ;
+	return (count);
 }
 
 int	lexer(char *input, t_token *token)
 {
-	ft_strlen_token(input, token);
+	int	count;
+
+	count = ft_strlen_token(input);
+	printf("Tokens: %d\n", count);
 	create_token(input, token);
 	return (0);
 }

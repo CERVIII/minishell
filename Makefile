@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2023/11/08 14:37:25 by pcervill         ###   ########.fr        #
+#    Updated: 2023/11/21 12:04:59 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		= ./src
 
-SRCS		= main.c lexer.c
+SRCS		= main2.c lexer2.c lexer_utils.c #main.c lexer.c
 
 OBJS		= $(addprefix $(SRC_DIR)/, ${SRCS:.c=.o})
 

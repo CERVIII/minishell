@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 12:06:29 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/21 11:45:51 by pcervill         ###   ########.fr       */
+/*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
+/*   Updated: 2023/11/21 14:37:31 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*prompt(void)
 
 	cwd = NULL;
 	end = ft_strjoin(BLUE, getcwd(cwd, sizeof(cwd)));
+	free(cwd);
 	free(end);
 	end = ft_strjoin(end, "\n");
 	free(end);
@@ -32,37 +33,18 @@ char	*prompt(void)
 	end = ft_strjoin(end, "> ");
 	free(end);
 	end = ft_strjoin(end, NORMAL);
-
 	return (end);
-}
-
-void	ft_freetoken(t_token *token)
-{
-	int	i;
-
-	i = 0;
-	while (token->content[i])
-		free(token->content[i++]);
-	free(token->content);
-	i = 0;
-	while (token->tokens[i])
-		free(token->tokens[i++]);
-	free(token->tokens);
-	free(token->cpinp);
 }
 
 int	main(void)
 {
 	char	*input;
 	char	*str;
-	int		i;
 	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token));
 	while (1)
 	{
 		atexit(leaks);
-//		input = readline("\x1B[34mminishell\n> \x1B[0m");
 		str = prompt();
 		input = readline(str);
 		if (!input || !ft_strcmp(input, "exit"))
@@ -72,12 +54,14 @@ int	main(void)
 			free(input);
 			break ;
 		}
+		token = NULL;
 		lexer(input, token);
-		i = 0;
-		printf("Tokens: %d\n", token->count);
-		while (token->tokens[i])
-			printf("Token: %s\n", token->tokens[i++]);
-//		ft_freetoken(token);
+		/* while (token->next)
+		{
+			token = token->next;
+		} */
+		printf("Token:%s\nType: %d\n", token->token, token->type);
+		ft_free_token(token);
 		free(str);
 		free(input);
 	}
