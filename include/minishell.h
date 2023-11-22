@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/21 14:28:07 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:18:51 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,17 @@ typedef struct s_token
 void	ft_strlen_token(char *input, t_token *token);
 int		lexer(char *input, t_token *token); */
 
+		/* main2.c */
+char		*prompt(void);
+
 		/* lexer2.c */
-void	create_token(char *input, t_token *token);
-int		ft_strlen_token(char *input);
-int		lexer(char *input, t_token *token);
+void		create_token(char *input, t_token **token);
+void		ft_strlen_token(char *input);
+int			lexer(char *input, t_token **token);
 
 		/* lexer_utils.c */
-t_token	*ft_token_new(char *token);
-void	ft_add_token_last(t_token *list, t_token *new);
-void	ft_free_token(t_token *token);
+t_token		*ft_token_new(char *token);
+void		ft_add_token_last(t_token **list, t_token *new);
+void		ft_free_token(t_token **token);
 
 #endif

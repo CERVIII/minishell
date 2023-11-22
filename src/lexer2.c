@@ -6,13 +6,13 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/21 14:36:49 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/22 13:29:23 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	create_token(char *input, t_token *token)
+void	create_token(char *input, t_token **token)
 {
 	int		i;
 	int		j;
@@ -20,7 +20,6 @@ void	create_token(char *input, t_token *token)
 	char	*tokens;
 	t_token	*tmp;
 
-	tokens = NULL;
 	i = 0;
 	while (input[i])
 	{
@@ -58,7 +57,7 @@ void	create_token(char *input, t_token *token)
 	return ;
 }
 
-int	ft_strlen_token(char *input)
+void	ft_strlen_token(char *input)
 {
 	int	i;
 	int	count;
@@ -81,15 +80,14 @@ int	ft_strlen_token(char *input)
 			count++;
 		i++;
 	}
-	return (count);
+	// Borrar printf de count tokens↓
+	printf("Tokens: %d\n", count);
+	return ;
 }
 
-int	lexer(char *input, t_token *token)
+int	lexer(char *input, t_token **token)
 {
-	int	count;
-
-	count = ft_strlen_token(input);
-	printf("Tokens: %d\n", count);
+	ft_strlen_token(input);
 	create_token(input, token);
 	return (0);
 }
