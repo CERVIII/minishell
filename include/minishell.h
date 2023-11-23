@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/22 13:18:51 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:34:21 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum e_token_type
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
+	HERE_DOC,
 }	t_token_type;
 
 /* typedef struct s_token

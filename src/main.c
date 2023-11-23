@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 12:06:29 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/21 11:45:51 by pcervill         ###   ########.fr       */
+/*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
+/*   Updated: 2023/11/23 12:53:52 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ static void	leaks(void)
 	system("leaks -q minishell");
 }
 
-char	*prompt(void)
+/* char	*prompt(void)
 {
 	char	*end;
 	char	*cwd;
 
 	cwd = NULL;
-	end = ft_strjoin(BLUE, getcwd(cwd, sizeof(cwd)));
+	end = ft_strjoin(BLUE, getcwd(NULL, 0));
+	free(cwd);
 	free(end);
 	end = ft_strjoin(end, "\n");
 	free(end);
@@ -32,54 +33,68 @@ char	*prompt(void)
 	end = ft_strjoin(end, "> ");
 	free(end);
 	end = ft_strjoin(end, NORMAL);
-
 	return (end);
-}
+} */
 
-void	ft_freetoken(t_token *token)
+void	free_exit(char *str, char *input)
 {
-	int	i;
-
-	i = 0;
-	while (token->content[i])
-		free(token->content[i++]);
-	free(token->content);
-	i = 0;
-	while (token->tokens[i])
-		free(token->tokens[i++]);
-	free(token->tokens);
-	free(token->cpinp);
+	free(str);
+	free(input);
+	return ;
 }
+
+char	*prompt(void)
+{
+	char	*end;
+	char	*cwd;
+	char	*temp;
+
+	end = NULL;
+	cwd = NULL;
+	cwd = getcwd(cwd, sizeof(cwd));
+	if (!cwd)
+		return (NULL);
+	end = ft_strjoin(BLUE, cwd);
+	free(cwd);
+	temp = end;
+	end = ft_strjoin(temp, "\n");
+	free(temp);
+	temp = ft_strjoin(end, GREEN);
+	free(end);
+	end = ft_strjoin(temp, "> ");
+	free(temp);
+	temp = ft_strjoin(end, NORMAL);
+	free(end);
+	return (temp);
+}
+
 
 int	main(void)
 {
 	char	*input;
 	char	*str;
-	int		i;
 	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token));
+	atexit(leaks);
 	while (1)
 	{
-		atexit(leaks);
-//		input = readline("\x1B[34mminishell\n> \x1B[0m");
+		token = NULL;
 		str = prompt();
 		input = readline(str);
 		if (!input || !ft_strcmp(input, "exit"))
-		{
-			printf("%sSaliendo de minishell...%s\n", RED, NORMAL);
-			free(str);
-			free(input);
 			break ;
+		lexer(input, &token);
+		// Borrar printf de token ↓
+		t_token	*temp = token;
+		while (temp)
+		{
+			printf("Token: %s	Type: %d\n", temp->token, temp->type);
+			temp = temp->next;
 		}
-		lexer(input, token);
-		i = 0;
-		printf("Tokens: %d\n", token->count);
-		while (token->tokens[i])
-			printf("Token: %s\n", token->tokens[i++]);
-//		ft_freetoken(token);
-		free(str);
-		free(input);
+		ft_free_token(&token);
+		free_exit(str, input);
 	}
+	printf("%sSaliendo de minishell...%s\n", RED, NORMAL);
+	free_exit(str, input);
 	return (0);
 }
