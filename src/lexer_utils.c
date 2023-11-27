@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/23 12:33:58 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:15:33 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_token	*ft_token_new(char *token)
 	else if (!ft_strcmp(new->token, ">"))
 		new->type = REDIR_OUT;
 	else if (!ft_strcmp(new->token, ">>"))
-		new->type = REDIR_OUT;
+		new->type = RREDIR;
 	else if (!ft_strcmp(new->token, "<<"))
 		new->type = HERE_DOC;
 	else
