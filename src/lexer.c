@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer2.c                                           :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/22 13:29:23 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/12/11 18:46:16 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	create_token(char *input, t_token **token)
+void	create_token(char *str, t_token **token)
 {
 	int		i;
 	int		j;
 	int		k;
 	char	*tokens;
+	char	*input;
 	t_token	*tmp;
 
 	i = 0;
+	input = ft_strtrim(str, " \t\n\r");
 	while (input[i])
 	{
 		if ((input[i] == '>' && input[i + 1] == '>')
@@ -29,11 +31,13 @@ void	create_token(char *input, t_token **token)
 			tokens = (char *)ft_calloc(3, sizeof(char));
 			tokens[0] = input[i++];
 			tokens[1] = input[i++];
+			// printf("Tokens%s\n",tokens );
 		}
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tokens = (char *)ft_calloc(2, sizeof(char));
 			tokens[0] = input[i++];
+			// printf("Tokens%s\n",tokens );
 		}
 		else if (input[i] != '|' && input[i] != '<' && input[i] != '>')
 		{
@@ -45,7 +49,8 @@ void	create_token(char *input, t_token **token)
 			k = 0;
 			while (i < j)
 				tokens[k++] = input[i++];
-		}
+			// printf("Tokens%s\n",tokens );
+		}		
 		if (tokens != NULL)
 		{
 			tmp = NULL;
@@ -54,25 +59,30 @@ void	create_token(char *input, t_token **token)
 			free(tokens);
 		}
 	}
+	free(input);
 	return ;
 }
 
-void	ft_strlen_token(char *input)
+void	ft_strlen_token(char *str)
 {
 	int	i;
 	int	count;
+	char	*input;
 
 	i = 0;
 	count = 0;
+	input = ft_strtrim(str, " \t\n\r");
 	while (input[i])
 	{
+		// if (input[i] == ' ')
+		// 	i++;
 		if ((input[i] == '>' && input[i + 1] == '>')
 			|| (input[i] == '<' && input[i + 1] == '<'))
 		{
 			count++;
 			i += 1;
 		}
-		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+		else if ((input[i] == '|' || input[i] == '<' || input[i] == '>'))
 			count++;
 		else if ((input[i] != '|' && input[i] != '<' && input[i] != '>')
 			&& (input[i + 1] == '|' || input[i + 1] == '<'
@@ -80,6 +90,7 @@ void	ft_strlen_token(char *input)
 			count++;
 		i++;
 	}
+	free(input);
 	// Borrar printf de count tokens↓
 	printf("Tokens: %d\n", count);
 	return ;
