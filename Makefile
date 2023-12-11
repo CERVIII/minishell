@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2023/11/23 11:59:05 by pcervill         ###   ########.fr        #
+#    Updated: 2023/12/11 18:46:49 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,13 @@ SRC_DIR		= ./src
 
 SRCS		= main.c lexer.c lexer_utils.c
 
-OBJS		= $(addprefix $(SRC_DIR)/, ${SRCS:.c=.o})
+OBJS		= $(addprefix $(OBJS_PATH)/, ${SRCS:.c=.o})
 
 NAME		= minishell
 
 LIBFT_PATH	= ./libft/
+
+OBJS_PATH = .objs
 
 all: $(NAME)
 	@echo " \033[32m[ OK ] | ✅ Minishell ready! ✅\033[0m"
@@ -35,9 +37,15 @@ $(NAME): $(OBJS)
 	@echo " \033[33m[ .. ] | Compiling minishell..\033[0m"
 	@$(CC) -L $(LIBFT_PATH) -l ft $(CFLAGS) $(EXTRAFLAGS) $(OBJS)  -o $(NAME)
 
+$(OBJS_PATH):
+	@mkdir -p $(OBJS_PATH)	
+
+$(OBJS_PATH)/%.o:$(SRC_DIR)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	@make clean -C $(LIBFT_PATH) --silent
-	@rm -f $(OBJS)
+	@rm -rf $(OBJS_PATH)
 
 fclean: clean
 	@rm -f $(NAME)
