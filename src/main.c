@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/27 13:19:07 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/12/13 15:55:24 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ static void	leaks(void)
 	system("leaks -q minishell");
 }
 
-/* char	*prompt(void)
+int ft_err(char *msg, int nb)
+{
+	printf("%s%s%s\n", RED, msg, NORMAL);
+	return (nb);
+}
+/*  char	*prompt(void)
 {
 	char	*end;
 	char	*cwd;
@@ -34,7 +39,20 @@ static void	leaks(void)
 	free(end);
 	end = ft_strjoin(end, NORMAL);
 	return (end);
-} */
+}  */
+
+void	check_redirects(t_token *lst)
+{
+	while (lst->next)
+	{		
+		if (lst->type != 0 && lst->next->type != 0)
+		{
+			ft_err("Error: Syntax error", 127);
+			break ;
+		}
+		lst = lst->next;
+	}
+}
 
 void	free_exit(char *str, char *input)
 {
@@ -86,11 +104,12 @@ int	main(void)
 		lexer(input, &token);
 		// Borrar printf de token ↓
 		t_token	*temp = token;
-		while (temp)
+		check_redirects(temp);
+		/* 	while (temp)
 		{
 			printf("Token: %s	Type: %d\n", temp->token, temp->type);
 			temp = temp->next;
-		}
+		}  */
 		ft_free_token(&token);
 		free_exit(str, input);
 	}
