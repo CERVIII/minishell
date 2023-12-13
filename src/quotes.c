@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:36:04 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/12/13 11:01:44 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:24:22 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void single_quotes(char *str, int flag)
 	if (flag != 0)
 		printf("%sERROR: Unclosed quotes\n", RED);
 }
+
+//TODO:optimizar funcion
 void read_input(char *argv)
 {
 	int single_flag;
@@ -85,51 +87,32 @@ void read_input(char *argv)
 	single_flag = 0;
 	while (*argv)
 	{
-		if (*argv == '\"')
-		{		
+		if (*argv++ == '\"')
+		{
 			argv++;
 			double_flag = 1;			
 			while (*argv != '\"' && *argv)
-			{
-				// printf("CHARRRR: %c\n", *argv);
 				argv++;
-			}
-			// printf("CHAR: %c\n", *argv);
 			if (*argv == '\"')
-			{
 				double_flag = 0;
-				// printf("Cierre: %i\n", double_flag);
-			}
 			if (double_flag != 0)
 				ft_err("ERROR: Unclosed quotes", 127);
 		}
-		if (*argv == '\'')
+		else if (*argv == '\'')
 		{
 			if (double_flag == 0)
 			{
 				argv++;
 				single_flag = 1;
 				while (*argv != '\'' && *argv)
-				{
-					// printf("CHARRRR: %c\n", *argv);
 					argv++;
-				}
-				// printf("CHAR: %c\n", *argv);
 				if (*argv == '\'')
-				{
 					single_flag = 0;
-					// printf("Cierre: %i\n", double_flag);
-				}
-			}		
+			}
 			if (single_flag != 0)
-				ft_err("ERROR: Unclosed quotes", 127);			
+				ft_err("ERROR: Unclosed quotes", 127);
 		}
 		argv++;
-	}
-	if (single_flag % 2 != 0 || double_flag % 2 != 0)
-	{
-		// printf("%sERROR: Unclosed quotes\n", RED);
-		return;
 	}
 }
 
