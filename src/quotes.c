@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:36:04 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/12/13 12:24:22 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:38:51 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void read_input(char *argv)
 	single_flag = 0;
 	while (*argv)
 	{
-		if (*argv++ == '\"')
+		if (*argv == '\"')
 		{
 			argv++;
 			double_flag = 1;			
@@ -105,9 +105,9 @@ void read_input(char *argv)
 				argv++;
 				single_flag = 1;
 				while (*argv != '\'' && *argv)
-					argv++;
+					argv++;		
 				if (*argv == '\'')
-					single_flag = 0;
+					single_flag = 0;			
 			}
 			if (single_flag != 0)
 				ft_err("ERROR: Unclosed quotes", 127);
