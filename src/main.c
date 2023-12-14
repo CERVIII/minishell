@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/14 17:55:36 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:32:54 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int ft_err(char *msg, int nb)
 	return (end);
 }  */
 
-void	check_reirects(t_token **lst)
+void	check_redirects(t_token **lst)
 {
 	while ((*lst))
 	{
@@ -118,7 +118,7 @@ int	main(void)
 		lexer(input, &token);
 		// Borrar printf de token ↓
 		t_token	*temp = token;
-		check_reirects(&temp);
+		check_redirects(&temp);
 		check_broken_pipes(&temp);
 		while (temp)
 		{
