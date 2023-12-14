@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/13 15:55:24 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/14 17:55:36 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,31 @@ int ft_err(char *msg, int nb)
 	return (end);
 }  */
 
-void	check_redirects(t_token *lst)
+void	check_reirects(t_token **lst)
 {
-	while (lst->next)
-	{		
-		if (lst->type != 0 && lst->next->type != 0)
+	while ((*lst))
+	{
+
+		if (((*lst)->type >= 2 &&(*lst)->type <= 5) && ((!(*lst)->next) || (*lst)->next->type != 0))
 		{
-			ft_err("Error: Syntax error", 127);
+			ft_err("Error: Bad redirect", 127);
 			break ;
 		}
-		lst = lst->next;
+		lst = &(*lst)->next;
 	}
+}
+
+void	check_broken_pipes(t_token **lst)
+{
+	while ((*lst))
+	{
+		if ((*lst)->type == 1 && (!(*lst)->next))
+		{
+			ft_err("Error: Syntax error '|' ", 127);
+			break ;
+		}
+		lst = &(*lst)->next;
+	}		
 }
 
 void	free_exit(char *str, char *input)
@@ -104,12 +118,13 @@ int	main(void)
 		lexer(input, &token);
 		// Borrar printf de token ↓
 		t_token	*temp = token;
-		check_redirects(temp);
-		/* 	while (temp)
+		check_reirects(&temp);
+		check_broken_pipes(&temp);
+		while (temp)
 		{
 			printf("Token: %s	Type: %d\n", temp->token, temp->type);
 			temp = temp->next;
-		}  */
+		}
 		ft_free_token(&token);
 		free_exit(str, input);
 	}
