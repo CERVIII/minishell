@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/11 18:46:16 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:26:03 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	create_token(char *str, t_token **token)
 	input = ft_strtrim(str, " \t\n\r");
 	while (input[i])
 	{
+		if (input[i] == 32)
+			i++;
 		if ((input[i] == '>' && input[i + 1] == '>')
 			|| (input[i] == '<' && input[i + 1] == '<'))
 		{
 			tokens = (char *)ft_calloc(3, sizeof(char));
 			tokens[0] = input[i++];
 			tokens[1] = input[i++];
-			// printf("Tokens%s\n",tokens );
 		}
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
 		{
 			tokens = (char *)ft_calloc(2, sizeof(char));
 			tokens[0] = input[i++];
-			// printf("Tokens%s\n",tokens );
 		}
 		else if (input[i] != '|' && input[i] != '<' && input[i] != '>')
 		{
@@ -49,7 +49,6 @@ void	create_token(char *str, t_token **token)
 			k = 0;
 			while (i < j)
 				tokens[k++] = input[i++];
-			// printf("Tokens%s\n",tokens );
 		}		
 		if (tokens != NULL)
 		{
@@ -74,8 +73,6 @@ void	ft_strlen_token(char *str)
 	input = ft_strtrim(str, " \t\n\r");
 	while (input[i])
 	{
-		// if (input[i] == ' ')
-		// 	i++;
 		if ((input[i] == '>' && input[i + 1] == '>')
 			|| (input[i] == '<' && input[i + 1] == '<'))
 		{
