@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/15 17:23:18 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/15 18:26:13 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,6 @@ int ft_err(char *msg, int nb)
 	return (end);
 }  */
 
-void	check_redirects(t_token **lst)
-{
-	while ((*lst))
-	{
-
-		if (((*lst)->type >= 2 && (*lst)->type <= 5) &&
-			((!(*lst)->next) || (*lst)->next->type != 0))
-		{
-			ft_err("Error: Bad redirect", 127);
-			break ;
-		}
-		lst = &(*lst)->next;
-	}
-}
-
-void	check_broken_pipes(t_token **lst)
-{
-	while ((*lst))
-	{
-		if ((*lst)->type == 1 && (!(*lst)->next))
-		{
-			ft_err("Error: Syntax error '|' ", 127);
-			break ;
-		}
-		lst = &(*lst)->next;
-	}		
-}
 
 void	free_exit(char *str, char *input)
 {
