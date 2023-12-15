@@ -6,12 +6,12 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:36:04 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/12/13 17:38:51 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/15 11:50:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
+/*
 void free_exit(char *str, char *input)
 {
 	free(str);
@@ -42,7 +42,7 @@ char *prompt(void)
 	free(end);
 	end = ft_strjoin(end, NORMAL);
 	return (end);
-}
+}*/
 
 void double_quotes(char *str, int flag)
 {
@@ -116,7 +116,7 @@ void read_input(char *argv)
 	}
 }
 
-int main(void)
+/*int main(void)
 {
 	char *input;
 	char *str;
@@ -136,4 +136,4 @@ int main(void)
 	printf("%sSaliendo de minishell...%s\n", RED, NORMAL);
 	free_exit(str, input);
 	return (0);
-}
+} */

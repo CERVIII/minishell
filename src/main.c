@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/14 18:32:54 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/15 17:23:18 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int ft_err(char *msg, int nb)
 	printf("%s%s%s\n", RED, msg, NORMAL);
 	return (nb);
 }
+ 
 /*  char	*prompt(void)
 {
 	char	*end;
@@ -46,7 +47,8 @@ void	check_redirects(t_token **lst)
 	while ((*lst))
 	{
 
-		if (((*lst)->type >= 2 &&(*lst)->type <= 5) && ((!(*lst)->next) || (*lst)->next->type != 0))
+		if (((*lst)->type >= 2 && (*lst)->type <= 5) &&
+			((!(*lst)->next) || (*lst)->next->type != 0))
 		{
 			ft_err("Error: Bad redirect", 127);
 			break ;
@@ -86,22 +88,49 @@ char	*prompt(void)
 	cwd = getcwd(cwd, sizeof(cwd));
 	if (!cwd)
 		return (NULL);
-	end = ft_strjoin(BLUE, cwd);
-	free(cwd);
-	temp = end;
+	// end = ft_strjoin(BLUE, cwd);
+	// free(cwd);
+	temp = cwd;
 	end = ft_strjoin(temp, "\n");
 	free(temp);
-	temp = ft_strjoin(end, GREEN);
+	temp = ft_strjoin(end, "> ");
 	free(end);
-	end = ft_strjoin(temp, "> ");
-	free(temp);
-	temp = ft_strjoin(end, NORMAL);
-	free(end);
+	// end = ft_strjoin(temp, "> ");
+	// free(temp);
+	// temp = ft_strjoin(end, NORMAL);
+	// free(end);
 	return (temp);
 }
 
 
 int	main(void)
+{
+	char	*input;
+	char	*str;
+	t_token	*token;
+
+	atexit(leaks);
+	while (1)
+	{
+		token = NULL;
+		str = prompt();
+		input = readline(str);
+		read_input(input);
+		if (!input || !ft_strcmp(input, "exit"))
+			break ;
+		lexer(input, &token);		
+		t_token	*temp = token;
+		add_history(input);
+		check_redirects(&temp);
+		check_broken_pipes(&temp);
+		ft_free_token(&token);
+		free_exit(str, input);
+	}
+	free_exit(str, input);
+	return (0);
+}
+
+/* int	main(void)
 {
 	char	*input;
 	char	*str;
@@ -131,4 +160,4 @@ int	main(void)
 	printf("%sSaliendo de minishell...%s\n", RED, NORMAL);
 	free_exit(str, input);
 	return (0);
-}
+} */
