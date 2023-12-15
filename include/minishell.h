@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/27 14:15:58 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/12/15 14:16:28 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_token
 
 		/* main.c */
 char		*prompt(void);
+int			ft_err(char *msg, int nb);
 
 		/* lexer.c */
 void		create_token(char *input, t_token **token);
@@ -57,4 +58,6 @@ t_token		*ft_token_new(char *token);
 void		ft_add_token_last(t_token **list, t_token *new);
 void		ft_free_token(t_token **token);
 
+		/* quotes.c */
+void	read_input(char *argv);
 #endif
