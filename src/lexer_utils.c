@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/27 14:15:33 by pcervill         ###   ########.fr       */
+/*   Updated: 2023/12/18 11:32:09 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ t_token	*ft_token_new(char *token)
 		new->type = RREDIR;
 	else if (!ft_strcmp(new->token, "<<"))
 		new->type = HERE_DOC;
+	else if (!ft_strcmp(new->token, "\'"))
+		new->type = SINGLE_QUOTE;
+	else if (!ft_strcmp(new->token, "\""))
+		new->type = DOUBLE_QUOTE;
 	else
 		new->type = WORD;
 	new->next = NULL;

@@ -6,13 +6,13 @@
 #    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2023/12/15 18:26:32 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2023/12/18 15:41:17 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 
-CFLAGS		= -Wall -Werror -Wextra #-g -fsanitize=address -g3
+CFLAGS		= -Wall -Werror -Wextra #-g3 -fsanitize=address
 EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		= ./src

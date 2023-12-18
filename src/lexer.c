@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/14 18:26:03 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/18 11:38:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	create_token(char *str, t_token **token)
 			tokens[0] = input[i++];
 			tokens[1] = input[i++];
 		}
-		else if (input[i] == '|' || input[i] == '<' || input[i] == '>')
+		else if (input[i] == '|' || input[i] == '<' || input[i] == '>' ||
+				input[i] == '\'' || input[i] == '\"')
 		{
 			tokens = (char *)ft_calloc(2, sizeof(char));
 			tokens[0] = input[i++];
@@ -43,7 +44,8 @@ void	create_token(char *str, t_token **token)
 		{
 			j = i;
 			while (input[j] && input[j] != '|'
-				&& input[j] != '<' && input[j] != '>')
+				&& input[j] != '<' && input[j] != '>' && input[j] != '\''
+				&& input[j] != '\"')
 				j++;
 			tokens = ft_calloc(((j - i) + 1), sizeof(char));
 			k = 0;
@@ -79,11 +81,12 @@ void	ft_strlen_token(char *str)
 			count++;
 			i += 1;
 		}
-		else if ((input[i] == '|' || input[i] == '<' || input[i] == '>'))
+		else if ((input[i] == '|' || input[i] == '<' || input[i] == '>'
+				|| input[i] == '\'' || input[i] == '\"'))
 			count++;
-		else if ((input[i] != '|' && input[i] != '<' && input[i] != '>')
-			&& (input[i + 1] == '|' || input[i + 1] == '<'
-				|| input[i + 1] == '>' || !input[i + 1]))
+		else if ((input[i + 1] == '|' || input[i + 1] == '<' 
+				|| input[i + 1] == '>' || input[i + 1] == '\"'
+				|| input [i + 1] == '\'' ||!input[i + 1]))
 			count++;
 		i++;
 	}

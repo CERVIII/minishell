@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/15 18:26:13 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:58:23 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,23 @@ int	main(void)
 		token = NULL;
 		str = prompt();
 		input = readline(str);
-		read_input(input);
+		// read_input(input);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
 		lexer(input, &token);		
 		t_token	*temp = token;
 		add_history(input);
-		check_redirects(&temp);
-		check_broken_pipes(&temp);
-		ft_free_token(&token);
-		free_exit(str, input);
+		check_quotes(&temp);
+		// printf("FIN\n");
+		// check_redirects(&temp);
+		// check_broken_pipes(&temp);
+		// while (temp)
+		// {
+		// 	printf("Token: %s	Type: %d\n", temp->token, temp->type);
+		// 	temp = temp->next;
+		// }
+		// ft_free_token(&token);
+		// free_exit(str, input);
 	}
 	free_exit(str, input);
 	return (0);

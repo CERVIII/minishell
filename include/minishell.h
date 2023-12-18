@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/15 18:27:25 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/18 13:22:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef enum e_token_type
 	REDIR_OUT,
 	RREDIR,
 	HERE_DOC,
+	DOUBLE_QUOTE,
+	SINGLE_QUOTE,	
 }	t_token_type;
 
 typedef struct s_token
@@ -59,7 +61,7 @@ void		ft_add_token_last(t_token **list, t_token *new);
 void		ft_free_token(t_token **token);
 
 		/* quotes.c */
-void		read_input(char *argv);
+void		check_quotes(t_token **lst);
 
 		/* check_utils.c */
 void		check_redirects(t_token **lst);
