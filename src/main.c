@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/21 11:02:38 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:25:21 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@ static void	leaks(void)
 	system("leaks -q minishell");
 }
 
-int ft_err(char *msg, int nb)
+int	ft_err(char *msg, int nb)
 {
 	printf("%s%s%s\n", RED, msg, NORMAL);
 	return (nb);
 }
- 
+
+void print_tokens(t_token *temp)
+{
+	while (temp)
+	{
+		printf("Token: %s	Type: %d\n", temp->token, temp->type);
+		temp = temp->next;
+	}
+}
+
 /*  char	*prompt(void)
 {
 	char	*end;
@@ -41,8 +50,6 @@ int ft_err(char *msg, int nb)
 	end = ft_strjoin(end, NORMAL);
 	return (end);
 }  */
-
-
 void	free_exit(char *str, char *input)
 {
 	free(str);
@@ -75,12 +82,12 @@ char	*prompt(void)
 	return (temp);
 }
 
-
 int	main(void)
 {
 	char	*input;
 	char	*str;
 	t_token	*token;
+	t_token	*temp;
 
 	atexit(leaks);
 	while (1)
@@ -90,16 +97,12 @@ int	main(void)
 		input = readline(str);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
-		lexer(input, &token);		
-		t_token	*temp = token;
-		add_history(input);
-		check_quotes(&temp);		
+		lexer(input, &token);
+		temp = token;
+		add_history(input);		
+		check_quotes(&temp);
 		check_tokens(&temp);
-		while (temp)
-		{
-			printf("Token: %s	Type: %d\n", temp->token, temp->type);
-			temp = temp->next;
-		}
+		// print_tokens(temp);
 		ft_free_token(&token);
 		free_exit(str, input);
 	}
