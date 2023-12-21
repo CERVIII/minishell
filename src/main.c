@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/21 12:25:21 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/21 14:56:57 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(void)
 		add_history(input);		
 		check_quotes(&temp);
 		check_tokens(&temp);
-		// print_tokens(temp);
+		print_tokens(temp);
 		ft_free_token(&token);
 		free_exit(str, input);
 	}
