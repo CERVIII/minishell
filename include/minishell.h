@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/18 13:22:55 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:02:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		ft_free_token(t_token **token);
 void		check_quotes(t_token **lst);
 
 		/* check_utils.c */
-void		check_redirects(t_token **lst);
-void		check_broken_pipes(t_token **lst);
+int			check_redirects(t_token **lst);
+int			check_broken_pipes(t_token **lst);
+void		check_tokens(t_token **lst);
 #endif
