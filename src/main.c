@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/21 14:56:57 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/09 12:06:45 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(void)
 	char	*str;
 	t_token	*token;
 	t_token	*temp;
+	t_simple_cmds	*parser;
 
 	atexit(leaks);
 	while (1)
@@ -103,6 +104,7 @@ int	main(void)
 		check_quotes(&temp);
 		check_tokens(&temp);
 		print_tokens(temp);
+		create_parser(token, &parser);
 		ft_free_token(&token);
 		free_exit(str, input);
 	}

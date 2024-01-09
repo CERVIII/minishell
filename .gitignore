@@ -3,4 +3,5 @@
 minishell
 .DS*
 *.a
-a.out
+a.out*
+*.out

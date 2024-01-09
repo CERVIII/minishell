@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/21 11:02:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:10:00 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_simple_cmds
+{
+	char					**str;
+//	int						(*builtin)(t_tools *, struct s_simple_cmds *);
+	int						num_redirections;
+	char					*hd_file_name;
+	t_token					*redirections;
+	struct s_simple_cmds	*next;
+	struct s_simple_cmds	*prev;
+}	t_simple_cmds;
+
 		/* main.c */
 char		*prompt(void);
 int			ft_err(char *msg, int nb);
@@ -67,4 +78,5 @@ void		check_quotes(t_token **lst);
 int			check_redirects(t_token **lst);
 int			check_broken_pipes(t_token **lst);
 void		check_tokens(t_token **lst);
+
 #endif

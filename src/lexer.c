@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/08 10:50:04 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:28:03 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	create_token(char *str, t_token **token)
 			tokens[0] = input[i++];
 			tokens[1] = input[i++];
 		}
-		else if (input[i] == '|' || input[i] == '<' || input[i] == '>' ||
-				input[i] == '\'' || input[i] == '\"')
+		else if (input[i] == '|' || input[i] == '<' || input[i] == '>'
+			|| input[i] == '\'' || input[i] == '\"')
 		{
 			tokens = (char *)ft_calloc(2, sizeof(char));
 			tokens[0] = input[i++];
@@ -51,7 +51,7 @@ void	create_token(char *str, t_token **token)
 			k = 0;
 			while (i < j)
 				tokens[k++] = input[i++];
-		}		
+		}
 		if (tokens != NULL)
 		{
 			tmp = NULL;
@@ -66,8 +66,8 @@ void	create_token(char *str, t_token **token)
 
 void	ft_strlen_token(char *str)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 	char	*input;
 
 	i = 0;
@@ -84,7 +84,7 @@ void	ft_strlen_token(char *str)
 		else if ((input[i] == '|' || input[i] == '<' || input[i] == '>'
 				|| input[i] == '\'' || input[i] == '\"'))
 			count++;
-		else if ((input[i + 1] == '|' || input[i + 1] == '<' 
+		else if ((input[i + 1] == '|' || input[i + 1] == '<'
 				|| input[i + 1] == '>' || input[i + 1] == '\"'
 				|| input [i + 1] == '\'' ||!input[i + 1]))
 			count++;
