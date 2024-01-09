@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/21 11:02:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:51:40 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,45 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+typedef struct s_simple_cmds
+{
+	char                    **str;
+	// int                     (*builtin)(t_tools *, struct s_simple_cmds *);
+	int                     num_redirections;
+	char                    *hd_file_name;
+	t_token                 *redirections;
+	struct s_simple_cmds	*next;
+}	t_simple_cmds;
+
 		/* main.c */
-char		*prompt(void);
-int			ft_err(char *msg, int nb);
+char			*prompt(void);
+int				ft_err(char *msg, int nb);
+void			print_tokens(t_token **temp);
+void 			print_cmds(t_simple_cmds *temp);
 
 		/* lexer.c */
-void		create_token(char *input, t_token **token);
-void		ft_strlen_token(char *input);
-int			lexer(char *input, t_token **token);
+void			create_token(char *input, t_token **token);
+void			ft_strlen_token(char *input);
+int				lexer(char *input, t_token **token);
 
 		/* lexer_utils.c */
-t_token		*ft_token_new(char *token);
-void		ft_add_token_last(t_token **list, t_token *new);
-void		ft_free_token(t_token **token);
+t_token			*ft_token_new(char *token);
+void			ft_add_token_last(t_token **list, t_token *new);
+void			ft_free_token(t_token **token);
 
 		/* quotes.c */
-void		check_quotes(t_token **lst);
+void			check_quotes(t_token **lst);
 
 		/* check_utils.c */
-int			check_redirects(t_token **lst);
-int			check_broken_pipes(t_token **lst);
-void		check_tokens(t_token **lst);
+int				check_redirects(t_token **lst);
+int				check_broken_pipes(t_token **lst);
+void			check_tokens(t_token **lst);
+
+		/*parser.c*/
+void			split_pipes(t_token **lst);
+
+		/* utils.c */
+t_simple_cmds	*ft_mini_lstlast(t_simple_cmds *lst);
+void			ft_mini_lstadd_back(t_simple_cmds **lst, t_simple_cmds *new);
+t_simple_cmds	*ft_mini_lstnew(char **content);
 #endif

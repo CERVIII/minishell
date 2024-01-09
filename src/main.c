@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/21 14:56:57 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:46:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,30 @@ int	ft_err(char *msg, int nb)
 	return (nb);
 }
 
-void print_tokens(t_token *temp)
+void print_tokens(t_token **temp)
 {
-	while (temp)
+	while (*temp)
 	{
-		printf("Token: %s	Type: %d\n", temp->token, temp->type);
-		temp = temp->next;
+		printf("Token: %s	Type: %d\n", (*temp)->token, (*temp)->type);
+		temp = &(*temp)->next;
+	}
+}
+
+void print_cmds(t_simple_cmds *temp)
+{
+	t_simple_cmds	*aux;
+	
+	aux = temp;
+	while (aux)
+	{		
+		int i = 0;
+		while ((aux)->str[i])
+		{
+			printf("Token: %s	\n", (aux)->str[i]);
+			i++;
+		}
+		printf("---------------------------\n");
+		aux = (aux)->next;
 	}
 }
 
@@ -89,7 +107,7 @@ int	main(void)
 	t_token	*token;
 	t_token	*temp;
 
-	atexit(leaks);
+	atexit(leaks);	
 	while (1)
 	{
 		token = NULL;
@@ -102,7 +120,8 @@ int	main(void)
 		add_history(input);		
 		check_quotes(&temp);
 		check_tokens(&temp);
-		print_tokens(temp);
+		// print_tokens(&temp);
+		split_pipes(&temp);
 		ft_free_token(&token);
 		free_exit(str, input);
 	}
