@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/12 11:20:35 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:36:16 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ t_simple_cmds	*ft_mini_lstlast(t_simple_cmds *lst);
 void			ft_mini_lstadd_back(t_simple_cmds **lst, t_simple_cmds *new);
 t_simple_cmds	*ft_mini_lstnew(char **content);
 char			**dup_matrix(char **str);
+char			**dup_matrix_exp(char **str);
 int				save_pwd(t_tools *tools);
 
 		/*Built-ins*/
