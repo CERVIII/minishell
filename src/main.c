@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/09 11:46:29 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/12 12:09:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,30 @@ char	*prompt(void)
 	return (temp);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	*str;
 	t_token	*token;
 	t_token	*temp;
+	t_simple_cmds *simple_cmds;
+	t_tools	tools;
+	simple_cmds = NULL;
 
-	atexit(leaks);	
+	atexit(leaks);
+	if (argc != 1 || argv[1])
+	{
+		printf("This program does not accept arguments\n");
+		exit(0);
+	}
+	tools.env = dup_matrix(envp);
+	// int i = 0;
+	// while (tools.env[i])
+	// {
+	// 	printf("%i: %s\n", i + 1, tools.env[i]);
+	// 	i++;
+	// }
+	save_pwd(&tools);
 	while (1)
 	{
 		token = NULL;
@@ -117,14 +133,24 @@ int	main(void)
 			break ;
 		lexer(input, &token);
 		temp = token;
-		add_history(input);		
+		add_history(input);
 		check_quotes(&temp);
 		check_tokens(&temp);
+		check_builtin(temp, &tools, simple_cmds);
 		// print_tokens(&temp);
 		split_pipes(&temp);
 		ft_free_token(&token);
 		free_exit(str, input);
 	}
+	//TODO: meter en una función para liberar todo lo que haya en tools
+	int i = 0;
+	while (tools.env[i])
+	{
+		free(tools.env[i]);
+		i++;
+	}
+	free(tools.pwd);
+	free(tools.old_pwd);
 	free_exit(str, input);
 	return (0);
 }

@@ -6,11 +6,45 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/08 17:45:06 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:48:48 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	save_pwd(t_tools *tools)
+{
+	int	i;
+
+	i = 0;
+	tools->pwd = getcwd(NULL, sizeof(NULL));
+	while (tools->env[i])
+	{
+		if (ft_strncmp(tools->env[i], "OLDPWD=", 7) == 0)
+			tools->old_pwd = ft_substr(tools->env[i], 7,
+				ft_strlen(tools->env[i]) - 7);
+		i++;
+	}
+	return (1);
+}
+
+char	**dup_matrix(char **str)
+{
+	char 	**dup;
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	dup = ft_calloc(i + 1, sizeof (char *));
+	i = 0;
+	while (str[i])
+	{
+		dup[i] = ft_strdup(str[i]);
+		i++;
+	}
+	return (dup);
+}
 
 
 t_simple_cmds	*ft_mini_lstnew(char **content)
