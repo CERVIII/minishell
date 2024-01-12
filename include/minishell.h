@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/09 11:51:40 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:20:35 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct s_simple_cmds
 	struct s_simple_cmds	*next;
 }	t_simple_cmds;
 
+typedef struct s_tools
+{
+	char	*pwd;
+	char	*old_pwd;
+	char	**env;
+}	t_tools;
+
 		/* main.c */
 char			*prompt(void);
 int				ft_err(char *msg, int nb);
@@ -87,4 +94,13 @@ void			split_pipes(t_token **lst);
 t_simple_cmds	*ft_mini_lstlast(t_simple_cmds *lst);
 void			ft_mini_lstadd_back(t_simple_cmds **lst, t_simple_cmds *new);
 t_simple_cmds	*ft_mini_lstnew(char **content);
+char			**dup_matrix(char **str);
+int				save_pwd(t_tools *tools);
+
+		/*Built-ins*/
+int				ft_cd(t_tools *tools, char *path);
+int				ft_env(t_tools *tools);
+int				ft_pwd(t_tools *tools);
+int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
+int				check_builtin(t_token *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
 #endif
