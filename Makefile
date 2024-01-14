@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
+#    By: fede <fede@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/12 11:20:59 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/01/14 19:48:43 by fede             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		= ./src
 
-SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c cd_in.c env_in.c pwd_in.c check_builtin.c export_in.c
+SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c cd_in.c env_in.c pwd_in.c check_builtin.c export_in.c unset_in.c echo_in.c exit_in.c
 
 OBJS		= $(addprefix $(OBJS_PATH)/, ${SRCS:.c=.o})
 

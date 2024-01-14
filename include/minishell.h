@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/12 15:36:16 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:40:16 by fede             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
+#include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -104,4 +105,9 @@ int				ft_env(t_tools *tools);
 int				ft_pwd(t_tools *tools);
 int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
 int				check_builtin(t_token *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
+int				ft_unset(t_tools *tools, t_simple_cmds *simple_cmds);
+
+		/*Built-ins utils*/
+int				check_if_nb(char *str);
+
 #endif
