@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:44:24 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/28 12:35:55 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:07:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_nodo	*insertar(t_nodo *raiz, int valor)
 {
 	if (!raiz)
 		return (crear_nodo(valor));
-
 	if (valor < raiz->valor)
 		raiz->izquierda = insertar(raiz->izquierda, valor);
 	else

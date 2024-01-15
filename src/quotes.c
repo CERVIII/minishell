@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:36:04 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2023/12/21 12:25:40 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:05:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	check_quotes(t_token **lst)
 	int	double_flag;
 
 	double_flag = 0;
-	single_flag = 0;	
+	single_flag = 0;
 	while ((*lst))
 	{
 		if ((*lst)->type == 6)

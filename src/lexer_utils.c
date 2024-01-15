@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2023/12/18 11:32:09 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:13:53 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_token	*ft_token_new(char *token)
 	else
 		new->type = WORD;
 	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }
 
@@ -45,7 +46,10 @@ void	ft_add_token_last(t_token **token, t_token *new)
 	t_token	*current;
 
 	if (!token || !new)
+	{
+		printf("Error: ft_add_token_last\n");
 		return ;
+	}
 	if (*token == NULL)
 		*token = new;
 	else
@@ -54,6 +58,7 @@ void	ft_add_token_last(t_token **token, t_token *new)
 		while (current->next)
 			current = current->next;
 		current->next = new;
+		new->prev = current;
 	}
 	return ;
 }

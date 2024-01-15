@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/09 12:06:45 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:11:21 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_err(char *msg, int nb)
 	return (nb);
 }
 
-void print_tokens(t_token *temp)
+void	print_tokens(t_token *temp)
 {
 	while (temp)
 	{
@@ -86,27 +86,25 @@ int	main(void)
 {
 	char	*input;
 	char	*str;
-	t_token	*token;
-	t_token	*temp;
-	t_simple_cmds	*parser;
+	t_tools	tools;
 
 	atexit(leaks);
 	while (1)
 	{
-		token = NULL;
 		str = prompt();
 		input = readline(str);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
-		lexer(input, &token);
-		temp = token;
-		add_history(input);		
-		check_quotes(&temp);
-		check_tokens(&temp);
-		print_tokens(temp);
-		create_parser(token, &parser);
-		ft_free_token(&token);
+		tools.arg = ft_strdup(input);
+		check_quotes(&tools);
+		lexer(input, &tools);
+		check_tokens(&tools.lexer);
+		add_history(input);
+		print_tokens(tools.lexer);
+//		create_parser(&tools);
+		ft_free_token(&tools.lexer);
 		free_exit(str, input);
+		free(tools.arg);
 	}
 	free_exit(str, input);
 	return (0);

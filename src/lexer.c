@@ -6,13 +6,13 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:17:13 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/08 13:28:03 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:57:45 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	create_token(char *str, t_token **token)
+/* void	create_token(char *str, t_token **token)
 {
 	int		i;
 	int		j;
@@ -64,6 +64,7 @@ void	create_token(char *str, t_token **token)
 	return ;
 }
 
+//	Eliminar funcion
 void	ft_strlen_token(char *str)
 {
 	int		i;
@@ -91,14 +92,13 @@ void	ft_strlen_token(char *str)
 		i++;
 	}
 	free(input);
-	// Borrar printf de count tokens↓
 	printf("Tokens: %d\n", count);
 	return ;
 }
 
-int	lexer(char *input, t_token **token)
+int	lexer(char *input, t_tools *tools)
 {
-	ft_strlen_token(input);
-	create_token(input, token);
+	ft_strlen_token(input); //eliminar funcion al finalizar
+	create_token(input, &tools->lexer);
 	return (0);
-}
+} */
