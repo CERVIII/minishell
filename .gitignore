@@ -5,3 +5,5 @@ minishell
 *.a
 a.out*
 *.out
+.nfs.20051026*
+*.3bdb

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/15 18:17:09 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:05:42 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ typedef enum e_token_type
 	REDIR_OUT,
 	RREDIR,
 	HERE_DOC,
-	DOUBLE_QUOTE,
-	SINGLE_QUOTE,	
 }	t_token_type;
 
 typedef struct s_token

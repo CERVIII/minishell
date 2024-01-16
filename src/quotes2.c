@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:05:56 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/15 18:17:30 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:18:42 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	quotes(char *input, int *i, int flag, char c)
 	if (input[*i] == c)
 	{
 		flag = change_flag(flag);
+		(*i)++;
 		while (input[*i] && input[*i] != c)
-			i++;
+			(*i)++;
 		if (input[*i] == c)
 			flag = change_flag(flag);
 	}
@@ -49,5 +50,8 @@ void	check_quotes(t_tools *tools)
 		single_flag = quotes(tools->arg, &i, single_flag, '\'');
 		i++;
 	}
-	ft_err("ERROR: Unclosed quotes", 127);
+	if (double_flag || single_flag)
+	{
+		ft_err("ERROR: Unclosed quotes", 127);
+	}
 }

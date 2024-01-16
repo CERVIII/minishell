@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/15 18:06:25 by pcervill         ###   ########.fr        #
+#    Updated: 2024/01/16 12:16:39 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		= ./src
 
-SRCS		= main.c lexer2.c lexer_utils.c quotes2.c check_utils.c ft_split_cmd_aux_2.c ft_split_cmd_aux.c ft_split_cmd.c
+SRCS		= main.c lexer2.c lexer_utils.c quotes2.c check_utils2.c ft_split_cmd_aux_2.c ft_split_cmd_aux.c ft_split_cmd.c
 
 OBJS		= $(addprefix $(OBJS_PATH)/, ${SRCS:.c=.o})
 

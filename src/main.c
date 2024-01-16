@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/15 18:11:21 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:20:29 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ int	main(void)
 		tools.arg = ft_strdup(input);
 		check_quotes(&tools);
 		lexer(input, &tools);
+		print_tokens(tools.lexer);
 		check_tokens(&tools.lexer);
 		add_history(input);
-		print_tokens(tools.lexer);
 //		create_parser(&tools);
 		ft_free_token(&tools.lexer);
 		free_exit(str, input);
