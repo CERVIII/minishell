@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/16 13:20:29 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:22:23 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	leaks(void)
 
 int	ft_err(char *msg, int nb)
 {
-	printf("%s%s%s\n", RED, msg, NORMAL);
+	printf("%s%s%s\n", RED, msg, RESET_COLOR);
 	return (nb);
 }
 
@@ -92,7 +92,7 @@ int	main(void)
 	while (1)
 	{
 		str = prompt();
-		input = readline(str);
+		input = readline(PROMPT_MSG);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
 		tools.arg = ft_strdup(input);
@@ -101,7 +101,7 @@ int	main(void)
 		print_tokens(tools.lexer);
 		check_tokens(&tools.lexer);
 		add_history(input);
-//		create_parser(&tools);
+		parser(&tools);
 		ft_free_token(&tools.lexer);
 		free_exit(str, input);
 		free(tools.arg);

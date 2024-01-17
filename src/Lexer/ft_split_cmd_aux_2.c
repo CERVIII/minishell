@@ -6,11 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:51:03 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/15 16:39:38 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:18:55 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	process_char(t_info *info, size_t *word_count, char c, int *in_quotes)
 {

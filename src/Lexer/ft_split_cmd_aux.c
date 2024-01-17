@@ -6,11 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 19:43:07 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/15 16:39:13 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:19:04 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	ft_is_whitespace(char c)
 {

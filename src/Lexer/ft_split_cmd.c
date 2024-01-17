@@ -6,11 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 20:11:09 by drubio-m          #+#    #+#             */
-/*   Updated: 2024/01/15 16:39:30 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/17 13:19:09 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 /* static void	ft_free_split(char **str, size_t words)
 {
