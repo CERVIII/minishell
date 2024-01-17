@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/14 19:40:16 by fede             ###   ########.fr       */
+/*   Updated: 2024/01/15 15:27:47 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_tools
 	char	*pwd;
 	char	*old_pwd;
 	char	**env;
+	char	**export;
 }	t_tools;
 
 		/* main.c */
@@ -106,6 +107,8 @@ int				ft_pwd(t_tools *tools);
 int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
 int				check_builtin(t_token *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_unset(t_tools *tools, t_simple_cmds *simple_cmds);
+int				ft_exit(t_tools *tools, t_simple_cmds *simple_cmds);
+int				ft_echo(t_simple_cmds *simple_cmds);
 
 		/*Built-ins utils*/
 int				check_if_nb(char *str);

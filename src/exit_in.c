@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/15 12:12:57 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:47:49 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
     simple_cmds = malloc(sizeof(t_simple_cmds)); 
 	simple_cmds->str = malloc(3 * sizeof(char *));
 	simple_cmds->str[0] = ft_strdup("10");
-	simple_cmds->str[1] = ft_strdup("10214");
-	simple_cmds->str[2] = ft_strdup("101");
     
 	if (simple_cmds->str[1] && simple_cmds->str[2] && !ft_all_char(simple_cmds->str))
     {

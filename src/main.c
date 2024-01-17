@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/12 12:09:27 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:43:52 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(int argc, char **argv, char **envp)
 		exit(0);
 	}
 	tools.env = dup_matrix(envp);
+	tools.export = dup_matrix(envp);
 	// int i = 0;
 	// while (tools.env[i])
 	// {
@@ -129,8 +130,6 @@ int	main(int argc, char **argv, char **envp)
 		token = NULL;
 		str = prompt();
 		input = readline(str);
-		if (!input || !ft_strcmp(input, "exit"))
-			break ;
 		lexer(input, &token);
 		temp = token;
 		add_history(input);
