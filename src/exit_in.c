@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/15 15:47:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:22:19 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ void ft_free_tools(t_tools *tools)
         free(tools->env[i]);
         i++;
     }
+    i = 0;
+    // while(tools->export[i])
+    // {
+    //     free(tools->export[i]);
+    //     i++;
+    // }
     free(tools->pwd);
     free(tools->old_pwd);
 }
@@ -63,15 +69,16 @@ void    ft_check_exit(char **str)
 int ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
 {
     simple_cmds = malloc(sizeof(t_simple_cmds)); 
-	simple_cmds->str = malloc(3 * sizeof(char *));
+	simple_cmds->str = malloc(1 * sizeof(char *));
 	simple_cmds->str[0] = ft_strdup("10");
     
-	if (simple_cmds->str[1] && simple_cmds->str[2] && !ft_all_char(simple_cmds->str))
-    {
-        ft_putendl_fd("exit: too many arguments\n", STDERR_FILENO);
-        return (EXIT_FAILURE);
-    }
-    ft_free_tools(tools);
+	// if (simple_cmds->str[1] && simple_cmds->str[2] && !ft_all_char(simple_cmds->str))
+    // {
+    //     ft_putendl_fd("exit: too many arguments\n", STDERR_FILENO);
+    //     return (EXIT_FAILURE);
+    // }
+    (void) tools;
+    // ft_free_tools(tools);
     ft_check_exit(simple_cmds->str);
     return (EXIT_SUCCESS);
 }

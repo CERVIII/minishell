@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/17 16:46:44 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:55:03 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,38 +124,63 @@ char	**ft_check_exports(t_simple_cmds *simple_cmds, char *var, char **exp, char 
 	return (new_env);
 }
 */
-void	ft_update_var(char **exp, char **env ,char *var)
+void	ft_join_var(char *old, char *var)
+{
+	char	*aux;
+	
+}
+
+void	ft_replace_var(char **exp, char *var_name, char *var)
 {
 	int	i;
 
 	i = 0;
-	if (ft_strchr(var, '='))
+	while(exp[i])
 	{
-			char	*aux_name = ft_substr(var, 0, ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
+		if (ft_strcmp(var_name, var) == 0)
+		{
+			free(exp[i]);
+			exp[i] = var;	
+		}
+		i++;
+	}
+}
+void	ft_free_matrix(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+}
+
+void	ft_update_var(char **exp, char **env ,char *var)
+{
+	int		i;
+	char	*aux;
+	char	*var_aux;
+
+	i = 0;
+	if (ft_strchr(var, '=')) 
+	{
+		var_aux = ft_substr(var, 0, ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
 		while(env[i])
 		{
-			char	*var_name = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
-			printf("VAR_NAME: %s\n", var_name);
-			printf("aux_NAME: %s\n", aux_name);
-			if (ft_strcmp(ft_substr(env[i], 0, ft_strlen(env[i]) -
-				ft_strlen(ft_strchr(env[i], '='))),
-				ft_substr(var, 0, ft_strlen(var) -
-				ft_strlen(ft_strchr(var, '=')))) == 0)
+			aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
+			if (ft_strcmp(aux,var_aux) == 0)
 			{
-				printf("AAAAAAAAAAAAA\n");
-				// free(env[i]);
+				free(env[i]);
 				env[i] = var;
-				// free(exp[i]);
-				exp[i] = var;
 			}
-			else
-			{
-				// free(exp[i]);
-				exp[i] = var;
-			}
+			free(aux);
 			i++;
 		}
-	}	
+		ft_replace_var(exp, var_aux, var);
+		free(var_aux);
+	}
 }
 
 int	ft_is_sorted(char **str)
@@ -209,12 +234,12 @@ void	ft_print_export(char **copy)
 		printf("declare -x %s\n", sorted_export[i]);
 		i++;
 	}
-	while (sorted_export[j])
-		free(sorted_export[j++]);
+	// while (sorted_export[j])
+	// 	free(sorted_export[j++]);
 } 
 char	**ft_update_export(char **exp, char **new_exp, char *var)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (exp[i])
@@ -222,31 +247,13 @@ char	**ft_update_export(char **exp, char **new_exp, char *var)
 		new_exp[i] = exp[i];
 		i++;
 	}
-	i--;
-	while (new_exp[i])
-	{
-		i++;
-		new_exp[i] = ft_strdup(var);
-		i++;
-	}	
+	ft_join_var(new_exp[i], var);
+	// new_exp[i] = var;
 	return (new_exp);
 }
 
-char	**ft_add_var_export(char **exp, char *var)
-{
-	char	**new_exp;
-	int		i;
 
-	i = 0;
-	while(exp[i])
-		i++;
-	new_exp = ft_calloc(i + 2, sizeof(char *));
-	if (!new_exp)
-		return (NULL);
-	ft_update_export(exp, new_exp, var);
-	return (new_exp);
-}
-char	**ft_add_var_env(char **env, char *var)
+char	**ft_add_var(char **env, char *var)
 {
 	char	**new_env;
 	int		i;
@@ -276,6 +283,7 @@ int	ft_check_if_exists(char **export, char *var)
 				return (1);							
 			i++;
 		}
+		free(var_name);
 	}
 	else
 		while (export[i])
@@ -317,19 +325,17 @@ int	ft_check_vars(char *cmds)
 	return (1);
 }
 
+
 /*
-	TODO: Verificar que existan las variables
 	TODO: Gestionar los aa=bb para que se guarde como aa="bb"
 */
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	char	**env_copy;
-	char	**exp_copy;
+	// char	**env_copy;
+	// char	**exp_copy;
 
-	env_copy = dup_matrix(tools->env);
-	exp_copy = dup_matrix(tools->export);
 	simple_cmds = malloc(sizeof(t_simple_cmds)); 
-	simple_cmds->str = malloc(3 * sizeof(char *));
+	simple_cmds->str = ft_calloc(3, sizeof(char *));
 	simple_cmds->str[0] = ft_strdup("USER=pepe");
 	simple_cmds->str[1] = ft_strdup("bb");
 	simple_cmds->str[2] = ft_strdup("Za1");
@@ -343,22 +349,18 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 		{
 			if (ft_check_vars(simple_cmds->str[i]))
 			{				
-				if(ft_check_if_exists(exp_copy, simple_cmds->str[i]))
-				{
+				if(ft_check_if_exists(tools->export, simple_cmds->str[i]))
 					ft_update_var(tools->export, tools->env, simple_cmds->str[i]);
-					printf("Entra\n");
-				}
 				else
 				{
 					if (ft_strchr(simple_cmds->str[i], '='))
-						env_copy = ft_add_var_env(env_copy, simple_cmds->str[i]);
-					exp_copy = ft_add_var_export(exp_copy, simple_cmds->str[i]);
+						tools->env = ft_add_var(tools->env, simple_cmds->str[i]);
+					tools->export = ft_add_var(tools->export, simple_cmds->str[i]);
 				}
 			}
 			i++;
 		}
 	// }
-	ft_print_export(exp_copy);
-
+	ft_print_export(tools->export);
 	return (1);
 }
