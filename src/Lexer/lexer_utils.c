@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/17 13:19:15 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:57:03 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ void	ft_add_token_last(t_token **token, t_token *new)
 	t_token	*current;
 
 	if (!token || !new)
-	{
-		printf("Error: ft_add_token_last\n");
 		return ;
-	}
 	if (*token == NULL)
 		*token = new;
 	else

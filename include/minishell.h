@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/17 13:22:55 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:51:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,37 +107,33 @@ typedef struct s_simple_cmds
 
 
 		/* main.c */
-void		print_tokens(t_token *temp);
-char		*prompt(void);
-int			ft_err(char *msg, int nb);
+void	print_tokens(t_token *temp);
+char	*prompt(void);
+int		ft_err(char *msg, int nb, t_tools *tools);
+void	free_err(t_tools *tools);
+
+		/* minishell_loop.c */
+void	minishell_loop(t_tools *tools);
 
 		/* lexer.c */
-/* void		create_token(char *input, t_token **token);
-void		ft_strlen_token(char *input);
-int			lexer(char *input, t_tools *tools); */
-
-		/* lexer2.c */
 void	create_token(t_tools *tools, t_token **token);
-void		ft_strlen_token(char *str);
-int			lexer(char *input, t_tools *tools);
+void	ft_strlen_token(char *str);
+int		lexer(t_tools *tools);
 
 		/* lexer_utils.c */
-t_token		*ft_token_new(char *token);
-void		ft_add_token_last(t_token **list, t_token *new);
-void		ft_free_token(t_token **token);
+t_token	*ft_token_new(char *token);
+void	ft_add_token_last(t_token **list, t_token *new);
+void	ft_free_token(t_token **token);
 
 		/* quotes.c */
-/* void		check_quotes(t_token **lst); */
-
-		/* quotes2.c */
-int			change_flag(int flag);
-int			quotes(char *input, int *i, int flag, char c);
-void		check_quotes(t_tools *tools);
+int		change_flag(int flag);
+int		quotes(char *input, int *i, int flag, char c);
+void	check_quotes(t_tools *tools);
 
 		/* check_utils.c */
-int			check_redirects(t_token **lst);
-int			check_broken_pipes(t_token **lst);
-void		check_tokens(t_token **lst);
+int		check_redirects(t_token **lst, t_tools *tools);
+int		check_broken_pipes(t_token **lst, t_tools *tools);
+void	check_tokens(t_tools *tools, t_token **lst);
 
 		/* parser.c */
 void	parser(t_tools *tools);

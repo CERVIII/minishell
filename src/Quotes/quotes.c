@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:05:56 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/17 13:19:50 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:33:41 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	check_quotes(t_tools *tools)
 	}
 	if (double_flag || single_flag)
 	{
-		ft_err("ERROR: Unclosed quotes", 127);
+		ft_err("ERROR: Unclosed quotes", 127, tools);
+		minishell_loop(tools);
 	}
 }

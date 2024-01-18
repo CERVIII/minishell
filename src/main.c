@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/17 13:22:23 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:41:08 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ static void	leaks(void)
 	system("leaks -q minishell");
 }
 
-int	ft_err(char *msg, int nb)
+int	ft_err(char *msg, int nb, t_tools *tools)
 {
 	printf("%s%s%s\n", RED, msg, RESET_COLOR);
+	free_err(tools);
 	return (nb);
 }
 
@@ -27,9 +28,32 @@ void	print_tokens(t_token *temp)
 {
 	while (temp)
 	{
-		printf("Token: %s	Type: %d\n", temp->token, temp->type);
+		printf("Token: %s	Type: %d	Indice: %d\n", temp->token, temp->type, temp->i);
 		temp = temp->next;
 	}
+}
+
+void	free_err(t_tools *tools)
+{
+	if (tools->arg)
+		free(tools->arg);
+	if (tools->lexer)
+	{
+		while (tools->lexer)
+		{
+			free(tools->lexer->token);
+			tools->lexer = tools->lexer->next;
+		}
+		free(tools->lexer);
+	}
+}
+
+int	main(void)
+{
+	t_tools	tools;
+
+	atexit(leaks);
+	minishell_loop(&tools);
 }
 
 /*  char	*prompt(void)
@@ -50,14 +74,8 @@ void	print_tokens(t_token *temp)
 	end = ft_strjoin(end, NORMAL);
 	return (end);
 }  */
-void	free_exit(char *str, char *input)
-{
-	free(str);
-	free(input);
-	return ;
-}
 
-char	*prompt(void)
+/* char	*prompt(void)
 {
 	char	*end;
 	char	*cwd;
@@ -80,9 +98,9 @@ char	*prompt(void)
 	// temp = ft_strjoin(end, NORMAL);
 	// free(end);
 	return (temp);
-}
+} */
 
-int	main(void)
+/* int	main(void)
 {
 	char	*input;
 	char	*str;
@@ -106,38 +124,6 @@ int	main(void)
 		free_exit(str, input);
 		free(tools.arg);
 	}
-	free_exit(str, input);
-	return (0);
-}
-
-/* int	main(void)
-{
-	char	*input;
-	char	*str;
-	t_token	*token;
-
-	atexit(leaks);
-	while (1)
-	{
-		token = NULL;
-		str = prompt();
-		input = readline(str);
-		if (!input || !ft_strcmp(input, "exit"))
-			break ;
-		lexer(input, &token);
-		// Borrar printf de token ↓
-		t_token	*temp = token;
-		check_redirects(&temp);
-		check_broken_pipes(&temp);
-		while (temp)
-		{
-			printf("Token: %s	Type: %d\n", temp->token, temp->type);
-			temp = temp->next;
-		}
-		ft_free_token(&token);
-		free_exit(str, input);
-	}
-	printf("%sSaliendo de minishell...%s\n", RED, NORMAL);
 	free_exit(str, input);
 	return (0);
 } */

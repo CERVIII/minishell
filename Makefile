@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/17 13:18:44 by pcervill         ###   ########.fr        #
+#    Updated: 2024/01/18 13:01:01 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC_QUOTES	=	./src/Quotes
 SRCS		=	Lexer/ft_split_cmd.c Lexer/ft_split_cmd_aux.c Lexer/ft_split_cmd_aux_2.c Lexer/lexer_utils.c Lexer/lexer.c \
 				Parser/check_utils.c  Parser/parser.c\
 				Quotes/quotes.c \
-				main.c
+				main.c minishell_loop.c
 
 OBJS		=	$(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 

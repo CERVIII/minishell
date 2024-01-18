@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:30 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/17 13:19:26 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:00:06 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	create_token(t_tools *tools, t_token **token)
 
 	input = NULL;
 	input = ft_split_cmd(tools->arg, ' ');
-//	input = ft_split(tools->arg, ' ');
 	i = 0;
 	while (input[i])
 	{
@@ -30,14 +29,19 @@ void	create_token(t_tools *tools, t_token **token)
 		free(input[i]);
 		i++;
 	}
+	free(input);
 	printf("Nº tokens: %d\n", i);
 	return ;
 }
 
-int	lexer(char *input, t_tools *tools)
+int	lexer(t_tools *tools)
 {
+	char	*tmp;
+
+	tmp = ft_strtrim(tools->arg, " \t\n\r");
+	free(tools->arg);
+	tools->arg = tmp;
 	tools->lexer = NULL;
-	tools->arg = ft_strtrim(input, " \t\n\r");
 	create_token(tools, &tools->lexer);
 	return (0);
 }
