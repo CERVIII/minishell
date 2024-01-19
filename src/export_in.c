@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/18 18:55:03 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:27:50 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,35 @@ char	**ft_check_exports(t_simple_cmds *simple_cmds, char *var, char **exp, char 
 	return (new_env);
 }
 */
-void	ft_join_var(char *old, char *var)
+
+void	ft_join_export(char **exp)
 {
-	char	*aux;
-	
+	char	*var_name;
+	char	*var_value;
+	char	*var_join;
+	char	*aux_join;
+	int		i;
+
+	i = 0;
+	while (exp[i])
+	{
+		var_name = ft_substr(exp[i], 0, (ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '='))));
+		var_value = ft_strchr(exp[i], '=');
+		var_value++;
+		aux_join = ft_strjoin(var_name, "=\"");
+		var_join = aux_join;
+		free(aux_join);
+		aux_join = ft_strjoin(var_join, var_value);
+		var_join = aux_join;
+		free(aux_join);
+		aux_join = ft_strjoin(var_join, "\"");
+		var_join = aux_join;
+		free(aux_join);
+		exp[i] = ft_strdup(var_join);
+		printf("EXP: %s", exp[i]);
+		free(var_name);
+		i++;
+	}
 }
 
 void	ft_replace_var(char **exp, char *var_name, char *var)
@@ -142,17 +167,6 @@ void	ft_replace_var(char **exp, char *var_name, char *var)
 			free(exp[i]);
 			exp[i] = var;	
 		}
-		i++;
-	}
-}
-void	ft_free_matrix(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
 		i++;
 	}
 }
@@ -171,10 +185,7 @@ void	ft_update_var(char **exp, char **env ,char *var)
 		{
 			aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
 			if (ft_strcmp(aux,var_aux) == 0)
-			{
-				free(env[i]);
 				env[i] = var;
-			}
 			free(aux);
 			i++;
 		}
@@ -222,16 +233,16 @@ char	**ft_sort_export(char **str)
 
 void	ft_print_export(char **copy)
 {
-	int i;
-	int j;
-	char **sorted_export;
+	int		i;
+	char	**sorted_export;
+	// char	**joined_export;
 
 	i = 0;
-	j = 0;
+	ft_join_export(copy);
 	sorted_export = ft_sort_export(copy);
 	while (sorted_export[i])
 	{
-		printf("declare -x %s\n", sorted_export[i]);
+		printf("declare -x %s\n", copy[i]);
 		i++;
 	}
 	// while (sorted_export[j])
@@ -247,8 +258,7 @@ char	**ft_update_export(char **exp, char **new_exp, char *var)
 		new_exp[i] = exp[i];
 		i++;
 	}
-	ft_join_var(new_exp[i], var);
-	// new_exp[i] = var;
+	new_exp[i] = var;
 	return (new_exp);
 }
 
@@ -331,9 +341,6 @@ int	ft_check_vars(char *cmds)
 */
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	// char	**env_copy;
-	// char	**exp_copy;
-
 	simple_cmds = malloc(sizeof(t_simple_cmds)); 
 	simple_cmds->str = ft_calloc(3, sizeof(char *));
 	simple_cmds->str[0] = ft_strdup("USER=pepe");

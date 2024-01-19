@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/15 15:43:52 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:21:04 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("This program does not accept arguments\n");
 		exit(0);
 	}
-	tools.env = dup_matrix(envp);
-	tools.export = dup_matrix(envp);
+	tools.env = envp;
+	tools.export = envp;
 	// int i = 0;
 	// while (tools.env[i])
 	// {
@@ -142,12 +142,6 @@ int	main(int argc, char **argv, char **envp)
 		free_exit(str, input);
 	}
 	//TODO: meter en una función para liberar todo lo que haya en tools
-	int i = 0;
-	while (tools.env[i])
-	{
-		free(tools.env[i]);
-		i++;
-	}
 	free(tools.pwd);
 	free(tools.old_pwd);
 	free_exit(str, input);
