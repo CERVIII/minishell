@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/19 17:27:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:31:24 by fede             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,21 +136,23 @@ void	ft_join_export(char **exp)
 	i = 0;
 	while (exp[i])
 	{
-		var_name = ft_substr(exp[i], 0, (ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '='))));
-		var_value = ft_strchr(exp[i], '=');
-		var_value++;
-		aux_join = ft_strjoin(var_name, "=\"");
-		var_join = aux_join;
-		free(aux_join);
-		aux_join = ft_strjoin(var_join, var_value);
-		var_join = aux_join;
-		free(aux_join);
-		aux_join = ft_strjoin(var_join, "\"");
-		var_join = aux_join;
-		free(aux_join);
-		exp[i] = ft_strdup(var_join);
-		printf("EXP: %s", exp[i]);
-		free(var_name);
+		if (ft_strchr(exp[i], '='))
+		{
+			var_value = ft_strchr(exp[i], '=');
+			var_name = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(var_value));
+			var_value++;
+			aux_join = ft_strjoin(var_name, "=\"");
+			var_join = aux_join;
+			free(aux_join);
+			aux_join = ft_strjoin(var_join, var_value);
+			var_join = aux_join;
+			free(aux_join);
+			aux_join = ft_strjoin(var_join, "\"");
+			var_join = aux_join;
+			free(aux_join);
+			exp[i] = ft_strdup(var_join);
+			free(var_name);
+		}
 		i++;
 	}
 }
@@ -238,7 +240,9 @@ void	ft_print_export(char **copy)
 	// char	**joined_export;
 
 	i = 0;
+	printf("LINEA: %s\n", copy[0]);
 	ft_join_export(copy);
+	printf("FIN\n");
 	sorted_export = ft_sort_export(copy);
 	while (sorted_export[i])
 	{
@@ -345,7 +349,7 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 	simple_cmds->str = ft_calloc(3, sizeof(char *));
 	simple_cmds->str[0] = ft_strdup("USER=pepe");
 	simple_cmds->str[1] = ft_strdup("bb");
-	simple_cmds->str[2] = ft_strdup("Za1");
+	simple_cmds->str[2] = ft_strdup("Za1=aa");
 	// simple_cmds->str[2] = ""
 	// if (!simple_cmds->str[1] || simple_cmds->str[0][0])
 	// 	ft_print_export(env_copy);
