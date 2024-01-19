@@ -6,7 +6,7 @@
 /*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/19 21:31:24 by fede             ###   ########.fr       */
+/*   Updated: 2024/01/19 21:56:34 by fede             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,23 +128,20 @@ char	**ft_check_exports(t_simple_cmds *simple_cmds, char *var, char **exp, char 
 void	ft_join_export(char **exp)
 {
 	char	*var_name;
-	char	*var_value;
 	char	*var_join;
 	char	*aux_join;
 	int		i;
 
-	i = 0;
-	while (exp[i])
+	i = -1;
+	while (exp[++i])
 	{
 		if (ft_strchr(exp[i], '='))
 		{
-			var_value = ft_strchr(exp[i], '=');
-			var_name = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(var_value));
-			var_value++;
+			var_name = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
 			aux_join = ft_strjoin(var_name, "=\"");
 			var_join = aux_join;
 			free(aux_join);
-			aux_join = ft_strjoin(var_join, var_value);
+			aux_join = ft_strjoin(var_join, ft_strchr(exp[i], '=') + 1);
 			var_join = aux_join;
 			free(aux_join);
 			aux_join = ft_strjoin(var_join, "\"");
@@ -153,7 +150,6 @@ void	ft_join_export(char **exp)
 			exp[i] = ft_strdup(var_join);
 			free(var_name);
 		}
-		i++;
 	}
 }
 
