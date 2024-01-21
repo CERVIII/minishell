@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
+#    By: fede <fede@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/18 14:27:37 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/01/21 12:50:50 by fede             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,19 @@ CFLAGS		= -Wall -Werror -Wextra #-g3 -fsanitize=address
 EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		= ./src
+SRC_BUILTIN = ./src/builtins
 
 SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c \
-			 cd_in.c env_in.c pwd_in.c check_builtin.c export_in.c \
-			 unset_in.c echo_in.c exit_in.c
+			 builtins/cd_in.c builtins/env_in.c builtins/pwd_in.c builtins/check_builtin.c builtins/export_in.c \
+			 builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c
 
-OBJS		= $(addprefix $(OBJS_PATH)/, ${SRCS:.c=.o})
-
+OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 NAME		= minishell
 
 LIBFT_PATH	= ./libft/
 
 OBJS_PATH = .objs
+
 
 all: $(NAME)
 	@echo " \033[32m[ OK ] | ✅ Minishell ready! ✅\033[0m"
@@ -43,6 +44,9 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)	
 
 $(OBJS_PATH)/%.o:$(SRC_DIR)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_BUILTIN)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
