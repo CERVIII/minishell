@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/18 14:41:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:45:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,25 @@ void	print_tokens(t_token *temp)
 
 void	free_err(t_tools *tools)
 {
+	t_token	*tmp;
+	t_token	*tmp2;
+
 	if (tools->arg)
+	{
 		free(tools->arg);
+		tools->arg = NULL;
+	}
 	if (tools->lexer)
 	{
-		while (tools->lexer)
+		tmp = tools->lexer;
+		while (tmp)
 		{
-			free(tools->lexer->token);
-			tools->lexer = tools->lexer->next;
+			tmp2 = tmp->next;
+			free(tmp->token);
+			free(tmp);
+			tmp = tmp2;
 		}
-		free(tools->lexer);
+		tools->lexer = NULL;
 	}
 }
 
@@ -54,6 +63,7 @@ int	main(void)
 
 	atexit(leaks);
 	minishell_loop(&tools);
+	return (0);
 }
 
 /*  char	*prompt(void)
@@ -103,27 +113,29 @@ int	main(void)
 /* int	main(void)
 {
 	char	*input;
-	char	*str;
+//	char	*str;
 	t_tools	tools;
 
-	atexit(leaks);
+//	atexit(leaks);
 	while (1)
 	{
-		str = prompt();
+		//str = prompt();
 		input = readline(PROMPT_MSG);
 		if (!input || !ft_strcmp(input, "exit"))
 			break ;
 		tools.arg = ft_strdup(input);
 		check_quotes(&tools);
-		lexer(input, &tools);
+		lexer(&tools);
 		print_tokens(tools.lexer);
-		check_tokens(&tools.lexer);
-		add_history(input);
+		check_tokens(&tools, &tools.lexer);
+		add_history(tools.arg);
 		parser(&tools);
 		ft_free_token(&tools.lexer);
-		free_exit(str, input);
+//		free(str);
+		free(input);
 		free(tools.arg);
 	}
-	free_exit(str, input);
+//	free(str);
+	free(input);
 	return (0);
 } */
