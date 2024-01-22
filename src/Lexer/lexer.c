@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:30 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/18 15:00:06 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:37:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	create_token(t_tools *tools, t_token **token)
 
 	input = NULL;
 	input = ft_split_cmd(tools->arg, ' ');
+	if (!input)
+		return ;
 	i = 0;
 	while (input[i])
 	{
 		new = NULL;
-		new = ft_token_new(input[i]);
+		new = ft_token_new(input[i], i);
 		ft_add_token_last(token, new);
 		free(input[i]);
 		i++;

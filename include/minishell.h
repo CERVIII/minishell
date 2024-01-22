@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/22 12:29:31 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:37:47 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ft_strlen_token(char *str);
 int		lexer(t_tools *tools);
 
 		/* lexer_utils.c */
-t_token	*ft_token_new(char *token);
+t_token	*ft_token_new(char *token, int i);
 void	ft_add_token_last(t_token **list, t_token *new);
 void	ft_free_token(t_token **token);
 
