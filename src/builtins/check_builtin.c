@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:00:50 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/21 12:48:12 by fede             ###   ########.fr       */
+/*   Updated: 2024/01/22 16:12:23 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	check_builtin(t_token *tokens, t_tools *tools, t_simple_cmds *simple_cmds)
 	else if (ft_strcmp(tokens->token, "exit") == 0)
 		ft_exit(tools, simple_cmds);
 	else
-		printf("hola\n");
+		printf("holadadggdsg\n");
 	return (1);
 }

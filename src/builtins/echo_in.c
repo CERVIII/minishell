@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/21 12:48:14 by fede             ###   ########.fr       */
+/*   Updated: 2024/01/22 16:36:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	ft_echo(t_simple_cmds *simple_cmds)
 	int i;
 	int j;
     bool flag;
+    simple_cmds = malloc(sizeof(t_simple_cmds)); 
+	simple_cmds->str = ft_calloc(2, sizeof(char *));
+	simple_cmds->str[0] = ft_strdup("hola");
+	simple_cmds->str[1] = ft_strdup("-n");
 
     i = 0;
     flag = false;

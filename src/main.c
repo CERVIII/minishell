@@ -6,16 +6,16 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/19 14:21:04 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:37:54 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	leaks(void)
-{
-	system("leaks -q minishell");
-}
+// static void	leaks(void)
+// {
+// 	system("leaks -q minishell");
+// }
 
 int	ft_err(char *msg, int nb)
 {
@@ -110,7 +110,7 @@ int	main(int argc, char **argv, char **envp)
 	t_tools	tools;
 	simple_cmds = NULL;
 
-	atexit(leaks);
+	// atexit(leaks);
 	if (argc != 1 || argv[1])
 	{
 		printf("This program does not accept arguments\n");
