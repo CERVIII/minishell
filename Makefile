@@ -3,24 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fede <fede@student.42.fr>                  +#+  +:+       +#+         #
+#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/21 12:50:50 by fede             ###   ########.fr        #
+#    Updated: 2024/01/23 11:48:16 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 
-CFLAGS		= -Wall -Werror -Wextra #-g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		= ./src
 SRC_BUILTIN = ./src/builtins
 
-SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c \
+SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c utils2.c\
 			 builtins/cd_in.c builtins/env_in.c builtins/pwd_in.c builtins/check_builtin.c builtins/export_in.c \
-			 builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c
+			 builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c builtins/export_utils.c
 
 OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 NAME		= minishell
