@@ -6,23 +6,16 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/22 16:00:33 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:10:26 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	leaks(void)
+/* static void	leaks(void)
 {
 	system("leaks -q minishell");
-}
-
-int	ft_err(char *msg, int nb, t_tools *tools)
-{
-	printf("%s%s%s\n", RED, msg, RESET_COLOR);
-	free_err(tools);
-	return (nb);
-}
+} */
 
 void	print_tokens(t_token *temp)
 {
@@ -33,11 +26,19 @@ void	print_tokens(t_token *temp)
 	}
 }
 
+int	ft_err(char *msg, int nb, t_tools *tools)
+{
+	printf("%s%s%s\n", RED, msg, RESET_COLOR);
+	free_err(tools);
+	return (nb);
+}
+
 void	free_err(t_tools *tools)
 {
 	t_token	*tmp;
 	t_token	*tmp2;
 
+	tmp = tools->lexer;
 	if (tools->arg)
 	{
 		free(tools->arg);
@@ -45,7 +46,6 @@ void	free_err(t_tools *tools)
 	}
 	if (tools->lexer)
 	{
-		tmp = tools->lexer;
 		while (tmp)
 		{
 			tmp2 = tmp->next;
@@ -61,7 +61,7 @@ int	main(void)
 {
 	t_tools	tools;
 
-	atexit(leaks);
+//	atexit(leaks);
 	minishell_loop(&tools);
 	return (0);
 }

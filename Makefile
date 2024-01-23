@@ -6,13 +6,13 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/22 11:28:07 by pcervill         ###   ########.fr        #
+#    Updated: 2024/01/23 12:10:23 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
-CFLAGS		=	-Wall -Werror -Wextra -g3 #-fsanitize=address
+CFLAGS		=	-Wall -Werror -Wextra -g3 -fsanitize=address
 EXTRAFLAGS	=	-lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
 SRC_DIR		=	./src
@@ -21,7 +21,7 @@ SRC_PARSER	=	./src/Parser
 SRC_QUOTES	=	./src/Quotes
 
 SRCS		=	Lexer/ft_split_cmd.c Lexer/ft_split_cmd_aux.c Lexer/ft_split_cmd_aux_2.c Lexer/lexer_utils.c Lexer/lexer.c \
-				Parser/check_utils.c  Parser/parser.c\
+				Parser/check_utils.c  Parser/parser.c Parser/clean_lexer.c Parser/parser_utils.c \
 				Quotes/quotes.c \
 				main.c minishell_loop.c
 

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:30 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/22 17:37:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:14:39 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	lexer(t_tools *tools)
 	tmp = ft_strtrim(tools->arg, " \t\n\r");
 	free(tools->arg);
 	tools->arg = tmp;
-	tools->lexer = NULL;
 	create_token(tools, &tools->lexer);
 	return (0);
 }

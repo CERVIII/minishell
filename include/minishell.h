@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/22 17:37:47 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:19:00 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,28 +116,7 @@ void	free_err(t_tools *tools);
 		/* minishell_loop.c */
 void	minishell_loop(t_tools *tools);
 
-		/* lexer.c */
-void	create_token(t_tools *tools, t_token **token);
-void	ft_strlen_token(char *str);
-int		lexer(t_tools *tools);
-
-		/* lexer_utils.c */
-t_token	*ft_token_new(char *token, int i);
-void	ft_add_token_last(t_token **list, t_token *new);
-void	ft_free_token(t_token **token);
-
-		/* quotes.c */
-int		change_flag(int flag);
-int		quotes(char *input, int *i, int flag, char c);
-void	check_quotes(t_tools *tools);
-
-		/* check_utils.c */
-int		check_redirects(t_token **lst, t_tools *tools);
-int		check_broken_pipes(t_token **lst, t_tools *tools);
-void	check_tokens(t_tools *tools, t_token **lst);
-
-		/* parser.c */
-void	parser(t_tools *tools);
+	/* ###########	LEXER	########### */
 
 		/* split */
 char	**ft_split_cmd(char *s, char c);
@@ -152,4 +131,41 @@ void	process_delimiter(t_info *info, size_t *w_c, char c, int in_quotes);
 void	p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
 int		ft_is_whitespace(char c);
 int		ft_skip_spaces(char *str);
+
+		/* lexer_utils.c */
+t_token	*ft_token_new(char *token, int i);
+void	ft_add_token_last(t_token **list, t_token *new);
+void	ft_free_token(t_token **token);
+
+		/* lexer.c */
+void	create_token(t_tools *tools, t_token **token);
+void	ft_strlen_token(char *str);
+int		lexer(t_tools *tools);
+
+	/* ###########	PARSER	########### */
+
+		/* check_utils.c */
+int		check_redirects(t_token **lst, t_tools *tools);
+int		check_broken_pipes(t_token **lst, t_tools *tools);
+void	check_tokens(t_tools *tools, t_token **lst);
+
+		/* clean_lexer.c */
+t_token	*ft_lexerclear_one(t_token **tmp);
+void	ft_lexerdel_first(t_token **lexer);
+void	ft_lexerdelone(t_token **lexer, int key);
+
+		/* parser_utils.c */
+void	count_pipes(t_token *lexer, t_tools *tools);
+
+		/* parser.c */
+void	parser(t_tools *tools);
+
+	/* ###########	QUOTES	########### */
+
+		/* quotes.c */
+int		change_flag(int flag);
+int		quotes(char *input, int *i, int flag, char c);
+void	check_quotes(t_tools *tools);
+
+
 #endif
