@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/23 12:19:00 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:29:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,6 @@ typedef enum e_token_type
 	RREDIR,
 	HERE_DOC,
 }	t_token_type;
-
-/* Old checker_utils */
-/* typedef enum e_token_type
-{
-	WORD,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	RREDIR,
-	HERE_DOC,
-	DOUBLE_QUOTE,
-	SINGLE_QUOTE
-}	t_token_type; */
 
 typedef struct s_token
 {
@@ -144,7 +131,7 @@ int		lexer(t_tools *tools);
 
 	/* ###########	PARSER	########### */
 
-		/* check_utils.c */
+		/* check_token.c */
 int		check_redirects(t_token **lst, t_tools *tools);
 int		check_broken_pipes(t_token **lst, t_tools *tools);
 void	check_tokens(t_tools *tools, t_token **lst);

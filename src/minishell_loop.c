@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/23 13:14:23 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:33:11 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,3 @@ void	minishell_loop(t_tools *tools)
 	free_err(tools);
 	minishell_loop(tools);
 }
-
-/* void	minishell_loop(t_tools *tools)
-{
-	char *input;
-	(void) tools;
-
-	//input = NULL;
-	
-	printf("%p\n", &input);
-	input = readline(PROMPT_MSG);
-	printf("%p\n", &input);
-	printf("%s\n", input);
-	free(input);
-	printf("%s\n%p\n", input, &input);
-	return ;
-} */
