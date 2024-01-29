@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/25 14:29:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:39:14 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_string_info
 	char	*s;
 	size_t	*i;
 	char	current_quote;
-}t_info;
+}	t_info;
 
 typedef enum e_token_type
 {
@@ -95,7 +95,7 @@ typedef struct s_simple_cmds
 
 
 		/* main.c */
-void	print_tokens(t_token *temp);
+void	print_tokens(t_token *temp, t_tools *tools);
 char	*prompt(void);
 int		ft_err(char *msg, int nb, t_tools *tools);
 void	free_err(t_tools *tools);
@@ -104,6 +104,13 @@ void	free_err(t_tools *tools);
 void	minishell_loop(t_tools *tools);
 
 	/* ###########	LEXER	########### */
+
+		/* check_input.c */
+int		add_space(char *arg, char *new, int i, int j);
+void	status_quotes(int *single_q, int *double_q, char quote);
+int		ft_strlen_spaces(char *arg);
+void	pass_quotes(char *arg, char *new, int *i, int *j);
+char	*check_add_spaces(char *arg);
 
 		/* split */
 char	**ft_split_cmd(char *s, char c);

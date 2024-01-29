@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/25 14:33:11 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:39:25 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_tools(t_tools *tools)
 void	minishell_loop(t_tools *tools)
 {
 	init_tools(tools);
-	tools->arg = readline(PROMPT_MSG);
+	tools->arg = check_add_spaces(readline(PROMPT_MSG));
 	if (!tools->arg || !ft_strcmp(tools->arg, "exit"))
 		exit(0);
 	if (!tools->arg[0])
@@ -34,11 +34,11 @@ void	minishell_loop(t_tools *tools)
 	add_history(tools->arg);
 	check_quotes(tools);
 	lexer(tools);
-//	print_tokens(tools->lexer);
+	print_tokens(tools->lexer, tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
 	printf("Tokens after parser:\n");
-	print_tokens(tools->lexer);
+	print_tokens(tools->lexer, tools);
 	free_err(tools);
 	minishell_loop(tools);
 }

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/23 13:10:26 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:38:52 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 	system("leaks -q minishell");
 } */
 
-void	print_tokens(t_token *temp)
+void	print_tokens(t_token *temp, t_tools *tools)
 {
+	printf("Input: %s\n", tools->arg);
 	while (temp)
 	{
 		printf("Token: %s	Type: %d	Indice: %d\n", temp->token, temp->type, temp->i);

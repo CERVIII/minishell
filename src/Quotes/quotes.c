@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:05:56 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/25 14:31:35 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:36:21 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	check_quotes(t_tools *tools)
 
 	double_flag = 0;
 	single_flag = 0;
-	printf("arg: %s\n", tools->arg);
 	i = 0;
 	while (tools->arg[i] && i < (int)ft_strlen(tools->arg))
 	{
@@ -70,7 +69,6 @@ void	check_quotes(t_tools *tools)
 		if (i == j)
 			i++;
 	}
-	printf("double_quotes: %d\nsingle_quoes: %d\n", double_flag, single_flag);
 	if (double_flag || single_flag)
 	{
 		ft_err("ERROR: Unclosed quotes", 127, tools);

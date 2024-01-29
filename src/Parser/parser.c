@@ -6,18 +6,39 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/25 15:49:43 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:17:55 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+void	parser_double_token(t_tools *tools, t_token *lexer)
+{
+	if (lexer->type == REDIR_IN)
+		ft_err("Error: Syntax error near unexpected token '<'\n",
+			STDERR_FILENO, tools);
+	else if (lexer->type == REDIR_OUT)
+		ft_err("Error: Syntax error near unexpected token '>'\n",
+			STDERR_FILENO, tools);
+	else if (lexer->type == RREDIR)
+		ft_err("Error: Syntax error near unexpected token '>>'\n",
+			STDERR_FILENO, tools);
+	else if (lexer->type == HERE_DOC)
+		ft_err("Error: Syntax error near unexpected token '<<'\n",
+			STDERR_FILENO, tools);
+	else if (lexer->type == PIPE)
+		ft_err("Error: Syntax error near unexpected token '|'\n",
+			STDERR_FILENO, tools);
+}
+
 void	parser(t_tools *tools)
 {
-	t_token *cpy;
+	t_token	*cpy;
 
 	cpy = tools->lexer;
 	count_pipes(tools->lexer, tools);
+	if (tools->lexer->type == PIPE)
+		parser_double_token(tools, tools->lexer);
 	printf("Number of pipes: %d\n", tools->pipes);
 	while (tools->lexer && cpy)
 	{
@@ -26,34 +47,3 @@ void	parser(t_tools *tools)
 		cpy = cpy->next;
 	}
 }
-
-/* void	parser(t_tools *tools)
-{
-	t_token	*current;
-
-	current = NULL;
-	count_pipes(tools->lexer, tools);
-	printf("Number of pipes: %d\n", tools->pipes);
-
-	// Iterar sobre la lista hasta que no haya más nodos
-	while (tools->lexer)
-	{
-		// Guardar el nodo actual antes de borrarlo
-		current = tools->lexer;
-
-		// Avanzar al siguiente nodo antes de eliminar el actual
-		tools->lexer = tools->lexer->next;
-
-		// Verificar si el nodo actual es un PIPE y eliminarlo
-		if (current->type == PIPE)
-		{
-			ft_lexerdelone(&tools->lexer, current->i);
-		}
-
-		// Si ya no hay más nodos, salir del bucle
-		if (!tools->lexer)
-		{
-			break;
-		}
-	}
-} */
