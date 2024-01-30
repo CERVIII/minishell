@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/29 17:50:03 by pcervill         ###   ########.fr        #
+#    Updated: 2024/01/30 15:00:17 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,8 +64,8 @@ clean:
 	@rm -rf $(OBJS_PATH)
 
 fclean: clean
-	@rm -f $(NAME)
 	@make fclean -C $(LIBFT_PATH)
+	@rm -f $(NAME)
 	@echo " \033[1;31m[ OK ] | 🧹 Minishell fclean ready! 🧹 \033[0m"
 
 re: fclean all

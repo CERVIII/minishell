@@ -6,12 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:30 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/29 12:02:41 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:46:00 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 void	create_token(t_tools *tools, t_token **token)
 {
@@ -33,7 +32,6 @@ void	create_token(t_tools *tools, t_token **token)
 		i++;
 	}
 	free(input);
-	printf("Nº tokens: %d\n", i);
 	return ;
 }
 
@@ -42,6 +40,8 @@ int	lexer(t_tools *tools)
 	char	*tmp;
 
 	tmp = ft_strtrim(tools->arg, " \t\n\r");
+	if (!tmp[0])
+		minishell_loop(tools);
 	free(tools->arg);
 	tools->arg = tmp;
 	create_token(tools, &tools->lexer);

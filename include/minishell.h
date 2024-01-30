@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/29 17:39:14 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:50:34 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,32 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define RESET_COLOR	"\033[0m"
-# define BLACK   		"\033[30m"
-# define RED     		"\033[31m"
+# define NORMAL			"\033[0m"
+# define BLACK			"\033[30m"
+# define RED			"\033[31m"
 # define LIGHT_RED		"\033[91m"
-# define GREEN   		"\033[32m"
+# define GREEN			"\033[32m"
 # define LIGHT_GREEN	"\033[92m"
-# define YELLOW  		"\033[33m"
+# define YELLOW			"\033[33m"
 # define LIGHT_YELLOW	"\033[93m"
-# define BLUE    		"\033[34m"
+# define BLUE			"\033[34m"
 # define LIGHT_BLUE		"\033[94m"
-# define MAGENTA 		"\033[35m"
+# define MAGENTA		"\033[35m"
 # define LIGHT_MAGENTA	"\033[95m"
-# define CYAN    		"\033[36m"
+# define CYAN			"\033[36m"
 # define LIGHT_CYAN		"\033[96m"
-# define WHITE   		"\033[37m"
-# define GREY    		"\033[90m"
+# define WHITE			"\033[37m"
+# define GREY			"\033[90m"
 # define LIGHT_GREY		"\033[37m"
 
-# define BLACK_BOLD   	"\033[1;30m"
-# define RED_BOLD     	"\033[1;31m"
-# define GREEN_BOLD   	"\033[1;32m"
-# define YELLOW_BOLD  	"\033[1;33m"
-# define BLUE_BOLD    	"\033[1;34m"
-# define MAGENTA_BOLD 	"\033[1;35m"
-# define CYAN_BOLD    	"\033[1;36m"
-# define WHITE_BOLD   	"\033[1;37m"
+# define BLACK_BOLD		"\033[1;30m"
+# define RED_BOLD		"\033[1;31m"
+# define GREEN_BOLD		"\033[1;32m"
+# define YELLOW_BOLD	"\033[1;33m"
+# define BLUE_BOLD		"\033[1;34m"
+# define MAGENTA_BOLD	"\033[1;35m"
+# define CYAN_BOLD		"\033[1;36m"
+# define WHITE_BOLD		"\033[1;37m"
 
 # define PROMPT_MSG "\033[1;36m$minishell/ \033[0m"
 
@@ -95,7 +95,7 @@ typedef struct s_simple_cmds
 
 
 		/* main.c */
-void	print_tokens(t_token *temp, t_tools *tools);
+void	print_tokens(t_token *temp);
 char	*prompt(void);
 int		ft_err(char *msg, int nb, t_tools *tools);
 void	free_err(t_tools *tools);
@@ -108,7 +108,7 @@ void	minishell_loop(t_tools *tools);
 		/* check_input.c */
 int		add_space(char *arg, char *new, int i, int j);
 void	status_quotes(int *single_q, int *double_q, char quote);
-int		ft_strlen_spaces(char *arg);
+int		ft_strlen_spaces(char *arg, int i, int j);
 void	pass_quotes(char *arg, char *new, int *i, int *j);
 char	*check_add_spaces(char *arg);
 

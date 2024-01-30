@@ -6,30 +6,29 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/29 17:48:43 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:56:22 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/* static void	leaks(void)
+static void	leaks(void)
 {
 	system("leaks -q minishell");
-} */
+}
 
-void	print_tokens(t_token *temp, t_tools *tools)
+void	print_tokens(t_token *tmp)
 {
-	printf("Input: %s\n", tools->arg);
-	while (temp)
+	while (tmp)
 	{
-		printf("Token: %s	Type: %d	Indice: %d\n", temp->token, temp->type, temp->i);
-		temp = temp->next;
+		printf("%sToken: %s%s	%sType: %s%d	%sIndex: %s%d%s\n", YELLOW_BOLD, YELLOW, tmp->token, BLUE_BOLD, BLUE, tmp->type, MAGENTA_BOLD, MAGENTA, tmp->i, NORMAL);
+		tmp = tmp->next;
 	}
 }
 
 int	ft_err(char *msg, int nb, t_tools *tools)
 {
-	printf("%s%s%s\n", RED, msg, RESET_COLOR);
+	printf("%s%s%s\n", RED, msg, NORMAL);
 	free_err(tools);
 	return (nb);
 }
@@ -62,7 +61,7 @@ int	main(void)
 {
 	t_tools	tools;
 
-//	atexit(leaks);
+	atexit(leaks);
 	minishell_loop(&tools);
 	return (0);
 }
@@ -141,7 +140,4 @@ int	main(void)
 	return (0);
 } */
 
-
-
-
-//asdas | fsdfsdf"sdfsd>>fsdfsd!" >> sdfsdf|sa>asd
+//hola | esto"es>>una!" >> prueba|por>si

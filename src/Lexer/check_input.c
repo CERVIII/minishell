@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 17:28:05 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/29 17:34:56 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:43:32 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,26 @@ void	status_quotes(int *single_q, int *double_q, char quote)
 	}
 }
 
-int	ft_strlen_spaces(char *arg)
+int	ft_strlen_spaces(char *arg, int i, int j)
 {
-	int	i;
-	int	j;
 	int	single_q;
 	int	double_q;
 
 	single_q = 0;
 	double_q = 0;
-	i = 0;
-	j = 0;
 	while (arg[i])
 	{
 		status_quotes(&single_q, &double_q, arg[i]);
 		if ((!single_q && !double_q && (arg[i] == '|' || arg[i] == '<'
-					|| arg[i] == '>')) && ((arg[i + 1] && arg[i + 1] != ' '
-					&& arg[i + 1] != '<' && arg[i + 1] != '>'
-					&& arg[i + 1] != '|') || ((i - 1) >= 0 && arg[i - 1]
-					&& arg[i - 1] != ' ' && arg[i - 1] != '<'
-					&& arg[i - 1] != '>')))
-			j++;
+					|| arg[i] == '>')))
+		{
+			if (arg[i + 1] && arg[i + 1] != ' ' && arg[i + 1] != '<'
+				&& arg[i + 1] != '>' && arg[i + 1] != '|')
+				j++;
+			if ((i - 1) >= 0 && arg[i - 1] && arg[i - 1] != ' '
+				&& arg[i - 1] != '<' && arg[i - 1] != '>')
+				j++;
+		}
 		j++;
 		i++;
 	}
@@ -109,21 +108,24 @@ char	*check_add_spaces(char *arg)
 	int		i;
 	int		j;
 
-	new = malloc(sizeof(char) * ft_strlen_spaces(arg) + 1);
 	i = 0;
 	j = 0;
+	new = malloc(sizeof(char) * ft_strlen_spaces(arg, i, j) + 1);
+	if (!new)
+		return (NULL);
 	while (arg[i])
 	{
 		if (arg[i] == '\'' || arg[i] == '\"')
 			pass_quotes(arg, new, &i, &j);
 		else if ((arg[i] == '|' || arg[i] == '<' || arg[i] == '>'))
-		{
 			j = add_space(arg, new, i, j);
-		}
 		else
 			new[j] = arg[i];
 		i++;
 		j++;
 	}
+	new[j] = '\0';
+	free(arg);
+	arg = NULL;
 	return (new);
 }

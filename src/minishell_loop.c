@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/29 17:39:25 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:04:24 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ void	minishell_loop(t_tools *tools)
 	add_history(tools->arg);
 	check_quotes(tools);
 	lexer(tools);
-	print_tokens(tools->lexer, tools);
+	printf("Input: %s\n\n", tools->arg);
+	print_tokens(tools->lexer);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
-	printf("Tokens after parser:\n");
-	print_tokens(tools->lexer, tools);
+	printf("\n%sTokens after parser:%s\n", RED_BOLD, NORMAL);
+	print_tokens(tools->lexer);
 	free_err(tools);
 	minishell_loop(tools);
 }
