@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/30 15:04:24 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:06:55 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_tools(t_tools *tools)
 void	minishell_loop(t_tools *tools)
 {
 	init_tools(tools);
-	tools->arg = check_add_spaces(readline(PROMPT_MSG));
+	tools->arg = readline(PROMPT_MSG);
 	if (!tools->arg || !ft_strcmp(tools->arg, "exit"))
 		exit(0);
 	if (!tools->arg[0])
@@ -31,6 +31,7 @@ void	minishell_loop(t_tools *tools)
 		free(tools->arg);
 		minishell_loop(tools);
 	}
+	tools->arg = check_add_spaces(tools->arg);
 	add_history(tools->arg);
 	check_quotes(tools);
 	lexer(tools);
