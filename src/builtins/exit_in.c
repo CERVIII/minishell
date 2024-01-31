@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/21 12:48:20 by fede             ###   ########.fr       */
+/*   Updated: 2024/01/26 14:44:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
     //     return (EXIT_FAILURE);
     // }
     (void) tools;
-    // ft_free_tools(tools);
+    //ft_free_tools(tools);
     ft_check_exit(simple_cmds->str);
     return (EXIT_SUCCESS);
 }

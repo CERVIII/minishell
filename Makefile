@@ -6,21 +6,23 @@
 #    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/01/23 11:48:16 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/01/29 15:46:11 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
 
-CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
-EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
+CFLAGS		= -Wall -Werror -Wextra #-g3 -fsanitize=address
+EXTRAFLAGS	= -lreadline -lhistory -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 SRC_DIR		= ./src
 SRC_BUILTIN = ./src/builtins
+SRC_EXECUTOR = ./src/executor
 
-SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c utils2.c\
+SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c parser.c utils.c utils2.c signals.c\
 			 builtins/cd_in.c builtins/env_in.c builtins/pwd_in.c builtins/check_builtin.c builtins/export_in.c \
-			 builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c builtins/export_utils.c
+			 builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c builtins/export_utils.c\
+			 executor/executor.c
 
 OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 NAME		= minishell
@@ -40,13 +42,17 @@ $(NAME): $(OBJS)
 	@echo " \033[33m[ .. ] | Compiling minishell..\033[0m"
 	@$(CC) -L $(LIBFT_PATH) -l ft $(CFLAGS) $(EXTRAFLAGS) $(OBJS)  -o $(NAME)
 
+
 $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)	
 
 $(OBJS_PATH)/%.o:$(SRC_DIR)/%.c | $(OBJS_PATH)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS)  -c $< -o $@
 
 $(OBJS_PATH)/%.o:$(SRC_BUILTIN)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+$(OBJS_PATH)/%.o:$(SRC_EXECUTOR)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

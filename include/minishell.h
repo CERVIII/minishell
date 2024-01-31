@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/23 11:47:20 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:47:30 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
+# include <signal.h>
 #include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
+# include <signal.h>
+// # include "readline.h"
 # define NORMAL  "\x1B[0m"
 # define RED  "\033[1;31m"
 # define GREEN  "\x1B[32m"
@@ -119,9 +121,9 @@ char			**ft_sort_export(char **str);
 void			ft_print_export(char **copy);
 char			**ft_update_export(char **exp, char **new_exp, char *var);
 
-
-
-
+		/*	Signals	*/
+void			init_signals();
+void			rl_replace_line(const char *text, int clear_undo);
 
 
 #endif

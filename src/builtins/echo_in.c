@@ -6,13 +6,13 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/22 16:36:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/26 10:12:59 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void    printf_args(int i, char **str, int fd)
+void	printf_args(int i, char **str, int fd)
 {
     while (str[i])
     {
@@ -25,11 +25,12 @@ void    printf_args(int i, char **str, int fd)
 
 int	ft_echo(t_simple_cmds *simple_cmds)
 {
-	int i;
-	int j;
-    bool flag;
+	int     i;
+	int     j;
+    bool    flag;
+
     simple_cmds = malloc(sizeof(t_simple_cmds)); 
-	simple_cmds->str = ft_calloc(2, sizeof(char *));
+	simple_cmds->str = ft_calloc(3, sizeof(char *));
 	simple_cmds->str[0] = ft_strdup("hola");
 	simple_cmds->str[1] = ft_strdup("-n");
 

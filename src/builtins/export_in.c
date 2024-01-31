@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/23 11:46:48 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/01/26 11:25:33 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 	// else
 	// {
 	int i = 0;
+	ft_print_export(tools->export);
+	printf("----------------------------------------------------------\n");
 		while (simple_cmds->str[i])
 		{
 			if (ft_check_vars(simple_cmds->str[i]))
