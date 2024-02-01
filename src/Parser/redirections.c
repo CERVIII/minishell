@@ -6,20 +6,20 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:01:32 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/31 13:26:29 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:22:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_token	*token_new_cmds(char *str, int token, int i)
+t_token	*token_new_cmd(char *str, int token, int i)
 {
 	t_token		*new;
 
 	new = (t_token *)malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	new->token = ft_strdup(token);
+	new->token = ft_strdup(str);
 	new->type = token;
 	new->i = i;
 	new->next = NULL;

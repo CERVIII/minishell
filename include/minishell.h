@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/31 13:47:37 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:14:09 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,18 +156,23 @@ t_token			*ft_lexerclear_one(t_token **tmp);
 void			ft_lexerdel_first(t_token **lexer);
 void			ft_lexerdelone(t_token **lexer, int key);
 
+		/* cmd_utils.c */
+t_simple_cmds	*create_node_cmd(t_parser_tools *parser_tools);
+t_simple_cmds	*new_node_cmd(char **str, t_parser_tools *parser_tools);
+void			add_back_cmd(t_simple_cmds **cmd, t_simple_cmds *node);
+
 		/* parser_utils.c */
 void			count_pipes(t_token *lexer, t_tools *tools);
+int				count_arg(t_token *lexer);
 t_parser_tools	init_parser_tools(t_token *lexer, t_tools *tools);
-t_simple_cmds	*create_node_cmd(t_parser_tools *parser_tools);
-t_simple_cmds	*new_node_cmd(t_parser_tools *parser_tools);
 void			print_parser_tools(t_parser_tools *tools);
+void	print_simple_cmd(t_simple_cmds *cmd);
 
 		/* parser.c */
 void			parser(t_tools *tools);
 
 		/* redirections.c */
-t_token			*token_new_cmds(char *str, int token, int i);
+t_token			*token_new_cmd(char *str, int token, int i);
 void			new_redirection(t_token *tmp, t_parser_tools *parser_tools);
 void			redirection_add(t_parser_tools *parser_tools);
 

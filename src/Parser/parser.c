@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/31 13:54:21 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:59:42 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	parser(t_tools *tools)
 		if (!tools->parser)
 			tools->parser = node;
 		else
-			return ;	//falta funcion add last
+			add_back_cmd(&tools->parser, node);
+		tools->lexer = parser_tools.lexer;
 	}
+	print_simple_cmd(tools->parser);
 }

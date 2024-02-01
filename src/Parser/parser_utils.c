@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:07:10 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/31 13:52:47 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:07:37 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,44 @@ t_parser_tools	init_parser_tools(t_token *lexer, t_tools *tools)
 	return (parser_tools);
 }
 
-t_simple_cmds	*create_node_cmd(t_parser_tools *parser_tools)
+int	count_arg(t_token *lexer)
 {
-	redirection_add(parser_tools);
-}
+	int	i;
 
-t_simple_cmds	*new_node_cmd(t_parser_tools *parser_tools)
-{
-	t_simple_cmds	*node;
-
-	node = (t_simple_cmds *)malloc(sizeof(t_simple_cmds));
-	node->builtin = NULL;
-	node->hd_file_name = NULL;
-	node->num_redirections = parser_tools->num_redirections;
-	node->redirections = parser_tools->redirections;
-	node->str = NULL;
-	node->prev = NULL;
-	node->next = NULL;
-	return (node);
+	i = 0;
+	while (lexer && lexer->type != PIPE)
+	{
+		if (lexer->type == WORD)
+			i++;
+		lexer = lexer->next;
+	}
+	return (i);
 }
 
 void	print_parser_tools(t_parser_tools *tools)
 {
 	printf("\n%sParser tools%s\n", GREEN_BOLD, NORMAL);
-	printf("Number of redirections: %d\n", tools->num_redirections);
-	printf("Redirections:\n");
+	printf("%sNumber of redirections: %d%s\n", BLUE_BOLD, tools->num_redirections, NORMAL);
+	printf("\n%sRedirections:%s\n", BLUE_BOLD, NORMAL);
 	print_tokens(tools->redirections);
-	printf("Lexer:\n");
+	printf("%s\nLexer:%s\n", RED_BOLD, NORMAL);
 	print_tokens(tools->lexer);
+}
+
+void	print_simple_cmd(t_simple_cmds *cmd)
+{
+	while (cmd)
+	{
+		int	i;
+	
+		printf("\n%sSimple command%s\n", GREEN_BOLD, NORMAL);
+		printf("%sNumber of redirections: %d%s\n", BLUE_BOLD, cmd->num_redirections, NORMAL);
+		printf("\n%sRedirections:%s\n", BLUE_BOLD, NORMAL);
+		print_tokens(cmd->redirections);
+		printf("\n%sArguments:%s\n", BLUE_BOLD, NORMAL);
+		i = 0;
+		while (cmd->str[i])
+			printf("%s\n", cmd->str[i++]);
+		cmd = cmd->next;
+	}
 }
