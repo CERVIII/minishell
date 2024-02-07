@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:07:10 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/01 15:07:37 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:57:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	count_pipes(t_token *lexer, t_tools *tools)
 {
-	t_token	*tmp;
-
-	tmp = lexer;
 	tools->pipes = 0;
 	while (lexer)
 	{
@@ -59,22 +56,4 @@ void	print_parser_tools(t_parser_tools *tools)
 	print_tokens(tools->redirections);
 	printf("%s\nLexer:%s\n", RED_BOLD, NORMAL);
 	print_tokens(tools->lexer);
-}
-
-void	print_simple_cmd(t_simple_cmds *cmd)
-{
-	while (cmd)
-	{
-		int	i;
-	
-		printf("\n%sSimple command%s\n", GREEN_BOLD, NORMAL);
-		printf("%sNumber of redirections: %d%s\n", BLUE_BOLD, cmd->num_redirections, NORMAL);
-		printf("\n%sRedirections:%s\n", BLUE_BOLD, NORMAL);
-		print_tokens(cmd->redirections);
-		printf("\n%sArguments:%s\n", BLUE_BOLD, NORMAL);
-		i = 0;
-		while (cmd->str[i])
-			printf("%s\n", cmd->str[i++]);
-		cmd = cmd->next;
-	}
 }

@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/22 17:37:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:02:08 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+//#include "../../include/minishell.h"
+#include "../../include/lexer.h"
 
 t_token	*ft_token_new(char *token, int i)
 {
@@ -57,7 +58,7 @@ void	ft_add_token_last(t_token **token, t_token *new)
 	return ;
 }
 
-void	ft_free_token(t_token **token)
+/* void	ft_free_token(t_token **token)
 {
 	t_token	*tmp;
 	t_token	*tmp2;
@@ -73,4 +74,4 @@ void	ft_free_token(t_token **token)
 		tmp = tmp2;
 	}
 	return ;
-}
+} */

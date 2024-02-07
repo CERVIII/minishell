@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/02/01 12:49:00 by pcervill         ###   ########.fr        #
+#    Updated: 2024/02/07 13:00:46 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ SRC_DIR		=	./src
 SRC_LEXER	=	./src/Lexer
 SRC_PARSER	=	./src/Parser
 SRC_QUOTES	=	./src/Quotes
+SRC_CLEAN	=	./src/Clean
+SRC_DELETE	=	./src/borrar_al-final #borrar al final
 
 SRCS		=	Lexer/check_input.c Lexer/ft_split_cmd.c Lexer/ft_split_cmd_aux.c Lexer/ft_split_cmd_aux_2.c Lexer/lexer_utils.c Lexer/lexer.c \
 				Parser/check_token.c Parser/parser.c Parser/clean_lexer.c Parser/cmd_utils.c Parser/parser_utils.c Parser/redirections.c \
@@ -50,6 +52,12 @@ $(OBJS_PATH)/%.o:$(SRC_PARSER)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_PATH)/%.o:$(SRC_QUOTES)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_CLEAN)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_DELETE)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

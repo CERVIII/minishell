@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 17:28:05 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/31 11:03:01 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:58:19 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+//#include "../../include/minishell.h"
+#include "../../include/lexer.h"
 
 int	add_space(char *arg, char *new, int i, int j)
 {

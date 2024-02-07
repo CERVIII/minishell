@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/01 15:14:09 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:55:23 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "borrar_al_final.h"
+# include "clean.h"
+# include "lexer.h"
+# include "parser.h"
+# include "quotes.h"
 
 # define NORMAL			"\033[0m"
 # define BLACK			"\033[30m"
@@ -102,86 +107,8 @@ typedef struct s_simple_cmds
 }	t_simple_cmds;
 
 
-		/* main.c */
-void			print_tokens(t_token *temp);
-char			*prompt(void);
-int				ft_err(char *msg, int nb, t_tools *tools);
-void			free_err(t_tools *tools);
-
 		/* minishell_loop.c */
+void			init_tools(t_tools *tools);
 void			minishell_loop(t_tools *tools);
-
-	/* ###########	LEXER	########### */
-
-		/* check_input.c */
-int				add_space(char *arg, char *new, int i, int j);
-void			status_quotes(int *single_q, int *double_q, char quote);
-int				ft_strlen_spaces(char *arg, int i, int j);
-void			pass_quotes(char *arg, char *new, int *i, int *j);
-char			*check_add_spaces(char *arg);
-
-		/* split */
-char			**ft_split_cmd(char *s, char c);
-size_t			ft_count_words_cmd(char *s, char c);
-char			*get_next_word(char *s, size_t *start, char c);
-void			skip_delimiters(char *s, size_t *start, char c, int in_quotes);
-void			process_word(char *s, size_t *i, int *in_quotes, char *current_quote);
-void			process_delimiter_split(char *s, size_t *i, char c, int in_quotes);
-void			process_char(t_info *info, size_t *word_count, char c, int *in_quotes);
-t_info			initialize_string_info(char *s, size_t *i);
-void			process_delimiter(t_info *info, size_t *w_c, char c, int in_quotes);
-void			p_quotes_cmd(char *s, size_t *i, int *in_quotes, char *current_quote);
-int				ft_is_whitespace(char c);
-int				ft_skip_spaces(char *str);
-
-		/* lexer_utils.c */
-t_token			*ft_token_new(char *token, int i);
-void			ft_add_token_last(t_token **list, t_token *new);
-void			ft_free_token(t_token **token);
-
-		/* lexer.c */
-void			create_token(t_tools *tools, t_token **token);
-void			ft_strlen_token(char *str);
-int				lexer(t_tools *tools);
-
-	/* ###########	PARSER	########### */
-
-		/* check_token.c */
-int				check_redirects(t_token **lst, t_tools *tools);
-int				check_broken_pipes(t_token **lst, t_tools *tools);
-void			check_tokens(t_tools *tools, t_token **lst);
-
-		/* clean_lexer.c */
-t_token			*ft_lexerclear_one(t_token **tmp);
-void			ft_lexerdel_first(t_token **lexer);
-void			ft_lexerdelone(t_token **lexer, int key);
-
-		/* cmd_utils.c */
-t_simple_cmds	*create_node_cmd(t_parser_tools *parser_tools);
-t_simple_cmds	*new_node_cmd(char **str, t_parser_tools *parser_tools);
-void			add_back_cmd(t_simple_cmds **cmd, t_simple_cmds *node);
-
-		/* parser_utils.c */
-void			count_pipes(t_token *lexer, t_tools *tools);
-int				count_arg(t_token *lexer);
-t_parser_tools	init_parser_tools(t_token *lexer, t_tools *tools);
-void			print_parser_tools(t_parser_tools *tools);
-void	print_simple_cmd(t_simple_cmds *cmd);
-
-		/* parser.c */
-void			parser(t_tools *tools);
-
-		/* redirections.c */
-t_token			*token_new_cmd(char *str, int token, int i);
-void			new_redirection(t_token *tmp, t_parser_tools *parser_tools);
-void			redirection_add(t_parser_tools *parser_tools);
-
-	/* ###########	QUOTES	########### */
-
-		/* quotes.c */
-int				change_flag(int flag);
-int				quotes(char *input, int *i, int flag, char c);
-void			check_quotes(t_tools *tools);
-
 
 #endif

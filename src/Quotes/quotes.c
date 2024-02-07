@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:05:56 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/29 17:36:21 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:03:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include "../../include/quotes.h"
 
 int	change_flag(int flag)
 {

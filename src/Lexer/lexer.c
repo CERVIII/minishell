@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:30 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/30 14:46:00 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/07 14:02:02 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+//#include "../../include/minishell.h"
+#include "../../include/lexer.h"
 
 void	create_token(t_tools *tools, t_token **token)
 {
