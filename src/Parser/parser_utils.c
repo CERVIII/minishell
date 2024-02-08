@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:07:10 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 12:57:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:57:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+//#include "../../include/parser.h"
 
 void	count_pipes(t_token *lexer, t_tools *tools)
 {
@@ -46,14 +47,4 @@ int	count_arg(t_token *lexer)
 		lexer = lexer->next;
 	}
 	return (i);
-}
-
-void	print_parser_tools(t_parser_tools *tools)
-{
-	printf("\n%sParser tools%s\n", GREEN_BOLD, NORMAL);
-	printf("%sNumber of redirections: %d%s\n", BLUE_BOLD, tools->num_redirections, NORMAL);
-	printf("\n%sRedirections:%s\n", BLUE_BOLD, NORMAL);
-	print_tokens(tools->redirections);
-	printf("%s\nLexer:%s\n", RED_BOLD, NORMAL);
-	print_tokens(tools->lexer);
 }

@@ -6,12 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 14:02:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:56:52 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../include/minishell.h"
-#include "../../include/lexer.h"
+#include "../../include/minishell.h"
+//#include "../../include/lexer.h"
 
 t_token	*ft_token_new(char *token, int i)
 {

@@ -6,12 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:56:44 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 13:57:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:06:00 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//#include "../../include/borrar.h"
 #include "../../include/minishell.h"
-#include "../../include/borrar_al_final.h"
 
 void	print_tokens(t_token *tmp)
 {
@@ -52,4 +52,14 @@ void	print_simple_cmd(t_simple_cmds *cmd)
 		}
 		tmp = tmp->next;
 	}
+}
+
+void	print_parser_tools(t_parser_tools *tools)
+{
+	printf("\n%sParser tools%s\n", GREEN_BOLD, NORMAL);
+	printf("%sNumber of redirections: %d%s\n", BLUE_BOLD, tools->num_redirections, NORMAL);
+	printf("\n%sRedirections:%s\n", BLUE_BOLD, NORMAL);
+	print_tokens(tools->redirections);
+	printf("%s\nLexer:%s\n", RED_BOLD, NORMAL);
+	print_tokens(tools->lexer);
 }

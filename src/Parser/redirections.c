@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:01:32 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 11:50:17 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:57:41 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+//#include "../../include/parser.h"
 
 t_token	*token_new_cmd(char *str, int token, int i)
 {

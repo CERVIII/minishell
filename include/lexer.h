@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:25:32 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 13:31:47 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:12:23 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define LEXER_H
 
 # include "minishell.h"
+
+typedef struct s_parser_tools	t_parser_tools;
+typedef struct s_string_info	t_info;
+typedef enum e_token_type		t_token_type;
+typedef struct s_simple_cmds	t_simple_cmds;
+typedef struct s_token			t_token;
+typedef struct s_tools			t_tools;
 
 		/* check_input.c */
 int		add_space(char *arg, char *new, int i, int j);

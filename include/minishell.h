@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 13:55:23 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:09:19 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "borrar_al_final.h"
-# include "clean.h"
 # include "lexer.h"
-# include "parser.h"
 # include "quotes.h"
+# include "parser.h"
+# include "clean.h"
+# include "borrar.h"
 
 # define NORMAL			"\033[0m"
 # define BLACK			"\033[30m"

@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 13:18:57 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:55:55 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+//#include "../../include/clean.h"
 
 int	ft_err(char *msg, int nb, t_tools *tools)
 {
@@ -22,7 +23,6 @@ int	ft_err(char *msg, int nb, t_tools *tools)
 void	free_tools(t_tools *tools)
 {
 	t_token	*tmp;
-	t_token	*tmp2;
 
 	tmp = tools->lexer;
 	if (tools->arg)

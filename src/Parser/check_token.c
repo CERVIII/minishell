@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_utils.c                                      :+:      :+:    :+:   */
+/*   check_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:50:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/01/18 14:52:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:05:21 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+//#include "../../include/clean.h"
+//#include "../../include/parser.h"
 
 int	check_redirects(t_token **lst, t_tools *tools)
 {

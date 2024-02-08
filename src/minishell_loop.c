@@ -6,11 +6,12 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 13:02:55 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:00:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+//#include "../include/lexer.h"
 
 void	init_tools(t_tools *tools)
 {
@@ -37,6 +38,6 @@ void	minishell_loop(t_tools *tools)
 	lexer(tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
-	free_err(tools);
+	free_tools(tools);
 	minishell_loop(tools);
 }
