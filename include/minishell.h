@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:29:24 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/12 11:52:30 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "lexer.h"
@@ -85,6 +87,10 @@ typedef struct s_tools
 	struct s_simple_cmds	*parser;
 	char					*arg;
 	int						pipes;
+	char					*pwd;
+	char					**env;
+	char					*old_pwd;
+	char 					**export;
 }	t_tools;
 
 typedef struct s_parser_tools
@@ -122,7 +128,7 @@ int				ft_cd(t_tools *tools, char *path);
 int				ft_env(t_tools *tools);
 int				ft_pwd(t_tools *tools);
 int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
-int				check_builtin(t_token *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
+int				*check_builtin(char *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_unset(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_exit(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_echo(t_simple_cmds *simple_cmds);
