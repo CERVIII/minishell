@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:52:30 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:38:38 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_tools
 	struct s_simple_cmds	*parser;
 	char					*arg;
 	int						pipes;
+	int						*pid;
 	char					*pwd;
 	char					**env;
 	char					*old_pwd;
@@ -128,7 +129,7 @@ int				ft_cd(t_tools *tools, char *path);
 int				ft_env(t_tools *tools);
 int				ft_pwd(t_tools *tools);
 int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
-int				*check_builtin(char *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
+// int				(*check_builtin(char *tokens))(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_unset(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_exit(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_echo(t_simple_cmds *simple_cmds);
