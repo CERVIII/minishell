@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   quotes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 09:27:42 by pcervill         ###   ########.fr       */
+/*   Created: 2024/02/07 13:25:24 by pcervill          #+#    #+#             */
+/*   Updated: 2024/02/12 09:26:31 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef QUOTES_H
+# define QUOTES_H
 
-void	leaks(void)
-{
-	system("leaks -q minishell");
-}
+# include "minishell.h"
 
-int	main(void)
-{
-	t_tools	tools;
+typedef struct s_parser_tools	t_parser_tools;
+typedef struct s_simple_cmds	t_simple_cmds;
 
-//	atexit(leaks);
-	minishell_loop(&tools);
-	return (0);
-}
+		/* quotes.c */
+int		change_flag(int flag);
+int		quotes(char *input, int *i, int flag, char c);
+void	check_quotes(t_tools *tools);
+
+#endif

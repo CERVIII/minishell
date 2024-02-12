@@ -1,5 +1,9 @@
 .vscode
 *.o
 minishell
-.DS*
+*.DS*
 *.a
+a.out*
+*.out
+.nfs.20051026*
+*.3bdb

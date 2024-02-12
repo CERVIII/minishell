@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 11:44:24 by pcervill          #+#    #+#             */
-/*   Updated: 2023/11/27 17:23:26 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/01/11 13:07:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 typedef struct s_nodo
 {
-	int	valor;
+	int				valor;
 	struct s_nodo	*izquierda;
 	struct s_nodo	*derecha;
 }	t_nodo;
@@ -33,9 +33,8 @@ t_nodo	*crear_nodo(int valor)
 
 t_nodo	*insertar(t_nodo *raiz, int valor)
 {
-	if (raiz == NULL)
+	if (!raiz)
 		return (crear_nodo(valor));
-
 	if (valor < raiz->valor)
 		raiz->izquierda = insertar(raiz->izquierda, valor);
 	else
@@ -48,7 +47,7 @@ void	imprimir_arbol(t_nodo *raiz, unsigned long espacio)
 	unsigned long	i;
 
 	i = 0;
-	if (raiz == NULL)
+	if (!raiz)
 		return ;
 
 	espacio += 5;
@@ -74,11 +73,11 @@ void	imprimir_arbol(t_nodo *raiz, unsigned long espacio)
 
 void	en_orden(t_nodo *raiz)
 {
-	if (raiz != NULL)
+	if (raiz)
 	{
-		en_orden(raiz->derecha);
-		printf("%d ", raiz->valor);
 		en_orden(raiz->izquierda);
+		printf("%d ", raiz->valor);
+		en_orden(raiz->derecha);
 	}
 }
 

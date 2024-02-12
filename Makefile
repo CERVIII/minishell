@@ -3,32 +3,64 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
+#    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2023/12/18 15:41:17 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/02/12 09:27:35 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			= gcc
+CC			=	gcc
 
-CFLAGS		= -Wall -Werror -Wextra #-g3 -fsanitize=address
-EXTRAFLAGS	= -lreadline -L /Users/$(USER)/.brew/opt/readline/lib
+CFLAGS		=	-Wall -Werror -Wextra -g3 -fsanitize=address
+EXTRAFLAGS	=	-lreadline -L /Users/$(USER)/.brew/opt/readline/lib
 
-SRC_DIR		= ./src
+SRC_DIR		=	./src
+SRC_LEXER	=	./src/Lexer
+SRC_PARSER	=	./src/Parser
+SRC_QUOTES	=	./src/Quotes
+SRC_CLEAN	=	./src/Clean
+SRC_DELETE	=	./src/borrar_al_final
 
-SRCS		= main.c lexer.c lexer_utils.c quotes.c check_utils.c
+SRCS		=	Lexer/check_input.c Lexer/ft_split_cmd.c Lexer/ft_split_cmd_aux.c Lexer/ft_split_cmd_aux_2.c Lexer/lexer_utils.c Lexer/lexer.c \
+				Parser/check_token.c Parser/parser.c Parser/clean_lexer.c Parser/cmd_utils.c Parser/parser_utils.c Parser/redirections.c \
+				Quotes/quotes.c \
+				Clean/free_tools.c \
+				borrar_al_final/print_tools.c \
+				main.c minishell_loop.c
 
-OBJS		= $(addprefix $(OBJS_PATH)/, ${SRCS:.c=.o})
+OBJS		=	$(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 
-NAME		= minishell
+NAME		=	minishell
 
-LIBFT_PATH	= ./libft/
+LIBFT_PATH	=	./libft/
 
-OBJS_PATH = .objs
+OBJS_PATH =		.objs
 
+	
 all: $(NAME)
 	@echo " \033[32m[ OK ] | ✅ Minishell ready! ✅\033[0m"
+
+$(OBJS_PATH):
+	@mkdir -p $(OBJS_PATH)	
+
+$(OBJS_PATH)/%.o:$(SRC_DIR)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+$(OBJS_PATH)/%.o:$(SRC_LEXER)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_PARSER)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_QUOTES)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_CLEAN)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJS_PATH)/%.o:$(SRC_DELETE)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo " \033[33m[ .. ] | Compiling libft..\033[0m"
@@ -37,22 +69,17 @@ $(NAME): $(OBJS)
 	@echo " \033[33m[ .. ] | Compiling minishell..\033[0m"
 	@$(CC) -L $(LIBFT_PATH) -l ft $(CFLAGS) $(EXTRAFLAGS) $(OBJS)  -o $(NAME)
 
-$(OBJS_PATH):
-	@mkdir -p $(OBJS_PATH)	
-
-$(OBJS_PATH)/%.o:$(SRC_DIR)/%.c | $(OBJS_PATH)
-	$(CC) $(CFLAGS) -c $< -o $@
-
 clean:
 	@make clean -C $(LIBFT_PATH) --silent
 	@rm -rf $(OBJS_PATH)
 
 fclean: clean
-	@rm -f $(NAME)
 	@make fclean -C $(LIBFT_PATH)
+	@rm -f $(NAME)
 	@echo " \033[1;31m[ OK ] | 🧹 Minishell fclean ready! 🧹 \033[0m"
 
 re: fclean all
 
 .PHONY = all clean fclean re
 .SILENT: $(OBJS)
+
