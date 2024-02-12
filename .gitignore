@@ -4,3 +4,4 @@ minishell
 .DS*
 *.a
 a.out
+.nfs*
