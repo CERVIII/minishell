@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clean.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:30:21 by pcervill         ###   ########.fr       */
+/*   Created: 2024/02/07 13:25:35 by pcervill          #+#    #+#             */
+/*   Updated: 2024/02/12 09:23:15 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef CLEAN_H
+# define CLEAN_H
 
-void	leaks(void)
-{
-	system("leaks -q minishell");
-}
+# include "minishell.h"
 
-int	main(void)
-{
-	t_tools	tools;
+		/* free_err.c */
+int		ft_err(char *msg, int nb, t_tools *tools);
+void	free_tools(t_tools *tools);
+void	free_lexer(t_token *lexer);
+void	free_parser(t_simple_cmds *parser);
 
-//	atexit(leaks);
-	minishell_loop(&tools);
-	return (0);
-}
+#endif
