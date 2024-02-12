@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 12:57:00 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:27:42 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(void)
 {
 	t_tools	tools;
 
-	atexit(leaks);
+//	atexit(leaks);
 	minishell_loop(&tools);
 	return (0);
 }
