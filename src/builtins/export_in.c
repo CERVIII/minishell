@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 16:48:00 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:36:54 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,13 @@ int	ft_check_vars(char *cmds)
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
 	int i;
-	//TODO: Check comillas a llamar a export repetidas veces.
+
 	i = 0;
 	if (!simple_cmds->str[1] || simple_cmds->str[1][0] == '\0')
+	{
+		printf("QUE PASSA\n");
 		ft_print_export(tools->exp);
+	}
 	else
 	{
 		while (simple_cmds->str[i])

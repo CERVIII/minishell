@@ -6,17 +6,16 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 17:31:35 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:43:48 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-//TODO: Revisar las 6 variables
 void	ft_join_export(char **exp)
 {
-	int		i;
-
+	int	i;
+	
 	i = 0;
 	while (exp[i])
 	{
@@ -28,16 +27,21 @@ void	ft_join_export(char **exp)
 
 void	ft_replace_var(char **exp, char *var_name, char *var)
 {
-	int	i;
-
+	int		i;
+	char	*aux; 
 	i = 0;
+	printf("VAR_NAME: %s\n", var_name);
+	printf("VAR: %s\n", var);
 	while(exp[i])
 	{
-		if (ft_strcmp(var_name, var) == 0)
+		aux = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
+		if (ft_strcmp(aux, var_name) == 0)
 		{
 			free(exp[i]);
-			exp[i] = var;	
+			exp[i] = var;
+			printf("exp[i]: %s\n", exp[i]);
 		}
+		free(aux);
 		i++;
 	}
 }
@@ -56,11 +60,15 @@ void	ft_update_var(char **exp, char **env ,char *var)
 		{
 			aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
 			if (ft_strcmp(aux,var_aux) == 0)
-				env[i] = var;
+			{
+				free(env[i]);
+				env[i] = ft_strdup(var);
+			}
 			free(aux);
 			i++;
 		}
-		ft_replace_var(exp, var_aux, var);
+		(void)exp;
+		// ft_replace_var(exp, var_aux, var);
 		free(var_aux);
 	}
 }
@@ -99,5 +107,6 @@ char	**ft_sort_export(char **str)
 			i++;
 		}
 	}
+	printf("SORT_EXPORT: %s\n", str[0]);
 	return (str);
 }
