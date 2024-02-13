@@ -6,35 +6,23 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 16:48:40 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:31:35 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+//TODO: Revisar las 6 variables
 void	ft_join_export(char **exp)
 {
-	char	*var_name;
-	char	*join;
-	char	*join_2;
-	char	*aux;
 	int		i;
 
-	i = -1;
-	while (exp[++i])
+	i = 0;
+	while (exp[i])
 	{
 		if (ft_strchr(exp[i], '='))
-		{
-			var_name = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
-			aux = ft_strjoin(var_name, "=\"");
-			join = ft_strjoin(aux, ft_strchr(exp[i], '=') + 1);
-			join_2 = ft_strjoin(join, "\"");
-			free(exp[i]);
-			exp[i] = join_2;
-			free(var_name);
-			free(aux);
-			free(join);
-		}
+			exp[i] = ft_joinvar(exp[i]);
+		i++;
 	}
 }
 
