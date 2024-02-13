@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/26 11:25:33 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:48:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_check_if_exists(char **export, char *var)
 		while (export[i])
 		{
 			if (ft_strncmp(var_name, export[i], ft_strlen(var_name)) == 0)
-				return (1);							
+				return (1);
 			i++;
 		}
 		free(var_name);
@@ -102,36 +102,28 @@ int	ft_check_vars(char *cmds)
 
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	simple_cmds = malloc(sizeof(t_simple_cmds)); 
-	simple_cmds->str = ft_calloc(4, sizeof(char *));
-	simple_cmds->str[0] = "USER=pepe";
-	simple_cmds->str[1] = "bb";
-	simple_cmds->str[2] = "Za1=aa";
-	//simple_cmds->str[3] = ("\0");
-	// simple_cmds->str[2] = ""
-	// if (!simple_cmds->str[1] || simple_cmds->str[0][0])
-	// 	ft_print_export(env_copy);
-	// else
-	// {
-	int i = 0;
-	ft_print_export(tools->export);
-	printf("----------------------------------------------------------\n");
+	int i;
+	//TODO: Check comillas a llamar a export repetidas veces.
+	i = 0;
+	if (!simple_cmds->str[1] || simple_cmds->str[1][0] == '\0')
+		ft_print_export(tools->exp);
+	else
+	{
 		while (simple_cmds->str[i])
 		{
 			if (ft_check_vars(simple_cmds->str[i]))
 			{				
-				if(ft_check_if_exists(tools->export, simple_cmds->str[i]))
-					ft_update_var(tools->export, tools->env, simple_cmds->str[i]);
+				if(ft_check_if_exists(tools->exp, simple_cmds->str[i]))
+					ft_update_var(tools->exp, tools->env, simple_cmds->str[i]);
 				else
 				{
 					if (ft_strchr(simple_cmds->str[i], '='))
 						tools->env = ft_add_var(tools->env, simple_cmds->str[i]);
-					tools->export = ft_add_var(tools->export, simple_cmds->str[i]);
+					tools->exp = ft_add_var(tools->exp, simple_cmds->str[i]);
 				}
 			}
 			i++;
 		}
-	// }
-	ft_print_export(tools->export);
+	}
 	return (1);
 }

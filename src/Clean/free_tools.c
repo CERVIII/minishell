@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 14:55:55 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:13:16 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	free_tools(t_tools *tools)
 		free_lexer(tools->lexer);
 	if (tools->parser)
 		free_parser(tools->parser);
+	minishell_loop(tools);
 }
 
 void	free_lexer(t_token *lexer)

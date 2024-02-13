@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/23 11:00:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:48:40 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_join_export(char **exp)
 			aux = ft_strjoin(var_name, "=\"");
 			join = ft_strjoin(aux, ft_strchr(exp[i], '=') + 1);
 			join_2 = ft_strjoin(join, "\"");
+			free(exp[i]);
 			exp[i] = join_2;
 			free(var_name);
 			free(aux);

@@ -1,35 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 17:03:37 by fdiaz-gu         ###   ########.fr       */
+/*   Created: 2024/02/13 11:07:59 by fdiaz-gu          #+#    #+#             */
+/*   Updated: 2024/02/13 11:08:32 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-
-void	leaks(void)
-{
-	system("leaks -q minishell");
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_tools	tools;
-
-	atexit(leaks);
-	if (argc != 1 || argv[1])
-	{
-		printf("This program does not accept arguments\n");
-		exit(0);
-	}		
-	tools.env = dup_matrix(envp);
-	tools.exp = dup_matrix(envp);
-	save_pwd(&tools);
-	minishell_loop(&tools);
-	return (0);
-}
+#ifndef ERROR_H
+# define ERROR_H
+#include "./minishell.h"
+int	ft_error_cmd(char *cmd);
+#endif

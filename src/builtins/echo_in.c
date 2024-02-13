@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/26 10:12:59 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:58:47 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,16 @@ void	printf_args(int i, char **str, int fd)
     }
 }
 
-int	ft_echo(t_simple_cmds *simple_cmds)
+int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
 {
 	int     i;
 	int     j;
     bool    flag;
-
-    simple_cmds = malloc(sizeof(t_simple_cmds)); 
-	simple_cmds->str = ft_calloc(3, sizeof(char *));
-	simple_cmds->str[0] = ft_strdup("hola");
-	simple_cmds->str[1] = ft_strdup("-n");
-
-    i = 0;
+    i = 1;
+    
+    (void) tools;
     flag = false;
+    printf("\n");
     while (simple_cmds->str[i] && simple_cmds->str[i][0] == '-' && simple_cmds->str[i][1] == 'n')
     {
         j = 1;
@@ -46,7 +43,7 @@ int	ft_echo(t_simple_cmds *simple_cmds)
         i++;
     }
     printf_args(i, simple_cmds->str, STDOUT_FILENO);
-    if (!flag)
-        ft_putstr_fd("\n", STDOUT_FILENO);
+    if (flag == false)
+        printf("\n");
     return (EXIT_SUCCESS);
 }

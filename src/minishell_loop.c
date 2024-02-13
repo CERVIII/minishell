@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 13:00:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:45:31 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	init_tools(t_tools *tools)
 	tools->lexer = NULL;
 	tools->pipes = 0;
 	tools->parser = NULL;
+	init_signals();
 }
 
 void	minishell_loop(t_tools *tools)
 {
 	init_tools(tools);
 	tools->arg = readline(PROMPT_MSG);
-	if (!tools->arg || !ft_strcmp(tools->arg, "exit"))
+	if (!tools->arg)
 		exit(0);
 	if (!tools->arg[0])
 	{
@@ -38,6 +39,7 @@ void	minishell_loop(t_tools *tools)
 	lexer(tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
+	before_execution(tools);
 	free_tools(tools);
-	minishell_loop(tools);
+	// minishell_loop(tools);
 }

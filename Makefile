@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/02/12 11:38:19 by pcervill         ###   ########.fr        #
+#    Updated: 2024/02/13 16:43:40 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_LEXER	=	./src/Lexer
 SRC_PARSER	=	./src/Parser
 SRC_QUOTES	=	./src/Quotes
 SRC_CLEAN	=	./src/Clean
+SRC_ERROR	=	./src/error
 SRC_DELETE	=	./src/borrar_al_final
 
 SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c \
@@ -33,6 +34,7 @@ SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c \
 				Quotes/quotes.c \
 				Clean/free_tools.c \
 				borrar_al_final/print_tools.c \
+				error/error.c\
 
 OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 NAME		= minishell
@@ -69,6 +71,9 @@ $(OBJS_PATH)/%.o:$(SRC_BUILTIN)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 $(OBJS_PATH)/%.o:$(SRC_EXECUTOR)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+$(OBJS_PATH)/%.o:$(SRC_ERROR)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)

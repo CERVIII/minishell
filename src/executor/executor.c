@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/12 18:38:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:13:03 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 			1.2: Si son varios:
 				 Bucle para recorrer cmds y muchas movidas.
 */
+/*
+07_minishell git:(fede_builtin) ✗ wc -l < prueba 
+      13
+➜  07_minishell git:(fede_builtin) ✗ prueba < wc -l
+zsh: no such file or directory: wc
+➜  07_minishell git:(fede_builtin) ✗ < prueba wc -l
+      13*/
 char	*get_cmd_route(char *path, char	*cmd)
 {
 	char	**possible_path;
@@ -76,25 +83,37 @@ void exec_cmd(t_tools *tools)
 	path = get_path(tools->env);
 	route = get_cmd_route(path, tools->parser->str[0]);
 	if (execve(route, tools->parser->str, tools->env) == -1)
-		ft_error();
+		ft_error_cmd(tools->parser->str[0]);
 	
 }
 
 void	check_cmd(t_tools *tools)
 {
+	int exit_code;
 	//TODO: check cosas
+	if (tools->parser->builtin != NULL)
+	{
+		exit_code = tools->parser->builtin(tools, tools->parser);
+		exit(exit_code);
+	}
 	exec_cmd(tools);
 }
 
 void	execute_single(t_tools *tools)
 {
 	int pid;
-	
+
+	if (tools->parser->builtin)
+	{
+		tools->parser->builtin(tools, tools->parser);
+		return ;
+	}
 	pid = fork();
 	if (pid == -1) //TODO: FUNCION DE ERROR
 		return ;
 	if (pid == 0)
 		check_cmd(tools);
+	waitpid(pid, NULL, 0);
 			
 }
 
