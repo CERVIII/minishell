@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 18:43:48 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:07:24 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,21 @@ void	ft_join_export(char **exp)
 void	ft_replace_var(char **exp, char *var_name, char *var)
 {
 	int		i;
-	char	*aux; 
+	char	*aux;
 	i = 0;
 	printf("VAR_NAME: %s\n", var_name);
 	printf("VAR: %s\n", var);
 	while(exp[i])
 	{
+		//TODO:FALLA AQUI
 		aux = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
-		if (ft_strcmp(aux, var_name) == 0)
-		{
-			free(exp[i]);
-			exp[i] = var;
-			printf("exp[i]: %s\n", exp[i]);
-		}
-		free(aux);
+		// if (ft_strcmp(aux, var_name) == 0)
+		// {
+		// 	free(exp[i]);
+		// 	exp[i] = var;
+		// 	printf("exp[i]: %s\n", exp[i]);
+		// }
+		// free(aux);
 		i++;
 	}
 }
@@ -51,6 +52,9 @@ void	ft_update_var(char **exp, char **env ,char *var)
 	int		i;
 	char	*aux;
 	char	*var_aux;
+	int j = 0;
+	while(exp[j])
+		j++;
 
 	i = 0;
 	if (ft_strchr(var, '=')) 
@@ -67,8 +71,7 @@ void	ft_update_var(char **exp, char **env ,char *var)
 			free(aux);
 			i++;
 		}
-		(void)exp;
-		// ft_replace_var(exp, var_aux, var);
+		ft_replace_var(exp, var_aux, var);
 		free(var_aux);
 	}
 }
