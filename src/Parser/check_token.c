@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:50:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 10:16:22 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:01:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ void	check_tokens(t_tools *tools, t_token **lst)
 	if ((*lst)->type == 1)
 	{
 		ft_err("Syntax error near unexpected token '|'", 127, tools);
-		minishell_loop(tools);
-	}
-	if ((*lst)->type > PIPE && (*lst)->type <= HERE_DOC)
-	{
-		ft_err("Syntax error near unexpected token 'newline'", 127, tools);
 		minishell_loop(tools);
 	}
 	while (*lst)

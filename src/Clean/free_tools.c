@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 14:55:55 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:51:18 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,28 @@ void	free_lexer(t_token *lexer)
 	lexer = NULL;
 }
 
+void	free_str(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+	str = NULL;
+}
+
 void	free_parser(t_simple_cmds *parser)
 {
 	t_simple_cmds	*tmp;
 	t_simple_cmds	*tmp2;
-	int				i;
 
 	tmp = parser;
 	while (tmp)
 	{
 		tmp2 = tmp->next;
 		if (tmp->str)
-		{
-			i = 0;
-			while (tmp->str[i])
-				free(tmp->str[i++]);
-			free(tmp->str);
-			tmp->str = NULL;
-		}
+			free_str(tmp->str);
 		if (tmp->redirections)
 		{
 			free_lexer(tmp->redirections);

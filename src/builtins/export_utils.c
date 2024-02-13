@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/23 11:00:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:54:25 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_join_export(char **exp)
 	{
 		if (ft_strchr(exp[i], '='))
 		{
-			var_name = ft_substr(exp[i], 0, ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
+			var_name = ft_substr(exp[i], 0,
+					ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
 			aux = ft_strjoin(var_name, "=\"");
 			join = ft_strjoin(aux, ft_strchr(exp[i], '=') + 1);
 			join_2 = ft_strjoin(join, "\"");
@@ -42,31 +43,33 @@ void	ft_replace_var(char **exp, char *var_name, char *var)
 	int	i;
 
 	i = 0;
-	while(exp[i])
+	while (exp[i])
 	{
 		if (ft_strcmp(var_name, var) == 0)
 		{
 			free(exp[i]);
-			exp[i] = var;	
+			exp[i] = var;
 		}
 		i++;
 	}
 }
 
-void	ft_update_var(char **exp, char **env ,char *var)
+void	ft_update_var(char **exp, char **env, char *var)
 {
 	int		i;
 	char	*aux;
 	char	*var_aux;
 
 	i = 0;
-	if (ft_strchr(var, '=')) 
+	if (ft_strchr(var, '='))
 	{
-		var_aux = ft_substr(var, 0, ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
-		while(env[i])
+		var_aux = ft_substr(var, 0,
+				ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
+		while (env[i])
 		{
-			aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
-			if (ft_strcmp(aux,var_aux) == 0)
+			aux = ft_substr(env[i], 0,
+					ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
+			if (ft_strcmp(aux, var_aux) == 0)
 				env[i] = var;
 			free(aux);
 			i++;
@@ -78,7 +81,7 @@ void	ft_update_var(char **exp, char **env ,char *var)
 
 int	ft_is_sorted(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i + 1])
@@ -90,12 +93,11 @@ int	ft_is_sorted(char **str)
 	return (1);
 }
 
-
 char	**ft_sort_export(char **str)
 {
 	char	*aux;
 	int		i;
-	
+
 	while (!ft_is_sorted(str))
 	{
 		i = 0;

@@ -6,12 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:07:10 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 12:57:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:44:17 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-//#include "../../include/parser.h"
 
 void	count_pipes(t_token *lexer, t_tools *tools)
 {

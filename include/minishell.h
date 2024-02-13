@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:52:30 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:27:15 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_tools
 	char					*pwd;
 	char					**env;
 	char					*old_pwd;
-	char 					**export;
+	char					**export;
 }	t_tools;
 
 typedef struct s_parser_tools
@@ -128,7 +128,7 @@ int				ft_cd(t_tools *tools, char *path);
 int				ft_env(t_tools *tools);
 int				ft_pwd(t_tools *tools);
 int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
-int				*check_builtin(char *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
+int				(*check_builtin(char *token))(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_unset(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_exit(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_echo(t_simple_cmds *simple_cmds);
@@ -137,14 +137,14 @@ int				ft_echo(t_simple_cmds *simple_cmds);
 int				check_if_nb(char *str);
 void			ft_join_export(char **exp);
 void			ft_replace_var(char **exp, char *var_name, char *var);
-void			ft_update_var(char **exp, char **env ,char *var);
+void			ft_update_var(char **exp, char **env, char *var);
 int				ft_is_sorted(char **str);
 char			**ft_sort_export(char **str);
 void			ft_print_export(char **copy);
 char			**ft_update_export(char **exp, char **new_exp, char *var);
 
 		/*	Signals	*/
-void			init_signals();
+void			init_signals(void);
 void			rl_replace_line(const char *text, int clear_undo);
 
 #endif

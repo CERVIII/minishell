@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/26 11:25:33 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:20:16 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**ft_add_var(char **env, char *var)
 	int		i;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 		i++;
 	new_env = ft_calloc(i + 2, sizeof(char *));
 	if (!new_env)
@@ -35,22 +35,24 @@ int	ft_check_if_exists(char **export, char *var)
 	i = 0;
 	if (ft_strchr(var, '='))
 	{
-		var_name = ft_substr(var, 0, ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
+		var_name = ft_substr(var, 0,
+				ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
 		while (export[i])
 		{
 			if (ft_strncmp(var_name, export[i], ft_strlen(var_name)) == 0)
-				return (1);							
+				return (1);
 			i++;
 		}
 		free(var_name);
 	}
 	else
-		while (export[i])
+	{
+		while (export[i++])
 		{
 			if (ft_strncmp(var, export[i], ft_strlen(var)) == 0)
 				return (1);
-			i++;
 		}
+	}
 	return (0);
 }
 
@@ -80,7 +82,8 @@ int	ft_check_vars(char *cmds)
 	i = 0;
 	if (ft_strchr(cmds, '='))
 	{
-		aux = ft_substr(cmds, 0, ft_strlen(cmds) - ft_strlen(ft_strchr(cmds, '=')));
+		aux = ft_substr(cmds, 0,
+				ft_strlen(cmds) - ft_strlen(ft_strchr(cmds, '=')));
 		ft_check_vars(aux);
 		free (aux);
 	}
@@ -102,7 +105,7 @@ int	ft_check_vars(char *cmds)
 
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	simple_cmds = malloc(sizeof(t_simple_cmds)); 
+	simple_cmds = malloc(sizeof(t_simple_cmds));
 	simple_cmds->str = ft_calloc(4, sizeof(char *));
 	simple_cmds->str[0] = "USER=pepe";
 	simple_cmds->str[1] = "bb";

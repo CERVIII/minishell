@@ -6,12 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 13:00:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:47:31 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-//#include "../include/lexer.h"
 
 void	init_tools(t_tools *tools)
 {
