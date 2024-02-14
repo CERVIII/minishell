@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:46:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 19:05:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:57:18 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_print_export(char **copy)
 	// printf("COPY: %s\n",copy[0]);
 	sorted_export = ft_sort_export(copy);
 	// printf("SE: %s\n",sorted_export[0]);	
-	while (sorted_export[i])
+	while (copy[i])
 	{
-		printf("declare -x %s\n", sorted_export[i]);
+		printf("declare -x %s\n", copy[i]);
 		i++;
 	}
 	printf("FIN\n");
@@ -37,9 +37,9 @@ char	**ft_update_export(char **exp, char **new_exp, char *var)
 	i = 0;
 	while (exp[i])
 	{
-		new_exp[i] = exp[i];
+		new_exp[i] = ft_strdup(exp[i]);
 		i++;
 	}
-	new_exp[i] = var;
+	new_exp[i] = ft_strdup(var);
 	return (new_exp);
 }

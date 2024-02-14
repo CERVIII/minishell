@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 18:56:08 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:48:02 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	if (!simple_cmds->str[1] || simple_cmds->str[1][0] == '\0')
 	{
 		printf("QUE PASSA\n");
@@ -117,11 +117,12 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 		{
 			if (ft_check_vars(simple_cmds->str[i]))
 			{				
-				if(ft_check_if_exists(tools->exp, simple_cmds->str[i]))
+				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
 				{
-					printf("ENTRA\n");
-					ft_update_var(tools->exp, tools->env, simple_cmds->str[i]);
+					ft_update_var(tools->env, simple_cmds->str[i]);
+					ft_update_var(tools->exp, simple_cmds->str[i]);
 				}
+				//TODO: REVISAR AQUI
 				else
 				{
 					if (ft_strchr(simple_cmds->str[i], '='))

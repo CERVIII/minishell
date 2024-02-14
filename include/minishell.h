@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 17:31:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:47:50 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,7 @@ int				ft_echo(t_tools *tools, t_simple_cmds *simple_cmds);
 		/*Built-ins utils*/
 int				check_if_nb(char *str);
 void			ft_join_export(char **exp);
-void			ft_replace_var(char **exp, char *var_name, char *var);
-void			ft_update_var(char **exp, char **env ,char *var);
+void			ft_update_var(char **exp, char *var);
 int				ft_is_sorted(char **str);
 char			**ft_sort_export(char **str);
 void			ft_print_export(char **copy);

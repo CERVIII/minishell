@@ -6,13 +6,13 @@
 #    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/02/13 16:43:40 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/02/14 14:53:53 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
-CFLAGS		= -Wall -Werror -Wextra #-g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 EXTRAFLAGS	= -lreadline -lhistory -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 SRC_DIR		= ./src
@@ -27,7 +27,7 @@ SRC_DELETE	=	./src/borrar_al_final
 
 SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c \
 				builtins/cd_in.c builtins/env_in.c builtins/pwd_in.c builtins/check_builtin.c builtins/export_in.c \
-				builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c builtins/export_utils.c\
+				builtins/unset_in.c builtins/echo_in.c builtins/exit_in.c builtins/export_utils.c  builtins/export_trim.c\
 				executor/executor.c \
 				Lexer/check_input.c Lexer/ft_split_cmd.c Lexer/ft_split_cmd_aux.c Lexer/ft_split_cmd_aux_2.c Lexer/lexer_utils.c Lexer/lexer.c \
 				Parser/check_token.c Parser/parser.c Parser/clean_lexer.c Parser/cmd_utils.c Parser/parser_utils.c Parser/redirections.c \

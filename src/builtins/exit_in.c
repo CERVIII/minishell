@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 16:41:23 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:57:15 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,17 @@ void    ft_check_exit(char **str)
 {
     int code;
     
-    if (!str[0])
+    if (!str[1])
         code = 0;
-    else if (!check_if_nb(str[0]))
+    else if (!check_if_nb(str[1]))
     {
-        code = ft_atoi(str[0]);
+        code = ft_atoi(str[1]);
         if (code < 0)
         code = 255;
     }     
     else
     {
-        ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(str[0], STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+        printf("minishell: exit: numeric argument required\n");
         code = 255;
     }
     exit(code);
@@ -69,7 +67,7 @@ void    ft_check_exit(char **str)
 int ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
 {    
     (void) tools;
-	if (simple_cmds->str[1] && simple_cmds->str[2] && !ft_all_char(simple_cmds->str))
+	if (simple_cmds->str[2] && !ft_all_char(simple_cmds->str))
     {
         ft_putendl_fd("exit: too many arguments\n", STDERR_FILENO);
         return (EXIT_FAILURE);
