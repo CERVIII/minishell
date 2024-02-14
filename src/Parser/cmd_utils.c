@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:44:41 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 14:25:29 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:54:21 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_simple_cmds	*new_node_cmd(char **str, t_parser_tools *parser_tools)
 	t_simple_cmds	*node;
 
 	node = (t_simple_cmds *)malloc(sizeof(t_simple_cmds));
-	node->builtin = check_builtin(str[0]);
+	node->builtin = check_built(str[0]);
 	node->hd_file_name = NULL;
 	node->num_redirections = parser_tools->num_redirections;
 	node->redirections = parser_tools->redirections;

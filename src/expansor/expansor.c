@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_builtin.c                                    :+:      :+:    :+:   */
+/*   expansor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 11:00:50 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/14 09:54:31 by pcervill         ###   ########.fr       */
+/*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
+/*   Updated: 2024/02/14 10:01:49 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	(*check_built(char *token))(t_tools *tools, t_simple_cmds *simple_cmds)
+void	expansor(char *str)
 {
-	int			i;
-	static void	*builtin[7][2] = {
-	{"echo", ft_echo},
-	{"cd", ft_cd},
-	{"pwd", ft_pwd},
-	{"export", ft_export},
-	{"unset", ft_unset},
-	{"env", ft_env},
-	{"exit", ft_exit},
-	};
+}
 
-	i = 0;
-	while (i < 7)
+int	main(int argc, char **argv)
+{
+	if (argc == 1)
 	{
-		if (ft_strcmp(token, builtin[i][0]))
-			return (builtin[i][1]);
-		i++;
+		printf("Error: No arguments\n");
+		return (1);
 	}
-	return (NULL);
+	printf("Expansor: %s\n", argv[1]);
+	return (0);
 }
