@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 12:19:15 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:12:28 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,14 @@ char	**ft_add_var(char **env, char *var)
 	new_env = ft_calloc(i + 2, sizeof(char *));
 	if (!new_env)
 		return (NULL);
-	ft_update_export(env, new_env, var);
+	new_env = ft_update_export(env, new_env, var);
+	i = 0;
+	while(env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	free(env);
 	return (new_env);
 }
 
