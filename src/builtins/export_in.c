@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/14 12:48:02 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:19:15 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	ft_check_if_exists(char **export, char *var)
 		while (export[i])
 		{
 			if (ft_strncmp(var_name, export[i], ft_strlen(var_name)) == 0)
+			{
+				free(var_name);
 				return (1);
+			}
 			i++;
 		}
 		free(var_name);
@@ -106,11 +109,7 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 
 	i = 1;
 	if (!simple_cmds->str[1] || simple_cmds->str[1][0] == '\0')
-	{
-		printf("QUE PASSA\n");
 		ft_print_export(tools->exp);
-		printf("FIN\n");
-	}
 	else
 	{
 		while (simple_cmds->str[i])

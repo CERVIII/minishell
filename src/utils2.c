@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:46:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/14 12:57:18 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:20:14 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ char	**ft_update_export(char **exp, char **new_exp, char *var)
 	i = 0;
 	while (exp[i])
 	{
+		free(new_exp[i]);
 		new_exp[i] = ft_strdup(exp[i]);
 		i++;
 	}
+	free(new_exp[i]);
 	new_exp[i] = ft_strdup(var);
 	return (new_exp);
 }
