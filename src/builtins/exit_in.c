@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 10:43:57 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:47:44 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void ft_free_tools(t_tools *tools)
     // {
     //     free(tools->exp[i]);
     //     i++;
-    // }    
+    // }
+    // free(tools->env);
     free(tools->pwd);
     free(tools->old_pwd);
 }
-int	ft_check_exit(char **str)
+void	ft_check_exit(char **str)
 {
     int code;
     
@@ -76,5 +77,6 @@ int ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
         return (EXIT_FAILURE);
     }
     ft_free_tools(tools);
-    return(ft_check_exit(simple_cmds->str));
+    ft_check_exit(simple_cmds->str);
+    return (EXIT_SUCCESS);
 }

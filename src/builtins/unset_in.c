@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 11:03:31 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:57:48 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char    **ft_del(char **str, char *var)
 	if (!cpy)
 		return (NULL);
 	cpy = ft_update(str, cpy, var);
+	free(str);
 	return (cpy);
 }
 
@@ -62,6 +63,9 @@ int	ft_unset(t_tools *tools, t_simple_cmds *simple_cmds)
 	{
     	tools->env = ft_del(tools->env, simple_cmds->str[i]);
     	tools->exp = ft_del(tools->exp, simple_cmds->str[i]);
+		// printf("DIR: %p\n", simple_cmds->str[i]);
+		// printf("ENV_DIR: %p\n", tools->exp);
+		// printf("EXP_DIR: %p\n", tools->env);
 		i++;
 	}
 	return(EXIT_SUCCESS);
