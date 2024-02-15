@@ -12,3 +12,4 @@ a.out*
 *.3bdb
 a.out
 .nfs*
+*.gch
