@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/14 13:50:50 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:08:02 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,29 @@
 
 int	cmp_dollar(char *str, int *i, char flag)
 {
-	while (str[*i] || str[*i] != flag)
+	printf("%s			ENTRA EN CMP_DOLLAR%s\n", RED, NORMAL);
+	printf("			valor de entrada de i: %d\n", *i);
+	*i += 1;
+	while (str[*i] && str[*i] != flag)
 	{
+		printf("			Comprobando caracter: %c\n", str[*i]);
 		if (str[*i] == '$')
 		{
+			while (str[*i + 1] != flag)
+			{
+				(*i)++;
+				printf("			valor c: %c\n", str[*i]);
+			}
 			if (flag == '\'')
+			{
+				printf("			$ dentro de comilla simple\n");
 				return (-1);
+			}
+			printf("			$ dentro de comilla doble\n");
 			return (1);
 		}
-		i++;
+		else
+			(*i)++;
 	}
 	return (0);
 }
@@ -33,32 +47,49 @@ int	quotes_dollar(char *str)
 	int	double_q;
 	int	single_q;
 
+	printf("%s		ENTRA EN QUOTES_DOLLAR%s\n", RED, NORMAL);
 	i = 0;
 	double_q = 0;
 	single_q = 0;
 	while (str[i])
 	{
+		printf("		valor comprobado: %c\n", str[i]);
 		if (str[i] == '\"' && single_q == 0 && double_q == 0)
 		{
-			double_q = cmp_dollar(str, (&i + 1), '\"');
+			printf("		Entra if de comilla doble\n");
+			double_q = cmp_dollar(str, &i, '\"');
+			printf("		Valor de double_q: %d\n", double_q);
 		}
 		if (str[i] == '\'' && double_q == 0)
-			single_q = cmp_dollar(str, (&i + 1), '\'');
+		{
+			printf("		Entra if de comilla simple\n");
+			single_q = cmp_dollar(str, &i, '\'');
+			printf("		Valor de single_q: %d\n", single_q);
+		}
 		if (single_q == -1)
-			return (-1);
+		{
+			printf("		eNTrA\n");
+			return (0);
+		}
+		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	dollar_sign(char *str)
 {
 	int	i;
 
+	printf("%s	ENTRA EN DOLLAR_SIGN%s\n", RED, NORMAL);
 	i = 0;
 	while (str[i])
 	{
+		printf("	Caracter comprobando: %c\n", str[i]);
 		if (str[i] == '$')
+		{
+			printf("	ENCUENTRA $\n");
 			return (i + 1);
+		}
 		i++;
 	}
 	return (0);
@@ -67,30 +98,28 @@ int	dollar_sign(char *str)
 void	expansor(char **str)
 {
 	int	result;
+	int	result_q;
 	int	i;
+	char	tmp;
 
-	i = 1;
+	i = 0;
+	printf("str: %s\n", str[i]);
 	while (str[i])
 	{
-		if (dollar_sign(str[i]) != 0)
+		if ((result = dollar_sign(str[i])) != 0 && (result_q = quotes_dollar(str[i])))		// hay dollar y esta primero entre comillas dobles o sin comillas
 		{
-			printf("\nresultado de comprobacion comillas%d\n", quotes_dollar(str[i]));
+			tmp = NULL; // crear funcion para cambiar el str por el expansor correspondiente;
 		}
-		printf("\n\n%sString: %s%s\n", BLUE, str[i], NORMAL);
-		result = dollar_sign(str[i]);
-		printf("\n\n%sResult: %d%s\n", GREEN, result, NORMAL);
+		printf("\nresultado de comprobacion comillas: %d\n", result_q);
+		printf("%sString comprobado: %s%s\n", BLUE, str[i], NORMAL);
+		printf("%sPosicion $: %d%s\n", GREEN, result, NORMAL);
 		i++;
 	}
 	return ;
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc == 1)
-	{
-		printf("Error: No arguments\n");
-		return (1);
-	}
-	expansor(argv);
+	expansor(ft_split(readline(PROMPT_MSG), ' '));
 	return (0);
 }
