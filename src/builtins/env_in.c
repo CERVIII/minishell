@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 12:14:16 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:04:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int ft_env(t_tools *tools, t_simple_cmds *simple_cmds)
 	i = 0;
 	while(tools->env[i])
 	{
-		ft_putendl_fd(tools->env[i], STDOUT_FILENO);
+		printf("%s\n", tools->env[i]);
 		i++;
 	}
 	return (EXIT_SUCCESS);

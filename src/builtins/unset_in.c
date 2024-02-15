@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 17:05:24 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:03:31 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ char    **ft_del(char **str, char *var)
 	i = 0;
 	while (str[i])
 		i++;
-	cpy = ft_calloc(sizeof(char *), i + 1);
+	cpy = ft_calloc(sizeof(char *), i);
 	if (!cpy)
 		return (NULL);
-	ft_update(str, cpy, var);
+	cpy = ft_update(str, cpy, var);
 	return (cpy);
 }
 
@@ -55,7 +55,7 @@ int	ft_unset(t_tools *tools, t_simple_cmds *simple_cmds)
 {
     int     i;
     
-    i = 0;
+    i = 1;
 	(void)tools;
     //TODO: Gestionar cuando no hay argumentos/caracteres validos
 	while (simple_cmds->str[i])

@@ -6,19 +6,19 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 12:58:47 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:06:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	printf_args(int i, char **str, int fd)
+void	printf_args(int i, char **str)
 {
     while (str[i])
     {
-        ft_putstr_fd(str[i], fd);
+        printf("%s", str[i]);
         if (str[i + 1])
-            ft_putstr_fd(" ", fd);
+            printf(" ");
         i++;
     }
 }
@@ -42,7 +42,7 @@ int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
             flag = true;
         i++;
     }
-    printf_args(i, simple_cmds->str, STDOUT_FILENO);
+    printf_args(i, simple_cmds->str);
     if (flag == false)
         printf("\n");
     return (EXIT_SUCCESS);
