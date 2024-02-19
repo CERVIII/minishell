@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 11:22:12 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:18:42 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_join_export(char **exp)
 			exp[i] = ft_joinvar(exp[i]);
 		i++;
 	}
-	printf("FIN JOIN_EXPORT\n");
 }
 
 void	ft_update_var(char **env ,char *var)
@@ -71,10 +70,6 @@ char	**ft_sort_export(char **str)
 	char	*aux;
 	int		i;
 	
-	// while(str[i])
-	// {
-	// 	i++;
-	// }
 	while (!ft_is_sorted(str))
 	{
 		i = 0;
@@ -89,6 +84,5 @@ char	**ft_sort_export(char **str)
 			i++;
 		}
 	}
-	// printf("SORT_EXPORT: %s\n", str[0]);
 	return (str);
 }

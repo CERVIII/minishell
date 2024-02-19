@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/14 12:47:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:29:26 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./lexer.h"
@@ -146,9 +147,13 @@ void			ft_print_export(char **copy);
 char			**ft_update_export(char **exp, char **new_exp, char *var);
 char			*ft_trim_quotes(char *str);
 char			*ft_joinvar(char *str);
+void			ft_update_both(char **env, char **exp, char *str);
 
+		/*Executor*/
+int				handle_redirects(t_token *redirects);
 		/*	Signals	*/
 void			init_signals();
 void			rl_replace_line(const char *text, int clear_undo);
+
 
 #endif

@@ -6,26 +6,26 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 14:12:28 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:19:02 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	**ft_add_var(char **env, char *var)
+char	**ft_add(char **env, char *var)
 {
 	char	**new_env;
 	int		i;
 
 	i = 0;
-	while(env[i])
+	while (env[i])
 		i++;
 	new_env = ft_calloc(i + 2, sizeof(char *));
 	if (!new_env)
 		return (NULL);
 	new_env = ft_update_export(env, new_env, var);
 	i = 0;
-	while(env[i])
+	while (env[i])
 	{
 		free(env[i]);
 		i++;
@@ -39,28 +39,26 @@ int	ft_check_if_exists(char **export, char *var)
 	char	*var_name;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (ft_strchr(var, '='))
 	{
-		var_name = ft_substr(var, 0, ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
-		while (export[i])
+		var_name = ft_substr(var, 0, ft_strlen(var)
+				- ft_strlen(ft_strchr(var, '=')));
+		while (export[++i])
 		{
-			if (ft_strncmp(var_name, export[i], ft_strlen(var_name)) == 0)
-			{
-				free(var_name);
-				return (1);
-			}
-			i++;
+			if (!ft_strncmp(var_name, export[i], ft_strlen(var_name)))
+				return (free(var_name), 1);
 		}
 		free(var_name);
 	}
 	else
-		while (export[i])
+	{
+		while (export[++i])
 		{
-			if (ft_strncmp(var, export[i], ft_strlen(var)) == 0)
+			if (!ft_strncmp(var, export[i], ft_strlen(var)))
 				return (1);
-			i++;
 		}
+	}
 	return (0);
 }
 
@@ -90,7 +88,8 @@ int	ft_check_vars(char *cmds)
 	i = 0;
 	if (ft_strchr(cmds, '='))
 	{
-		aux = ft_substr(cmds, 0, ft_strlen(cmds) - ft_strlen(ft_strchr(cmds, '=')));
+		aux = ft_substr(cmds, 0, ft_strlen(cmds)
+				- ft_strlen(ft_strchr(cmds, '=')));
 		ft_check_vars(aux);
 		free (aux);
 	}
@@ -112,31 +111,30 @@ int	ft_check_vars(char *cmds)
 
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	int i;
+	int	i;
 
-	i = 1;
+	i = 0;
 	if (!simple_cmds->str[1] || simple_cmds->str[1][0] == '\0')
 		ft_print_export(tools->exp);
 	else
 	{
-		while (simple_cmds->str[i])
+		while (simple_cmds->str[++i])
 		{
 			if (ft_check_vars(simple_cmds->str[i]))
-			{				
+			{
 				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
-				{
-					ft_update_var(tools->env, simple_cmds->str[i]);
-					ft_update_var(tools->exp, simple_cmds->str[i]);
-				}
-				//TODO: REVISAR AQUI
+				//TODO: acortar 1 línea
+					{
+						ft_update_var(tools->env, simple_cmds->str[i]);
+						ft_update_var(tools->exp, simple_cmds->str[i]);
+					}
 				else
 				{
 					if (ft_strchr(simple_cmds->str[i], '='))
-						tools->env = ft_add_var(tools->env, simple_cmds->str[i]);
-					tools->exp = ft_add_var(tools->exp, simple_cmds->str[i]);
+						tools->env = ft_add(tools->env, simple_cmds->str[i]);
+					tools->exp = ft_add(tools->exp, simple_cmds->str[i]);
 				}
 			}
-			i++;
 		}
 	}
 	return (1);

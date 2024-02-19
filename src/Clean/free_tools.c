@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/14 11:07:52 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/19 10:58:12 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	free_tools(t_tools *tools)
 		free_lexer(tools->lexer);
 	if (tools->parser)
 		free_parser(tools->parser);
-	minishell_loop(tools);
 }
 
 void	free_lexer(t_token *lexer)
