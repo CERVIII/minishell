@@ -6,33 +6,93 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/15 15:08:02 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:04:05 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+char	*check_env(char *str, char **env, int *i)
+{
+	char	*var;
+	char	*tmp;
+	int		j;
+	int		k;
+	int		l;
+
+//	printf("%sENTRA EN CHECK_ENV%s\n", BLUE, NORMAL);
+	var = ft_strdup("");
+	tmp = ft_strdup("");
+	j = 0;
+	*i += 1;
+	while (str[*i] && str[*i] != ' ' && str[*i] != '\'' && str[*i] != '"' && str[*i] != '$')
+		var[j++] = str[(*i)++];
+	var[j++] = '=';
+	var[j] = '\0';
+	j = 0;
+	while (env[j])
+	{
+		if (!ft_strncmp(var, env[j], (ft_strlen(var))))
+		{
+			l = ft_strlen(var);
+			k = 0;
+			while (env[j][l])
+				tmp[k++] = env[j][l++];
+			tmp[k] = '\0';
+		}
+		j++;
+	}
+	printf("new_stfgdfgfr ($): %s len: %zu\n", tmp, ft_strlen(tmp));
+	return (tmp);
+}
+
+char	*detect_dollar_sign(char *str, char **env)
+{
+	int		i;
+	char	*new_str;
+	char	*tmp;
+
+//	printf("%sENTRA EN DETECT_DOllAR\n%s", RED, NORMAL);
+	new_str = ft_strdup("");
+	tmp = ft_strdup("");
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$' && str[i + 1] == '?')
+		{
+			new_str = ft_itoa(127);		// cambiar por señal de error
+			printf("new_str ($?): %s\n", new_str);
+			tmp = ft_strjoin(tmp, new_str);
+			i += 2;
+		}
+		else if (str[i] == '$' && (str[i + 1] != '"'
+				|| str[i + 1] != '\'') && str[i + 1] != '\0')
+		{
+			new_str = check_env(str, env, &i);
+			printf("new_str ($): %s\n", new_str);
+			tmp = ft_strjoin(tmp, new_str);
+			printf("tmp ($): %s\n", tmp);
+		}
+		else
+		{
+			tmp = ft_strjoin(tmp, &str[i]);
+			i++;
+		}
+	}
+	return (tmp);
+}
+
 int	cmp_dollar(char *str, int *i, char flag)
 {
-	printf("%s			ENTRA EN CMP_DOLLAR%s\n", RED, NORMAL);
-	printf("			valor de entrada de i: %d\n", *i);
 	*i += 1;
 	while (str[*i] && str[*i] != flag)
 	{
-		printf("			Comprobando caracter: %c\n", str[*i]);
 		if (str[*i] == '$')
 		{
 			while (str[*i + 1] != flag)
-			{
 				(*i)++;
-				printf("			valor c: %c\n", str[*i]);
-			}
 			if (flag == '\'')
-			{
-				printf("			$ dentro de comilla simple\n");
 				return (-1);
-			}
-			printf("			$ dentro de comilla doble\n");
 			return (1);
 		}
 		else
@@ -47,28 +107,21 @@ int	quotes_dollar(char *str)
 	int	double_q;
 	int	single_q;
 
-	printf("%s		ENTRA EN QUOTES_DOLLAR%s\n", RED, NORMAL);
 	i = 0;
 	double_q = 0;
 	single_q = 0;
 	while (str[i])
 	{
-		printf("		valor comprobado: %c\n", str[i]);
 		if (str[i] == '\"' && single_q == 0 && double_q == 0)
 		{
-			printf("		Entra if de comilla doble\n");
 			double_q = cmp_dollar(str, &i, '\"');
-			printf("		Valor de double_q: %d\n", double_q);
 		}
 		if (str[i] == '\'' && double_q == 0)
 		{
-			printf("		Entra if de comilla simple\n");
 			single_q = cmp_dollar(str, &i, '\'');
-			printf("		Valor de single_q: %d\n", single_q);
 		}
 		if (single_q == -1)
 		{
-			printf("		eNTrA\n");
 			return (0);
 		}
 		i++;
@@ -80,46 +133,57 @@ int	dollar_sign(char *str)
 {
 	int	i;
 
-	printf("%s	ENTRA EN DOLLAR_SIGN%s\n", RED, NORMAL);
 	i = 0;
 	while (str[i])
 	{
-		printf("	Caracter comprobando: %c\n", str[i]);
 		if (str[i] == '$')
-		{
-			printf("	ENCUENTRA $\n");
 			return (i + 1);
-		}
 		i++;
 	}
 	return (0);
 }
 
-void	expansor(char **str)
+char	**expansor(char **str, char **env)
 {
-	int	result;
-	int	result_q;
-	int	i;
-	char	tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
-	printf("str: %s\n", str[i]);
 	while (str[i])
 	{
-		if ((result = dollar_sign(str[i])) != 0 && (result_q = quotes_dollar(str[i])))		// hay dollar y esta primero entre comillas dobles o sin comillas
+		if (dollar_sign(str[i]) != 0 && quotes_dollar(str[i]))
 		{
-			tmp = NULL; // crear funcion para cambiar el str por el expansor correspondiente;
+//			printf("%sENTRA EN EXPANSOR%s\n", GREEN, NORMAL);
+			tmp = detect_dollar_sign(str[i], env);
+			free(str[i]);
+			str[i] = ft_strdup(tmp);
 		}
-		printf("\nresultado de comprobacion comillas: %d\n", result_q);
-		printf("%sString comprobado: %s%s\n", BLUE, str[i], NORMAL);
-		printf("%sPosicion $: %d%s\n", GREEN, result, NORMAL);
 		i++;
 	}
-	return ;
+	return (str);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
-	expansor(ft_split(readline(PROMPT_MSG), ' '));
+	char	**input;
+	int		i;
+
+	if (argc != 1 || argv[1])
+		return (0);
+	while (1)
+	{
+		i = 0;
+		input = ft_split(readline(PROMPT_MSG), ' ');
+		if (!input[0] || !ft_strcmp(input[0], "exit") || !ft_strcmp(input[0], ""))
+		{
+			printf("HASTA LUEGO\n");
+			return (0) ;
+		}
+		input = expansor(input, env);
+		while (input[i])
+			printf("Nuevo input: %s\n", input[i++]);
+	}
 	return (0);
 }
+
+// /System/Volumes/Data/sgoinfre/students/pcervill/minishell

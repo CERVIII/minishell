@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:46:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/23 11:46:55 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:46:28 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	ft_print_export(char **copy)
 		printf("declare -x %s\n", copy[i]);
 		i++;
 	}
-} 
+}
+
 char	**ft_update_export(char **exp, char **new_exp, char *var)
 {
 	int		i;
