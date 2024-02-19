@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/19 17:04:05 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:52:00 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*detect_dollar_sign(char *str, char **env)
 
 //	printf("%sENTRA EN DETECT_DOllAR\n%s", RED, NORMAL);
 	new_str = ft_strdup("");
-	tmp = ft_strdup("");
+	tmp = NULL;
 	i = 0;
 	while (str[i])
 	{
@@ -62,6 +62,12 @@ char	*detect_dollar_sign(char *str, char **env)
 		{
 			new_str = ft_itoa(127);		// cambiar por señal de error
 			printf("new_str ($?): %s\n", new_str);
+			tmp = ft_strjoin(tmp, new_str);
+			i += 2;
+		}
+		else if (str[i] == '$' && str[i + 1] == '_')
+		{
+			new_str = ft_strdup("env");
 			tmp = ft_strjoin(tmp, new_str);
 			i += 2;
 		}
@@ -155,8 +161,10 @@ char	**expansor(char **str, char **env)
 		{
 //			printf("%sENTRA EN EXPANSOR%s\n", GREEN, NORMAL);
 			tmp = detect_dollar_sign(str[i], env);
+			printf("tmp: %s\n", tmp);
 			free(str[i]);
-			str[i] = ft_strdup(tmp);
+			ft_strlcpy(str[i], tmp, ft_strlen(tmp) + 1);
+			printf("str[i]: %s\n", str[i]);
 		}
 		i++;
 	}
@@ -180,6 +188,7 @@ int	main(int argc, char **argv, char **env)
 			return (0) ;
 		}
 		input = expansor(input, env);
+		printf("HOLA\n");
 		while (input[i])
 			printf("Nuevo input: %s\n", input[i++]);
 	}
@@ -187,3 +196,11 @@ int	main(int argc, char **argv, char **env)
 }
 
 // /System/Volumes/Data/sgoinfre/students/pcervill/minishell
+
+/*	TMPDIR
+	ZSH
+	NVM_DIR
+	SSH_AUTH_SOCK
+	MAIL
+	PATH
+*/
