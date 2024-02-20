@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/19 17:02:11 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:10:46 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_cmd(t_tools *tools)
 	//TODO: check redirects
 	//TODO: check cmd
 	if (tools->parser->num_redirections > 0)
-		if (handle_redirects(tools->parser->redirections))
+		if (handle_redirects(tools->parser->redirections) == 0)
 			exit(1);
 	if (tools->parser->builtin != NULL)
 	{
