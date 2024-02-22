@@ -6,12 +6,12 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 15:19:02 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 17:01:34 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
+//! export aa y luego export aa=bb -> segfault
 char	**ft_add(char **env, char *var)
 {
 	char	**new_env;
@@ -123,11 +123,11 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 			if (ft_check_vars(simple_cmds->str[i]))
 			{
 				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
-				//TODO: acortar 1 línea
-					{
+				{
 						ft_update_var(tools->env, simple_cmds->str[i]);
+						printf("---------------------------------------\n");
 						ft_update_var(tools->exp, simple_cmds->str[i]);
-					}
+				}
 				else
 				{
 					if (ft_strchr(simple_cmds->str[i], '='))
