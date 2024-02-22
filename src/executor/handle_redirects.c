@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 10:40:13 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:59:57 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,23 @@ int	handle_redirects(t_token *redirects)
 	t_token	*aux;
 
 	aux = redirects;
-	while (redirects->token)
+	while (aux)
 	{
 		//* > >>
 		//*: <
-		if (redirects->type == REDIR_IN)
+		if (aux->type == REDIR_IN)
 		{
-			if (!ft_infile(redirects->token))
+			if (ft_infile(aux->token))
 				return (EXIT_FAILURE);
 		}
-		else if (redirects->type == REDIR_OUT || redirects->type == RREDIR)
+		else if (aux->type == REDIR_OUT || aux->type == RREDIR)
 		{
-			if (!ft_outfile(redirects))
+			if (ft_outfile(aux))
 				return (EXIT_FAILURE);
 		}
 		//TODO: <<
-		// if (redirects->token == RREDIR)
-		redirects = redirects->next;
+		// if (aux->token == RREDIR)
+		aux = aux->next;
 	}
-	redirects = aux;
 	return (EXIT_SUCCESS);
 }

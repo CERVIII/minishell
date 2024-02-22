@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 14:27:41 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:35:20 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	execute_single(t_tools *tools)
 	else
 	{	
 		pid = fork();
-		if (pid < 0) //TODO: FUNCION DE ERROR
-			return ;
+		if (pid < 0)
+			return ; //TODO: ft_error
 		if (pid == 0)
 		{
 			if (tools->parser->str[0][0])
