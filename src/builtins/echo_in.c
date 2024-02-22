@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 11:06:55 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:18:22 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
     
     (void) tools;
     flag = false;
-    printf("\n");
     while (simple_cmds->str[i] && simple_cmds->str[i][0] == '-' && simple_cmds->str[i][1] == 'n')
     {
         j = 1;

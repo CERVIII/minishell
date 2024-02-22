@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/20 12:10:46 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:26:54 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,38 +86,44 @@ void	check_cmd(t_tools *tools)
 	int exit_code;
 
 	exit_code = 0;
-	//TODO: check builtin
-	//TODO: check redirects
-	//TODO: check cmd
-	if (tools->parser->num_redirections > 0)
-		if (handle_redirects(tools->parser->redirections) == 0)
-			exit(1);
-	if (tools->parser->builtin != NULL)
-	{
-		exit_code = tools->parser->builtin(tools, tools->parser);
-		exit(exit_code);
-	}
-	else if (tools->parser->str[0][0])
+	// if (tools->parser->num_redirections > 0)
+	// 	if (handle_redirects(tools->parser->redirections) == 0)
+	// 		exit(1);
+	// if (tools->parser->builtin != NULL)
+	// {
+	// 	exit_code = tools->parser->builtin(tools, tools->parser);
+	// 	exit(exit_code);
+	// }
+	if (tools->parser->str[0][0])
 		exit_code = exec_cmd(tools);
 	exit(exit_code);
 }
 
 void	execute_single(t_tools *tools)
 {
-	int pid;
-
+	pid_t	pid;
+	int	status;
+	// *RESETAER FD
+	if (tools->parser->redirections > 0)
+		handle_redirects(tools->parser->redirections);
 	if (tools->parser->builtin)
 	{
+		//TODO: Revisar redirecciones con bultins
 		tools->parser->builtin(tools, tools->parser);
-		return ;
 	}
-	pid = fork();
-	if (pid < 0) //TODO: FUNCION DE ERROR
-		return ;
-	if (pid == 0)
-		check_cmd(tools);
-	waitpid(pid, NULL, 0);
-			
+	else
+	{	
+		pid = fork();
+		if (pid < 0) //TODO: FUNCION DE ERROR
+			return ;
+		if (pid == 0)
+			check_cmd(tools);
+		waitpid(pid, &status, 0);
+		// if (WIFEXITED(status))
+		// 	printf("STATUS: %i\n", WEXITSTATUS(status));
+	}
+	dup2(tools->input, STDIN_FILENO);
+	dup2(tools->output, STDOUT_FILENO);
 }
 
 int	before_execution(t_tools *tools)

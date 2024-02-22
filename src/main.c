@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/19 11:00:09 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:25:18 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int argc, char **argv, char **envp)
 	}		
 	tools.env = dup_matrix(envp);
 	tools.exp = dup_matrix(envp);
+	tools.input = dup(STDIN_FILENO);
+	tools.output = dup(STDOUT_FILENO);
 	save_pwd(&tools);
 	minishell_loop(&tools);
 	return (0);
