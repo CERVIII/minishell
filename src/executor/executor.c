@@ -6,33 +6,39 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 18:35:20 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:17:06 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// int execute(t_tools *tools)
-// {
-// 	int pipe_fd[2];
-// 	while(tools->parser)
-// 	{
-// 		if (tools->parser->next)
-// 			pipe(pipe_fd);
-// 	}
-// 	return (EXIT_SUCCESS);
-// }
+int execute(t_tools *tools)
+{
+	int pipe_fd[2];
+	while(tools->parser)
+	{
+		if (tools->parser->next)
+			pipe(pipe_fd);
+		
+	}
+	return (EXIT_SUCCESS);
+}
 
 
 int exec_cmd(t_tools *tools)
 {
 	char	*path;
 	char	*route;
-	
+
 	path = get_path(tools->env);
 	route = get_cmd_route(path, tools->parser->str[0]);
-	execve(route, tools->parser->str, tools->env);
-	return (ft_error_cmd(tools->parser->str[0]));
+	if (execve(route, tools->parser->str, tools->env) == -1)
+	{
+		perror("execve");
+    	printf("Después de execve (falló)\n");
+		return(127);
+	}
+	return (0);
 }
 
 
@@ -49,15 +55,17 @@ void	execute_single(t_tools *tools)
 	{	
 		pid = fork();
 		if (pid < 0)
-			return ; //TODO: ft_error
+		{
+			perror("fork");
+			return ;
+		}
 		if (pid == 0)
 		{
 			if (tools->parser->str[0][0])
 				exec_cmd(tools);
 		}
-		waitpid(pid, &status, 0);
-		// if (WIFEXITED(status))
-		// 	printf("STATUS: %i\n", WEXITSTATUS(status));
+		if (waitpid(pid, &status, 0) == -1)
+			(perror("waitpid"), exit(0));
 	}
 }
 
