@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 14:47:31 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:44:17 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	minishell_loop(t_tools *tools)
 	lexer(tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
+	check_expander(tools, tools->parser);
 	free_tools(tools);
 	minishell_loop(tools);
 }

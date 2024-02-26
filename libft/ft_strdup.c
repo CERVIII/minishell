@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:19:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/19 18:52:36 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:56:01 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ char	*ft_strdup(const char *s1)
 	size_t	i;
 
 	i = 0;
-	printf("s1 antes: %s\n", s1);
 	size_len = ft_strlen(s1);
 	ptr = (char *)ft_calloc(sizeof(char), size_len + 1);
-	printf("s1 despues: %s\n", s1);
 	if (ptr == NULL)
 		return (NULL);
 	memcpy(ptr, s1, size_len);

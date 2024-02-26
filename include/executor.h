@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/26 12:43:48 by pcervill         ###   ########.fr       */
+/*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
+/*   Updated: 2024/02/26 11:22:56 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-void	leaks(void)
-{
-	system("leaks -q minishell");
-}
+# include "minishell.h"
 
-int	main(int argc, char **argv, char **env)
-{
-	t_tools	tools;
+typedef struct s_string_info	t_info;
+typedef struct s_token			t_token;
+typedef struct s_tools			t_tools;
 
-//	atexit(leaks);
-	if (argc == 1 && !argv[1])
-	{
-		tools.env = env;
-		minishell_loop(&tools);
-		return (0);
-	}
-	else
-	{
-		printf("%sError: not accept arguments%s\n", RED, NORMAL);
-		exit(1);
-	}
-}
+#endif

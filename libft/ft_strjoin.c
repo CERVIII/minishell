@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:38:41 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/19 18:04:42 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:09:08 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str++;
 		s1++;
 	}
-	printf("str del join: %s\n", str);
 	while (*s2)
 	{
 		*str = *s2;
