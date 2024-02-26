@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/19 14:29:26 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/26 18:25:47 by fede             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define WHITE_BOLD		"\033[1;37m"
 
 # define PROMPT_MSG "\033[1;36m$minishell/ \033[0m"
+# define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
 typedef struct s_string_info
 {
@@ -95,6 +96,9 @@ typedef struct s_tools
 	char					**env;
 	char					*old_pwd;
 	char 					**exp;
+	int						input;
+	int						output;
+	bool					heredoc;
 }	t_tools;
 
 typedef struct s_parser_tools
@@ -151,6 +155,12 @@ void			ft_update_both(char **env, char **exp, char *str);
 
 		/*Executor*/
 int				handle_redirects(t_token *redirects);
+char			*get_cmd_route(char *path, char	*cmd);
+char			*get_path(char **env);
+void 			handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in);
+void			execute_single(t_tools *tools);
+int				exec_cmd(t_tools *tools);
+
 		/*	Signals	*/
 void			init_signals();
 void			rl_replace_line(const char *text, int clear_undo);
