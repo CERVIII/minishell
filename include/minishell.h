@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/26 18:25:47 by fede             ###   ########.fr       */
+/*   Updated: 2024/02/27 13:05:45 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,11 @@ char			*get_path(char **env);
 void 			handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in);
 void			execute_single(t_tools *tools);
 int				exec_cmd(t_tools *tools);
+void			execute_one(t_tools *tools);
+int				ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser);
+int				pipe_wait(int *pid, int amount);
+t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map);
+
 
 		/*	Signals	*/
 void			init_signals();
