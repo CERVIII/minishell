@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 18:03:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:45:45 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,17 @@ int	check_if_nb(char *str)
 	if (str[i] == '+' || str[i] == '-')
 		i++;
 	if (str[i] == '\0')
+	{
+		printf("minishell: export: \'%s\': not a valid identifier\n", str);//TODO: ft_error
 		return (0);
+	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] == '\0')
+	{
+		printf("minishell: export: \'%s\': not a valid identifier\n", str);//TODO: ft_error
 		return (0);
+	}
 	return (1);
 }
 
@@ -86,7 +92,7 @@ int	ft_check_vars(char *cmds)
 	char	*aux;
 
 	i = 0;
-	if (ft_strchr(cmds, '='))
+	if (ft_strchr(cmds + 1, '='))
 	{
 		aux = ft_substr(cmds, 0, ft_strlen(cmds)
 				- ft_strlen(ft_strchr(cmds, '=')));
@@ -98,11 +104,17 @@ int	ft_check_vars(char *cmds)
 		if (!check_if_nb(cmds))
 			return (0);
 		else if (cmds[0] == '=')
-			return (0);
+		{
+			printf("minishell: export: \'%s\': not a valid identifier\n", cmds);//TODO: ft_error
+			return(0);
+		}
 		while (cmds[i])
 		{
 			if (!ft_isalpha(cmds[i]) && cmds[i] != '_')
-				return (0);
+			{
+				printf("minishell: export: \'%s\': not a valid identifier\n", cmds);//TODO: ft_error
+				return(0);
+			}
 			i++;
 		}
 	}
