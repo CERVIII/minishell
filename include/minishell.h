@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/27 13:05:45 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:06:14 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_tools
 	int						input;
 	int						output;
 	bool					heredoc;
+	bool					reset;
 }	t_tools;
 
 typedef struct s_parser_tools

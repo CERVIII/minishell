@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/27 11:12:45 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:42:14 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	init_tools(t_tools *tools)
 	tools->pipes = 0;
 	tools->parser = NULL;
 	tools->heredoc = false;
+	tools->reset = false;
 	init_signals();
 }
 
 void	minishell_loop(t_tools *tools)
 {
-	init_tools(tools);
 	tools->arg = readline(PROMPT_MSG);
 	if (!tools->arg)
 		exit(0);

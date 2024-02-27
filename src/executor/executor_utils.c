@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/27 13:04:37 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:46:50 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 int	ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser)
 {
 	static int i = 0;
+	if (tools->reset == true)
+	{
+		i = 0;
+		tools->reset = false;
+	}
 	tools->pid[i] = fork();
 	if (tools->pid[i] < 0)
 	{
@@ -55,18 +60,10 @@ int	pipe_wait(int *pid, int amount)
 
 void	execute_one(t_tools *tools)
 {
-	int	exit_code;
-
-	exit_code = 0;
 	if (tools->parser->redirections > 0)
-		if (handle_redirects(tools->parser->redirections))
-			exit(1);
+		handle_redirects(tools->parser->redirections);
 	if (tools->parser->builtin)
-	{
-		exit_code = tools->parser->builtin(tools, tools->parser);
-		exit(exit_code);
-	}
+		tools->parser->builtin(tools, tools->parser);
 	else if (tools->parser->str[0][0])
-		exit_code = exec_cmd(tools);
-	exit(exit_code);
+		exec_cmd(tools);
 }

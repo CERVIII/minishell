@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fede <fede@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/26 11:29:24 by fede             ###   ########.fr       */
+/*   Updated: 2024/02/27 15:38:24 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	tools.input = dup(STDIN_FILENO);
 	tools.output = dup(STDOUT_FILENO);
 	save_pwd(&tools);
+	init_tools(&tools);
 	minishell_loop(&tools);
 	return (0);
 }
