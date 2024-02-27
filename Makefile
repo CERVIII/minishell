@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/02/26 16:53:30 by pcervill         ###   ########.fr        #
+#    Updated: 2024/02/27 12:25:50 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c \
 				Quotes/quotes.c \
 				Clean/free_tools.c \
 				borrar_al_final/print_tools.c \
-				Expander/expander.c
+				Expander/expander.c Expander/expander_utils.c
 #				executor/executor.c
 
 OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))

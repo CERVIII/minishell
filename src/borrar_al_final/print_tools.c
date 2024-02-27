@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:56:44 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 13:08:35 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:56:28 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_simple_cmd(t_simple_cmds *cmd)
 	j = 1;
 	while (tmp)
 	{
-		i = 0;
+		i = -1;
 		printf("\n%sCommand number: %d%s\n", RED_BOLD, j++, NORMAL);
 		printf("%sNumber of redirections: %d%s\n", BLUE_BOLD,
 			tmp->num_redirections, NORMAL);
@@ -46,8 +46,8 @@ void	print_simple_cmd(t_simple_cmds *cmd)
 		if (tmp->str)
 		{
 			printf("\n%sArguments:%s\n", BLUE_BOLD, NORMAL);
-			while (tmp->str[i])
-				printf("%s\n", tmp->str[i++]);
+			while (tmp->str[++i])
+				printf("str[%d]: %s\n\n", i, tmp->str[i]);
 		}
 		tmp = tmp->next;
 	}
