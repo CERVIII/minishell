@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 11:59:16 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:34:24 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*check_env(char *str, char **env, int *i)
 		&& str[*i] != '"' && str[*i] != '$')
 		var[j++] = str[(*i)++];
 	var[j++] = '=';
-//	printf("		var: %s\n", var);
+	printf("		var: %s\n", var);
+	printf("		int variable: %zu valor: %s\n", ft_strlen(getenv(var)), getenv(var));
 	tmp = ft_calloc(1024, sizeof(char));
 	j = 0;
 	while (env[j])
@@ -127,6 +128,7 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 //	printf("\n%sENTRA EN CHECK_EXPANDER%s\n", RED, NORMAL);
 	i = 0;
 	cmd->str = expansor(cmd->str, tools);
+//	cmd->redirections->token = expansor(cmd->redirections->token, tools);
 	while (cmd->str[i])
 	{
 //		printf("cmd->str[%d]: %s\n", i, cmd->str[i]);
