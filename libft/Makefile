@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/25 20:25:05 by pcervill          #+#    #+#              #
-#    Updated: 2023/11/08 12:57:58 by pcervill         ###   ########.fr        #
+#    Updated: 2024/02/26 12:00:08 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,13 @@ B		=	.
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@echo " \033[33m[ .. ] | Compiling libft..\033[0m"
 	@ar rcs $(NAME) $(OBJ)
 
 bonus: $(B)
 	
 $(B):	$(OBJ) $(OBJB)
+	@echo " \033[33m[ .. ] | Compiling libft..\033[0m"
 	@ar rcs $(NAME) $(OBJ) $(OBJB)
 
 ####TARGETS####

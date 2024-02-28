@@ -6,23 +6,23 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:01:32 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 12:57:41 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:32:42 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-//#include "../../include/parser.h"
 
-t_token	*token_new_cmd(char *str, int token, int i)
+t_token	*token_new_cmd(char *str, int token)
 {
 	t_token		*new;
+	static int	i = 0;
 
 	new = (t_token *)malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
 	new->token = ft_strdup(str);
 	new->type = token;
-	new->i = i;
+	new->i = i++;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -31,12 +31,10 @@ t_token	*token_new_cmd(char *str, int token, int i)
 void	new_redirection(t_token *tmp, t_parser_tools *parser_tools)
 {
 	t_token	*node;
-	int		i;
 	int		index_1;
 	int		index_2;
 
-	i = 0;
-	node = token_new_cmd(tmp->next->token, tmp->type, i);
+	node = token_new_cmd(tmp->next->token, tmp->type);
 	if (!node)
 		return ; // falta funcion error
 	ft_add_token_last(&parser_tools->redirections, node);

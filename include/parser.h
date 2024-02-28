@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:25:27 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 09:24:00 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:33:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_parser_tools	init_parser_tools(t_token *lexer, t_tools *tools);
 void			parser(t_tools *tools);
 
 		/* redirections.c */
-t_token			*token_new_cmd(char *str, int token, int i);
+t_token			*token_new_cmd(char *str, int token);
 void			new_redirection(t_token *tmp, t_parser_tools *parser_tools);
 void			redirection_add(t_parser_tools *parser_tools);
 

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:38:41 by pcervill          #+#    #+#             */
-/*   Updated: 2022/05/30 12:26:50 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:09:08 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*str;
 	char	*cstr;
 
-	if (!s1 || !s2)
+	if (!s1)
+	{
+		if (s2)
+			return ((char *)s2);
+		else
+			return (NULL);
+	}
+	if (!s2)
 		return (NULL);
 	cont = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(sizeof(char) * cont + 1);

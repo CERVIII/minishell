@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 14:09:14 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:23:59 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ char **ft_update(char **env, char **new_env, char *var)
 	int		i;
 	int		j;
 	char	*aux;
-	
+
 	i = 0;
 	j = 0;
 	while (env[i])
 	{
 		if (ft_strchr(env[i], '='))
-			aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
+			aux = ft_substr(env[i], 0,
+					ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
 		else
 			aux = env[i];
 		if (ft_strcmp(var, aux) != 0)
@@ -38,7 +39,7 @@ char **ft_update(char **env, char **new_env, char *var)
 
 char    **ft_del(char **str, char *var)
 {
-    char	**cpy;
+	char	**cpy;
 	int		i;
 
 	i = 0;

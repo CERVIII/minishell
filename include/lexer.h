@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:25:32 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 09:22:03 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:48:01 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		ft_is_whitespace(char c);
 int		ft_skip_spaces(char *str);
 
 		/* lexer_utils.c */
-t_token	*ft_token_new(char *token, int i);
+t_token	*ft_token_new(char *token);
 void	ft_add_token_last(t_token **list, t_token *new);
 void	ft_free_token(t_token **token);
 

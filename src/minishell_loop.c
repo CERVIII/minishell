@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/27 15:42:14 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:19:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-//#include "../include/lexer.h"
 
 void	init_tools(t_tools *tools)
 {
@@ -40,6 +39,7 @@ void	minishell_loop(t_tools *tools)
 	lexer(tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
+	check_expander(tools, tools->parser);
 	before_execution(tools);
 	free_tools(tools);
 	dup2(tools->input, STDIN_FILENO);

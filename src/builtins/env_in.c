@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 11:04:55 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:21:59 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int ft_env(t_tools *tools, t_simple_cmds *simple_cmds)
 	(void) simple_cmds;
 
 	i = 0;
-	while(tools->env[i])
+	while (tools->env[i])
 	{
 		printf("%s\n", tools->env[i]);
 		i++;

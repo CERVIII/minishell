@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exit_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 12:47:44 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:22:07 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int ft_all_char(char **str)
+int	ft_all_char(char **str)
 {
-    int i;
+	int	i;
 
     i = 1;
     if (str[i])
@@ -29,8 +29,9 @@ int ft_all_char(char **str)
     return(1);
 }
 
-void ft_free_tools(t_tools *tools)
+void	ft_free_tools(t_tools *tools)
 {
+	int	i;
 
     int i = 0;
     while(tools->env[i])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 17:19:02 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:23:24 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ void	ft_update_var(char **env ,char *var)
 	char	*var_aux;
 
 	i = 0;
-	if (ft_strchr(var, '=')) 
+	if (ft_strchr(var, '='))
 	{
-		var_aux = ft_substr(var, 0, ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
-		while(env[i])
+		var_aux = ft_substr(var, 0,
+				ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
+		while (env[i])
 		{
 			if (ft_strchr(env[i], '='))
 				aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
@@ -56,7 +57,7 @@ void	ft_update_var(char **env ,char *var)
 
 int	ft_is_sorted(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i + 1])
@@ -68,12 +69,11 @@ int	ft_is_sorted(char **str)
 	return (1);
 }
 
-
 char	**ft_sort_export(char **str)
 {
 	char	*aux;
 	int		i;
-	
+
 	while (!ft_is_sorted(str))
 	{
 		i = 0;

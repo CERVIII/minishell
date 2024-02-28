@@ -6,17 +6,16 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:40:37 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:30:52 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:01:59 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/minishell.h"
-//#include "../../include/lexer.h"
 
-t_token	*ft_token_new(char *token, int i)
+t_token	*ft_token_new(char *token)
 {
 	t_token		*new;
+	static int	i = 0;
 
 	new = (t_token *)malloc(sizeof(t_token));
 	if (!new)
@@ -34,7 +33,7 @@ t_token	*ft_token_new(char *token, int i)
 		new->type = HERE_DOC;
 	else
 		new->type = WORD;
-	new->i = i;
+	new->i = i++;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -58,21 +57,3 @@ void	ft_add_token_last(t_token **token, t_token *new)
 	}
 	return ;
 }
-
-/* void	ft_free_token(t_token **token)
-{
-	t_token	*tmp;
-	t_token	*tmp2;
-
-	if (!token)
-		return ;
-	tmp = *token;
-	while (tmp)
-	{
-		tmp2 = tmp->next;
-		free(tmp->token);
-		free(tmp);
-		tmp = tmp2;
-	}
-	return ;
-} */

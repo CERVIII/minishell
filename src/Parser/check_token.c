@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:50:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 13:01:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:27:03 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-//#include "../../include/clean.h"
-//#include "../../include/parser.h"
 
 int	check_redirects(t_token **lst, t_tools *tools)
 {
@@ -46,11 +44,6 @@ void	check_tokens(t_tools *tools, t_token **lst)
 		ft_err("Syntax error near unexpected token '|'", 127, tools);
 		minishell_loop(tools);
 	}
-	// if ((*lst)->type > PIPE && (*lst)->type <= HERE_DOC)
-	// {
-	// 	ft_err("Syntax error near unexpected token 'newline'", 127, tools);
-	// 	minishell_loop(tools);
-	// }
 	while (*lst)
 	{
 		if (!check_redirects(lst, tools) || !check_broken_pipes(lst, tools))

@@ -6,20 +6,56 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:19:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/07 11:42:19 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:56:01 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *s1)
+{
+	char	*ptr;
+	size_t	size_len;
+	size_t	i;
+
+	i = 0;
+	size_len = ft_strlen(s1);
+	ptr = (char *)ft_calloc(sizeof(char), size_len + 1);
+	if (ptr == NULL)
+		return (NULL);
+	memcpy(ptr, s1, size_len);
+	return (ptr);
+}
+
+/* char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	size_t	size;
+	size_t	i;
+
+	i = 0;
+	size = ft_strlen(s1);
+	s2 = (char *)ft_calloc(size + 1, sizeof(char));
+	if (!s2)
+		return (0);
+	while (i < size)
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	return (s2);
+} */
+
+/* char	*ft_strdup(const char *s)
 {
 	char	*str;
 	char	*cstr;
 	size_t	count;
 
+	if (!s)
+		return (0);
 	count = ft_strlen(s);
-	str = (char *)malloc(count + 1);
+	str = (char *)ft_calloc(sizeof(char), count + 1);
 	if (!str)
 		return (0);
 	cstr = str;
@@ -31,7 +67,7 @@ char	*ft_strdup(const char *s)
 	}
 	*str = '\0';
 	return ((char *)cstr);
-}
+} */
 
 /* char	*ft_strdup(const char *s1)
 {
