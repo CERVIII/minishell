@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:25:41 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:57:59 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	execute_single(t_tools *tools)
 	if (tools->parser->builtin)
 		tools->parser->builtin(tools, tools->parser);
 	else
-	{	
+	{
 		pid = fork();
 		if (pid < 0)
 		{
@@ -105,6 +105,7 @@ void	execute_single(t_tools *tools)
 
 int	before_execution(t_tools *tools)
 {
+	check_expander(tools, tools->parser);
 	if (tools->pipes == 0)
 		execute_single(tools);
 	else

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:22:07 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:39:48 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ int	ft_all_char(char **str)
 
 void	ft_free_tools(t_tools *tools)
 {
-	int	i;
-
     int i = 0;
+
     while(tools->env[i])
     {
         free(tools->env[i]);
