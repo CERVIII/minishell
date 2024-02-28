@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:52:30 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:06:14 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "lexer.h"
-# include "quotes.h"
-# include "parser.h"
-# include "clean.h"
-# include "borrar.h"
+# include "./lexer.h"
+# include "./quotes.h"
+# include "./parser.h"
+# include "./clean.h"
+# include "./borrar.h"
+# include "./executor.h"
+# include "./error.h"
 
 # define NORMAL			"\033[0m"
 # define BLACK			"\033[30m"
@@ -54,6 +57,7 @@
 # define WHITE_BOLD		"\033[1;37m"
 
 # define PROMPT_MSG "\033[1;36m$minishell/ \033[0m"
+# define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
 typedef struct s_string_info
 {
@@ -87,10 +91,15 @@ typedef struct s_tools
 	struct s_simple_cmds	*parser;
 	char					*arg;
 	int						pipes;
+	int						*pid;
 	char					*pwd;
 	char					**env;
 	char					*old_pwd;
-	char 					**export;
+	char 					**exp;
+	int						input;
+	int						output;
+	bool					heredoc;
+	bool					reset;
 }	t_tools;
 
 typedef struct s_parser_tools
@@ -124,27 +133,43 @@ char			**dup_matrix(char **str);
 int				save_pwd(t_tools *tools);
 
 		/*Built-ins*/
-int				ft_cd(t_tools *tools, char *path);
-int				ft_env(t_tools *tools);
-int				ft_pwd(t_tools *tools);
+int				(*check_builtin(char *tokens))(t_tools *tools, t_simple_cmds *simple_cmds);
+int				ft_cd(t_tools *tools, t_simple_cmds *simple_cmds);
+int				ft_env(t_tools *tools, t_simple_cmds *simple_cmds);
+int				ft_pwd(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_export(t_tools *tools, t_simple_cmds *simple_cmds);
-int				*check_builtin(char *tokens, t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_unset(t_tools *tools, t_simple_cmds *simple_cmds);
 int				ft_exit(t_tools *tools, t_simple_cmds *simple_cmds);
-int				ft_echo(t_simple_cmds *simple_cmds);
+int				ft_echo(t_tools *tools, t_simple_cmds *simple_cmds);
 
 		/*Built-ins utils*/
 int				check_if_nb(char *str);
 void			ft_join_export(char **exp);
-void			ft_replace_var(char **exp, char *var_name, char *var);
-void			ft_update_var(char **exp, char **env ,char *var);
+void			ft_update_var(char **exp, char *var);
 int				ft_is_sorted(char **str);
 char			**ft_sort_export(char **str);
 void			ft_print_export(char **copy);
 char			**ft_update_export(char **exp, char **new_exp, char *var);
+char			*ft_trim_quotes(char *str);
+char			*ft_joinvar(char *str);
+void			ft_update_both(char **env, char **exp, char *str);
+
+		/*Executor*/
+int				handle_redirects(t_token *redirects);
+char			*get_cmd_route(char *path, char	*cmd);
+char			*get_path(char **env);
+void 			handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in);
+void			execute_single(t_tools *tools);
+int				exec_cmd(t_tools *tools);
+void			execute_one(t_tools *tools);
+int				ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser);
+int				pipe_wait(int *pid, int amount);
+t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map);
+
 
 		/*	Signals	*/
 void			init_signals();
 void			rl_replace_line(const char *text, int clear_undo);
+
 
 #endif

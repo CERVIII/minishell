@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/18 15:42:11 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:46:59 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**dup_matrix(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	dup = ft_calloc(i, sizeof (char *));
+	dup = ft_calloc(i + 1, sizeof (char *));
 	i = 0;
 	while (str[i])
 	{

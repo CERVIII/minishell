@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:44:41 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/12 11:46:22 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:04:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_simple_cmds	*new_node_cmd(char **str, t_parser_tools *parser_tools)
 	t_simple_cmds	*node;
 
 	node = (t_simple_cmds *)malloc(sizeof(t_simple_cmds));
-	node->builtin = check_builtin(str[0], parser_tools->tools, NULL);
+	node->builtin = check_builtin(str[0]);
 	node->hd_file_name = NULL;
 	node->num_redirections = parser_tools->num_redirections;
 	node->redirections = parser_tools->redirections;
