@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 11:50:26 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:22:32 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void			execute_one(t_tools *tools);
 int				ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser);
 int				pipe_wait(int *pid, int amount);
 t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map);
-int				ft_error_cmd(char *cmd);
+int				ft_error_cmd(t_tools *tools);
 #endif

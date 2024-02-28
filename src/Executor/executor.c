@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:57:59 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:18:41 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int exec_cmd(t_tools *tools)
 	path = get_path(tools->env);
 	route = get_cmd_route(path, tools->parser->str[0]);
 	execve(route, tools->parser->str, tools->env);
-	return (ft_error_cmd(tools->parser->str[0]));
+	return (ft_error_cmd(tools));
 }
 
 void	execute_single(t_tools *tools)
@@ -82,7 +82,8 @@ void	execute_single(t_tools *tools)
 	int	status;
 
 	if (tools->parser->redirections > 0)
-		handle_redirects(tools->parser->redirections);
+		if (handle_redirects(tools->parser->redirections))
+			exit(1);
 	if (tools->parser->builtin)
 		tools->parser->builtin(tools, tools->parser);
 	else
