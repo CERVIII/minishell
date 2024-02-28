@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:23:24 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:49:08 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_join_export(char **exp)
 {
 	int	i;
-	
+
 	i = 0;
 	while (exp[i])
 	{
