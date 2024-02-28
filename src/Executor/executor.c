@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 13:18:41 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:43:41 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in)
 {	
-	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
-		perror("pipe_1");
+	if (cmd->prev)
+		dup2(fd_in, STDIN_FILENO);
 	close(pipe_fd[0]);
-	if (cmd->next && dup2(pipe_fd[1], STDOUT_FILENO) < 0)
-		perror("pipe_2");
+	if (cmd->next)
+		dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[1]);
 	if (cmd->prev)
 		close(fd_in);
@@ -60,7 +60,7 @@ int execute(t_tools *tools)
 			break ;
 	}
 	pipe_wait(tools->pid, tools->pipes);
-	tools->parser = ft_simple_cmdsfirst(tools->parser);
+	// tools->parser = ft_simple_cmdsfirst(tools->parser);
 	return (EXIT_SUCCESS);
 }
 
@@ -69,9 +69,12 @@ int exec_cmd(t_tools *tools)
 {
 	char	*path;
 	char	*route;
+	// char	**cmd;
 
+	// cmd = ft_split(tools->parser->str[0], ' ');
 	path = get_path(tools->env);
 	route = get_cmd_route(path, tools->parser->str[0]);
+	// printf("cmd[0]: %s\n", cmd[0]);
 	execve(route, tools->parser->str, tools->env);
 	return (ft_error_cmd(tools));
 }
@@ -82,8 +85,7 @@ void	execute_single(t_tools *tools)
 	int	status;
 
 	if (tools->parser->redirections > 0)
-		if (handle_redirects(tools->parser->redirections))
-			exit(1);
+		handle_redirects(tools->parser->redirections);
 	if (tools->parser->builtin)
 		tools->parser->builtin(tools, tools->parser);
 	else
@@ -99,8 +101,8 @@ void	execute_single(t_tools *tools)
 			if (tools->parser->str[0][0])
 				exec_cmd(tools);
 		}
-		if (waitpid(pid, &status, 0) == -1)
-			(perror("waitpid"), exit(0));
+		if (waitpid(pid, &status, 0) < 0)
+			exit(0);
 	}
 }
 
@@ -108,7 +110,7 @@ int	before_execution(t_tools *tools)
 {
 	check_expander(tools, tools->parser);
 	if (tools->pipes == 0)
-		execute_single(tools);
+		execute_single(tools);			 
 	else
 	{
 		tools->pid = ft_calloc(sizeof(int), tools->pipes + 2);

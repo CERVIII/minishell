@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 13:22:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:33:33 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_token			t_token;
 typedef struct s_tools			t_tools;
 
 	/*		Executor.c		*/
-int	before_execution(t_tools *tools);
+int				before_execution(t_tools *tools);
 int				handle_redirects(t_token *redirects);
 char			*get_cmd_route(char *path, char	*cmd);
 char			*get_path(char **env);

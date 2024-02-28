@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/27 16:12:19 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:46:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parser(t_tools *tools)
 	count_pipes(tools->lexer, tools);
 	if (tools->lexer->type == PIPE)
 		parser_double_token(tools, tools->lexer);
-	printf("\n%sNumber of pipes: %d%s\n", GREEN_BOLD, tools->pipes, NORMAL);
+	// printf("\n%sNumber of pipes: %d%s\n", GREEN_BOLD, tools->pipes, NORMAL);
 	while (tools->lexer)
 	{
 		if (tools->lexer && tools->lexer->type == PIPE)

@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:48 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/13 15:52:29 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:51:07 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,15 @@ int	ft_cd(t_tools *tools, t_simple_cmds *simple_cmds)
 	int	res;
 
 	res = 0;
-	res = chdir(simple_cmds->str[1]);
-	if (res != 0)
-		perror("cd");
-	update_pwd(tools);
-	update_env(tools);
+	if (simple_cmds->str[1] && !simple_cmds->str[2])
+	{
+		res = chdir(simple_cmds->str[1]);
+		if (res != 0)
+			perror("cd");
+		update_pwd(tools);
+		update_env(tools);
+	}
+	else
+		ft_putendl_fd("Error: Too many arguments", STDERR_FILENO);
 	return (EXIT_SUCCESS);
 }
