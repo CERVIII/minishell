@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/02/27 12:25:50 by pcervill         ###   ########.fr        #
+#    Updated: 2024/02/28 11:15:43 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,9 @@ $(OBJS_PATH)/%.o:$(SRC_BUILTIN)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 $(OBJS_PATH)/%.o:$(SRC_EXPANDER)/%.c | $(OBJS_PATH)
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+$(OBJS_PATH)/%.o:$(SRC_ERROR)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #$(OBJS_PATH)/%.o:$(SRC_EXECUTOR)/%.c | $(OBJS_PATH)

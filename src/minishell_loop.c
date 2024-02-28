@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/26 12:44:17 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:19:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	init_tools(t_tools *tools)
 	tools->lexer = NULL;
 	tools->pipes = 0;
 	tools->parser = NULL;
+	tools->heredoc = false;
+	tools->reset = false;
+	init_signals();
 }
 
 void	minishell_loop(t_tools *tools)
 {
-	init_tools(tools);
 	tools->arg = readline(PROMPT_MSG);
-	if (!tools->arg || !ft_strcmp(tools->arg, "exit"))
+	if (!tools->arg)
 		exit(0);
 	if (!tools->arg[0])
 	{
@@ -38,6 +40,9 @@ void	minishell_loop(t_tools *tools)
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
 	check_expander(tools, tools->parser);
+	before_execution(tools);
 	free_tools(tools);
+	dup2(tools->input, STDIN_FILENO);
+	dup2(tools->output, STDOUT_FILENO);
 	minishell_loop(tools);
 }

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/26 11:30:57 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:18:38 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "expander.h"
@@ -27,6 +28,7 @@
 # include "clean.h"
 # include "borrar.h"
 # include "builtin.h"
+# include "error.h"
 
 # define NORMAL			"\033[0m"
 # define BLACK			"\033[30m"
@@ -56,6 +58,7 @@
 # define WHITE_BOLD		"\033[1;37m"
 
 # define PROMPT_MSG "\033[1;36m$minishell/ \033[0m"
+# define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
 typedef struct s_string_info
 {
@@ -89,10 +92,16 @@ typedef struct s_tools
 	struct s_simple_cmds	*parser;
 	char					*arg;
 	int						pipes;
+	int						*pid;
 	char					*pwd;
 	char					**env;
 	char					*old_pwd;
-	char					**export;
+//	char					**export;
+	char 					**exp;
+	int						input;
+	int						output;
+	bool					heredoc;
+	bool					reset;
 }	t_tools;
 
 typedef struct s_parser_tools
@@ -128,5 +137,6 @@ int				save_pwd(t_tools *tools);
 		/*	Signals	*/
 void			init_signals(void);
 void			rl_replace_line(const char *text, int clear_undo);
+
 
 #endif

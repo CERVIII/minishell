@@ -6,47 +6,43 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/12 13:16:01 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:21:48 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	printf_args(int i, char **str, int fd)
+void	printf_args(int i, char **str)
 {
-	while (str[i])
-	{
-		ft_putstr_fd(str[i], fd);
-		if (str[i + 1])
-			ft_putstr_fd(" ", fd);
-		i++;
-	}
+    while (str[i])
+    {
+        printf("%s", str[i]);
+        if (str[i + 1])
+            printf(" ");
+        i++;
+    }
 }
 
-int	ft_echo(t_simple_cmds *simple_cmds)
+int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	int		i;
-	int		j;
-	bool	flag;
-
-	simple_cmds = malloc(sizeof(t_simple_cmds));
-	simple_cmds->str = ft_calloc(3, sizeof(char *));
-	simple_cmds->str[0] = ft_strdup("hola");
-	simple_cmds->str[1] = ft_strdup("-n");
-	i = 0;
-	flag = false;
-	while (simple_cmds->str[i] && simple_cmds->str[i][0] == '-'
-		&& simple_cmds->str[i][1] == 'n')
-	{
-		j = 1;
-		while (simple_cmds->str[i][j] == 'n')
-			j++;
-		if (simple_cmds->str[i][j] == '\0')
-			flag = true;
-		i++;
-	}
-	printf_args(i, simple_cmds->str, STDOUT_FILENO);
-	if (!flag)
-		ft_putstr_fd("\n", STDOUT_FILENO);
-	return (EXIT_SUCCESS);
+	int     i;
+	int     j;
+    bool    flag;
+    i = 1;
+    
+    (void) tools;
+    flag = false;
+    while (simple_cmds->str[i] && simple_cmds->str[i][0] == '-' && simple_cmds->str[i][1] == 'n')
+    {
+        j = 1;
+        while (simple_cmds->str[i][j] == 'n')
+            j++;
+        if (simple_cmds->str[i][j] == '\0')
+            flag = true;
+        i++;
+    }
+    printf_args(i, simple_cmds->str);
+    if (flag == false)
+        printf("\n");
+    return (EXIT_SUCCESS);
 }

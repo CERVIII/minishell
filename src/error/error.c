@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 11:16:23 by pcervill         ###   ########.fr       */
+/*   Created: 2024/02/13 11:04:32 by fdiaz-gu          #+#    #+#             */
+/*   Updated: 2024/02/19 11:37:42 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
+#include "../../include/minishell.h"
 
-# include "minishell.h"
-
-typedef struct s_string_info	t_info;
-typedef struct s_token			t_token;
-typedef struct s_tools			t_tools;
-
-	/*		Executor.c		*/
-int	before_execution(t_tools *tools);
-
-#endif
+int	ft_error_cmd(char *cmd)
+{
+	printf("minishell: %s: command not found\n", cmd);
+	return(127);
+}

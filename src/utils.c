@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/19 15:46:15 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:19:54 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**dup_matrix(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	dup = ft_calloc(i, sizeof (char *));
+	dup = ft_calloc(i + 1, sizeof (char *));
 	i = 0;
 	while (str[i])
 	{

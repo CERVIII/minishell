@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 11:51:18 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:25:04 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ void	free_tools(t_tools *tools)
 
 	tmp = tools->lexer;
 	if (tools->arg)
-	{
 		free(tools->arg);
-		tools->arg = NULL;
-	}
 	if (tools->lexer)
 		free_lexer(tools->lexer);
 	if (tools->parser)
 		free_parser(tools->parser);
+	init_tools(tools);
+	tools->reset = true;
 }
 
 void	free_lexer(t_token *lexer)
@@ -86,3 +85,4 @@ void	free_parser(t_simple_cmds *parser)
 	}
 	parser = NULL;
 }
+

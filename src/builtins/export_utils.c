@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/12 12:54:25 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:23:24 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,18 @@
 
 void	ft_join_export(char **exp)
 {
-	char	*var_name;
-	char	*join;
-	char	*join_2;
-	char	*aux;
-	int		i;
-
-	i = -1;
-	while (exp[++i])
-	{
-		if (ft_strchr(exp[i], '='))
-		{
-			var_name = ft_substr(exp[i], 0,
-					ft_strlen(exp[i]) - ft_strlen(ft_strchr(exp[i], '=')));
-			aux = ft_strjoin(var_name, "=\"");
-			join = ft_strjoin(aux, ft_strchr(exp[i], '=') + 1);
-			join_2 = ft_strjoin(join, "\"");
-			exp[i] = join_2;
-			free(var_name);
-			free(aux);
-			free(join);
-		}
-	}
-}
-
-void	ft_replace_var(char **exp, char *var_name, char *var)
-{
 	int	i;
-
+	
 	i = 0;
 	while (exp[i])
 	{
-		if (ft_strcmp(var_name, var) == 0)
-		{
-			free(exp[i]);
-			exp[i] = var;
-		}
+		if (ft_strchr(exp[i], '='))
+			exp[i] = ft_joinvar(exp[i]);
 		i++;
 	}
 }
 
-void	ft_update_var(char **exp, char **env, char *var)
+void	ft_update_var(char **env ,char *var)
 {
 	int		i;
 	char	*aux;
@@ -67,14 +38,19 @@ void	ft_update_var(char **exp, char **env, char *var)
 				ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
 		while (env[i])
 		{
-			aux = ft_substr(env[i], 0,
-					ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
+			if (ft_strchr(env[i], '='))
+				aux = ft_substr(env[i], 0, ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
+			else
+				aux = env[i];
 			if (ft_strcmp(aux, var_aux) == 0)
-				env[i] = var;
-			free(aux);
+			{
+				free(env[i]);
+				env[i] = ft_strdup(var);
+			}
+			if(ft_strchr(aux,  '='))
+				free(aux);
 			i++;
 		}
-		ft_replace_var(exp, var_aux, var);
 		free(var_aux);
 	}
 }
