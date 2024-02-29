@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 15:18:24 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:47:32 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,6 @@ void	handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in)
 	if (cmd->prev)
 		close(fd_in);
 	execute_one(tools);
-}
-
-int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
-{
-	int	fd_in;
-
-	if (tools->heredoc)
-	{
-		close(end[0]);
-		fd_in = open(cmd->hd_file_name, O_RDONLY);
-	}
-	else
-		fd_in = end[0];
-	return (fd_in);
 }
 
 int execute(t_tools *tools)
@@ -70,7 +56,7 @@ int	exec_cmd(t_tools *tools)
 	char	*route;
 	char	**cmd;
 
-	if (tools->parser->str[1] == NULL)
+	if (!(tools->parser->str[1]))
 		cmd = ft_split(tools->parser->str[0], ' ');
 	else
 		cmd = tools->parser->str;
