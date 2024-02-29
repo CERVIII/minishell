@@ -6,7 +6,7 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/02/28 11:55:57 by pcervill         ###   ########.fr        #
+#    Updated: 2024/02/28 12:35:25 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ $(OBJS_PATH)/%.o:$(SRC_EXECUTOR)/%.c | $(OBJS_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
+	@echo " \033[33m[ .. ] | Compiling Libft..\033[0m"
 	@make bonus -C $(LIBFT_PATH) --silent
 	@echo " \033[32m[ OK ] | ✅ Libft ready! ✅\033[0m"
 	@echo " \033[33m[ .. ] | Compiling minishell..\033[0m"

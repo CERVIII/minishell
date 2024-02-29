@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/27 16:12:19 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:14:22 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	parser(t_tools *tools)
 	count_pipes(tools->lexer, tools);
 	if (tools->lexer->type == PIPE)
 		parser_double_token(tools, tools->lexer);
-	printf("\n%sNumber of pipes: %d%s\n", GREEN_BOLD, tools->pipes, NORMAL);
 	while (tools->lexer)
 	{
 		if (tools->lexer && tools->lexer->type == PIPE)
@@ -54,5 +53,4 @@ void	parser(t_tools *tools)
 			add_back_cmd(&tools->parser, node);
 		tools->lexer = parser_tools.lexer;
 	}
-	print_simple_cmd(tools->parser);
 }

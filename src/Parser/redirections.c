@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 13:01:32 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/13 12:32:42 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:44:53 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	redirection_add(t_parser_tools *parser_tools)
 		tmp = tmp->next;
 	if (!tmp || tmp->type == PIPE)
 		return ;
-	if (tmp->type >= REDIR_IN && tmp->type <= RREDIR)
+	if (tmp->type >= REDIR_IN && tmp->type <= HERE_DOC)
 		new_redirection(tmp, parser_tools);
 	redirection_add(parser_tools);
 }
