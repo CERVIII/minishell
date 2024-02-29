@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 16:40:46 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:25:06 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct s_tools
 	char					*pwd;
 	char					**env;
 	char					*old_pwd;
-//	char					**export;
 	char 					**exp;
 	int						input;
 	int						output;

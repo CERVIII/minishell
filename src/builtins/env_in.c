@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 17:52:45 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:30:16 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int ft_env(t_tools *tools, t_simple_cmds *simple_cmds)
 		}
 	}
 	else
-		ft_putendl_fd("Error: Too many arguments", STDERR_FILENO);
+	{ 
+		ft_putstr_fd("env: ", STDERR_FILENO);
+		ft_putstr_fd(simple_cmds->str[1], STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		g_error = 127;
+	}
 	return (EXIT_SUCCESS);
 }

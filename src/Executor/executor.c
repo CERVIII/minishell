@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 17:43:41 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:23:14 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int execute(t_tools *tools)
 			break ;
 	}
 	pipe_wait(tools->pid, tools->pipes);
-	// tools->parser = ft_simple_cmdsfirst(tools->parser);
 	return (EXIT_SUCCESS);
 }
 
@@ -85,25 +84,21 @@ void	execute_single(t_tools *tools)
 	int	status;
 
 	if (tools->parser->redirections > 0)
-		handle_redirects(tools->parser->redirections);
-	if (tools->parser->builtin)
-		tools->parser->builtin(tools, tools->parser);
-	else
-	{
-		pid = fork();
-		if (pid < 0)
-		{
-			perror("fork");
+		if (handle_redirects(tools->parser->redirections))
 			return ;
-		}
-		if (pid == 0)
-		{
-			if (tools->parser->str[0][0])
-				exec_cmd(tools);
-		}
-		if (waitpid(pid, &status, 0) < 0)
-			exit(0);
+	if (tools->parser->builtin)
+	{
+		tools->parser->builtin(tools, tools->parser);
+		return ;
 	}
+	pid = fork();
+	if (pid < 0)
+		perror("fork");
+	if (pid == 0)
+		handle_cmd(tools);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		g_error = WEXITSTATUS(status);		
 }
 
 int	before_execution(t_tools *tools)

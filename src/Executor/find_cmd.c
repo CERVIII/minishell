@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 17:48:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:24:07 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,5 @@ char	*get_path(char **env)
 		}
 		i++;
 	}
-	// //TODO:FT_ERROR
-	// perror("Error");
 	return (NULL);
 }
