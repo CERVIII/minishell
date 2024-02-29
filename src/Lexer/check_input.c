@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 17:28:05 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/08 15:11:47 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:06:43 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	add_space(char *arg, char *new, int i, int j)
 
 void	status_quotes(int *single_q, int *double_q, char quote)
 {
-	if (quote == '\'')
+	if (quote == '\'' && !*double_q)
 	{
 		if (*single_q == 0)
 			*single_q = 1;
 		else
 			*single_q = 0;
 	}
-	if (quote == '\"')
+	if (quote == '\"' && !*single_q)
 	{
 		if (*double_q == 0)
 			*double_q = 1;

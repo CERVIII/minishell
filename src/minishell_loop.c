@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 16:46:56 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:52:07 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	minishell_loop(t_tools *tools)
 		free(tools->arg);
 		minishell_loop(tools);
 	}
-	tools->arg = check_add_spaces(tools->arg);
 	add_history(tools->arg);
 	check_quotes(tools);
+	tools->arg = check_add_spaces(tools->arg);
 	lexer(tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
