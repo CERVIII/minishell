@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 12:23:14 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:18:24 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,19 @@ int execute(t_tools *tools)
 }
 
 
-int exec_cmd(t_tools *tools)
+int	exec_cmd(t_tools *tools)
 {
 	char	*path;
 	char	*route;
-	// char	**cmd;
+	char	**cmd;
 
-	// cmd = ft_split(tools->parser->str[0], ' ');
+	if (tools->parser->str[1] == NULL)
+		cmd = ft_split(tools->parser->str[0], ' ');
+	else
+		cmd = tools->parser->str;
 	path = get_path(tools->env);
-	route = get_cmd_route(path, tools->parser->str[0]);
-	// printf("cmd[0]: %s\n", cmd[0]);
-	execve(route, tools->parser->str, tools->env);
+	route = get_cmd_route(path, cmd[0]);
+	execve(route, cmd, tools->env);
 	return (ft_error_cmd(tools));
 }
 
