@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 13:34:24 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:11:49 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*check_env(char *str, char **env, int *i)
 	int		k;
 	int		l;
 
-//	printf("%s		ENTRA EN CHECK_ENV%s\n", BLUE, NORMAL);
 	*i += 1;
 	var = ft_calloc(ft_strlenmod(str, *i) + 2, sizeof(char));
 	j = 0;
@@ -28,8 +27,6 @@ char	*check_env(char *str, char **env, int *i)
 		&& str[*i] != '"' && str[*i] != '$')
 		var[j++] = str[(*i)++];
 	var[j++] = '=';
-	printf("		var: %s\n", var);
-	printf("		int variable: %zu valor: %s\n", ft_strlen(getenv(var)), getenv(var));
 	tmp = ft_calloc(1024, sizeof(char));
 	j = 0;
 	while (env[j])
@@ -44,7 +41,6 @@ char	*check_env(char *str, char **env, int *i)
 		}
 		j++;
 	}
-//	printf("		valor variable($): %s len: %zu\n", tmp, ft_strlen(tmp));
 	return (tmp);
 }
 
@@ -55,13 +51,11 @@ char	*detect_dollar_sign(char *str, char **env)
 	char	*new_str;
 	char	*tmp;
 
-//	printf("%s	ENTRA EN DETECT_DOllAR\n%s", YELLOW, NORMAL);
 	tmp = ft_strdup("");
 	i = 0;
 	while (str[i])
 	{
 		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
-//		printf("	str[%d]: %c\n", i, str[i]);
  		if (str[i] == '$' && str[i + 1] == '?')
 		{
 			new_str = ft_itoa(127);		// cambiar por señal de error
@@ -69,28 +63,31 @@ char	*detect_dollar_sign(char *str, char **env)
 			free(new_str);
 			i += 2;
 		}
+		else if (str[i] == '$' && !str[i + 1])
+		{
+			tmp = ft_strjoin(tmp, "$");
+			i++;
+		}
 		else if (str[i] == '$' && str[i + 1] != '\'' && str[i + 1] != '\"'
 			&& str[i + 1] != '\0')
 		{
 			new_str = check_env(str, env, &i);
 			if (new_str)
 			{
-//				printf("	LLEGA\n");
 				tmp = ft_strjoin(tmp, new_str);
 				free(new_str);
 			}
 		}
 		else
 		{
-			if (str[i] != '\"' && str[i] != '$')
+			if (str[i] != '$')
 			{
 				j = 0;
-				while (str[i] != '\0' && str[i] != '$' && str[i] != '\"')
+				while (str[i] != '\0' && str[i] != '$')
 				{
 					new_str[j++] = str[i++];
 				}
 				tmp = ft_strjoin(tmp, new_str);
-//				printf("	tmp: %s\n", tmp);
 				free(new_str);
 			}
 			else
@@ -110,12 +107,25 @@ char	**expansor(char **str, t_tools *tools)
 	{
 		if (dollar_sign(str[i]) != 0 && quotes_dollar(str[i]))
 		{
-//			printf("%sENTRA EN EXPANSOR%s\n", GREEN, NORMAL);
 			tmp = detect_dollar_sign(str[i], tools->env);
-//			printf("tmp: %s\n", tmp);
 			str[i] = ft_strdup(tmp);
 		}
+		str[i] = delete_quotes(str[i]);
 		i++;
+	}
+	return (str);
+}
+
+char	*expansor_str(char *str, t_tools *tools)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	if (str && dollar_sign(str) != 0 && quotes_dollar(str))
+	{
+		tmp = detect_dollar_sign(str, tools->env);
+		str = ft_strdup(tmp);
 	}
 	return (str);
 }
@@ -125,15 +135,14 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 	t_token	*tmp;
 	int		i;
 
-//	printf("\n%sENTRA EN CHECK_EXPANDER%s\n", RED, NORMAL);
 	i = 0;
 	cmd->str = expansor(cmd->str, tools);
-//	cmd->redirections->token = expansor(cmd->redirections->token, tools);
-	while (cmd->str[i])
-	{
-//		printf("cmd->str[%d]: %s\n", i, cmd->str[i]);
-		i++;
-	}
 	tmp = cmd->redirections;
+	while (tmp)
+	{
+		if (tmp->type != HERE_DOC)
+			tmp->token = expansor_str(cmd->redirections->token, tools);
+		tmp = tmp->next;
+	}
 	return (cmd);
 }

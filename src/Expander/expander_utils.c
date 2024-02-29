@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/27 12:39:07 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:13:25 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ int	dollar_sign(char *str)
 	}
 	return (0);
 }
+
+/* Comprueba la primera comilla que se mande y si hay dentro de ellas $ 
+	Valores de retorno:
+		0 : Hay dolar entre comillas pero es simple y no tiene que expandir
+		1 : Hay dolar entre comillas dobles o sin comillas
+		-1: Hay dolar entre comillas pero es siple y no tiene que expandir
+*/
 
 int	cmp_dollar(char *str, int *i, char flag)
 {
@@ -78,4 +85,31 @@ int	quotes_dollar(char *str)
 		i++;
 	}
 	return (1);
+}
+
+char	*delete_quotes(char *str)
+{
+	int	i;
+	int	single_q;
+	int	double_q;
+
+	i = 0;
+	single_q = 0;
+	double_q = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"' && !single_q)
+		{
+			double_q = change_flag(double_q);
+			ft_strlcpy(&str[i], &str[i + 1], ft_strlen(str) - i);
+		}
+		else if (str[i] == '\'' && !double_q)
+		{
+			single_q = change_flag(single_q);
+			ft_strlcpy(&str[i], &str[i + 1], ft_strlen(str) - i);
+		}
+		else
+			i++;
+	}
+	return (str);
 }
