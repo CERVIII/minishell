@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:22:40 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:57:40 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,11 @@ int	check_if_nb(char *str)
 	if (str[i] == '+' || str[i] == '-')
 		i++;
 	if (str[i] == '\0')
-	{
-		printf("minishell: export: \'%s\': not a valid identifier\n", str);//TODO: ft_error
 		return (0);
-	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] == '\0')
-	{
-		printf("minishell: export: \'%s\': not a valid identifier\n", str);//TODO: ft_error
 		return (0);
-	}
 	return (1);
 }
 
@@ -102,19 +96,13 @@ int	ft_check_vars(char *cmds)
 	else
 	{
 		if (!check_if_nb(cmds))
-			return (0);
+			return (ft_error_export(cmds));
 		else if (cmds[0] == '=')
-		{
-			printf("minishell: export: \'%s\': not a valid identifier\n", cmds);//TODO: ft_error
-			return(0);
-		}
+			return (ft_error_export(cmds));
 		while (cmds[i])
 		{
 			if (!ft_isalpha(cmds[i]) && cmds[i] != '_')
-			{
-				printf("minishell: export: \'%s\': not a valid identifier\n", cmds);//TODO: ft_error
-				return(0);
-			}
+				return (ft_error_export(cmds));
 			i++;
 		}
 	}

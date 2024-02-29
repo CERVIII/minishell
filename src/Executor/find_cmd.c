@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/22 11:41:35 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:24:07 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ char	*get_cmd_route(char *path, char	*cmd)
 		if (access(cmd_route, F_OK | X_OK) != -1)
 			break ;
 		else
-		{
-			free(aux_route);
-			free(cmd_route);
-		}
+			(free(aux_route), free(cmd_route));
 	}
 	free (aux);
 	return (cmd_route);
@@ -58,7 +55,5 @@ char	*get_path(char **env)
 		}
 		i++;
 	}
-	//TODO:FT_ERROR
-	perror("Error");
 	return (NULL);
 }

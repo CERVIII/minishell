@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 13:22:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:38:54 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_token			t_token;
 typedef struct s_tools			t_tools;
 
 	/*		Executor.c		*/
-int	before_execution(t_tools *tools);
+int				before_execution(t_tools *tools);
 int				handle_redirects(t_token *redirects);
 char			*get_cmd_route(char *path, char	*cmd);
 char			*get_path(char **env);
@@ -31,5 +31,7 @@ void			execute_one(t_tools *tools);
 int				ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser);
 int				pipe_wait(int *pid, int amount);
 t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map);
+void			handle_cmd(t_tools *tools);
 int				ft_error_cmd(t_tools *tools);
+int				ft_error_export(char *str);
 #endif

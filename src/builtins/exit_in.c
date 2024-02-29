@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:39:48 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:04:28 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_check_exit(char **str)
         printf("minishell: exit: %s: numeric argument required\n", str[1]);
         code = 255;
     }
+    printf("exit\n");
     exit(code);
 }
 

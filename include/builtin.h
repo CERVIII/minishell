@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:49:38 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 11:49:36 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:05:56 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void	ft_print_export(char **copy);
 char	**ft_update_export(char **exp, char **new_exp, char *var);
 char	*ft_trim_quotes(char *str);
 void	ft_update_both(char **env, char **exp, char *str);
+int		ft_check_if_exists(char **export, char *var);
 
 #endif
