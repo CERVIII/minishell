@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 15:28:18 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:45:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	pipe_wait(int *pid, int amount)
 		i++;
 	}
 	waitpid(pid[i], &status, 0);
+	if (WIFEXITED(status))
+		g_error = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
 

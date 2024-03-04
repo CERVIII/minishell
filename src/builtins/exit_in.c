@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 11:53:13 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:59:22 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_check_exit(char **str)
     {
         code = ft_atoi(str[1]);
         if (code < 0)
-        code = 255;
+        code = 256 + code;
     }     
     else
     {
