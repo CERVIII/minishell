@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 12:45:27 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:40:28 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	pipe_wait(int *pid, int amount)
 
 void	execute_one(t_tools *tools)
 {
-	if (tools->parser->redirections > 0)
+	if (tools->parser->num_redirections > 0)
 		if (handle_redirects(tools->parser->redirections))
 		{
 			g_error = 1;

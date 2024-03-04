@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:19:54 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:50:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft/libft.h"
 #include "../include/minishell.h"
 
 int	save_pwd(t_tools *tools)

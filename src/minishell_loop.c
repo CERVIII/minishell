@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 10:09:57 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:10:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	minishell_loop(t_tools *tools)
 	lexer(tools);
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
+	// print_simple_cmd(tools->parser);
 	before_execution(tools);
 	free_tools(tools);
 	dup2(tools->input, STDIN_FILENO);

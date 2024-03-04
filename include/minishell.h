@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 14:59:29 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:41:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/wait.h>
 # include "lexer.h"
 # include "quotes.h"
 # include "parser.h"

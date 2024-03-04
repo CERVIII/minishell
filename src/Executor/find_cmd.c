@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 14:01:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:40:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ char	*get_path(char **env)
 {
 	int		i;
 	char	*envp_path;
-	char	*cmd_route;
 
 	i = 0;
 	envp_path = NULL;
-	cmd_route = NULL;
 	while (env[i])
 	{
 		if (ft_strncmp("PATH", env[i], 4) == 0)

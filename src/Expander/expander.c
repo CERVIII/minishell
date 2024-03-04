@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 14:40:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:02:31 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ char	*check_env(char *str, char **env, int *i)
 	while (env[j])
 	{
 		if (!ft_strncmp(var, env[j], (ft_strlen(var))))
-			tmp = ft_strdup(ft_strchr(env[j], '=') + 1);
+		{
+			tmp = ft_strchr(env[j], '=') + 1;
+			break ;
+		}
 		j++;
 	}
 	free(var);
@@ -44,7 +47,7 @@ char	*detect_dollar_sign(char *str, char **env)
 	char	*new_str;
 	char	*tmp;
 
-	tmp = ft_strdup("");
+	tmp = "";
 	i = 0;
 	while (str[i])
 	{
@@ -58,7 +61,7 @@ char	*detect_dollar_sign(char *str, char **env)
 		}
 		else if (str[i] == '$' && (!str[i + 1] || str[i + 1] == ' ' || str[i + 1] == '\"'))
 		{
-			tmp = ft_strjoin(tmp, "$");
+			tmp = ft_strdup("$");
 			i++;
 		}
 		else if (str[i] == '$' && str[i + 1] != '\'' && str[i + 1] != '\"'
@@ -66,10 +69,7 @@ char	*detect_dollar_sign(char *str, char **env)
 		{
 			new_str = check_env(str, env, &i);
 			if (new_str)
-			{
 				tmp = ft_strjoin(tmp, new_str);
-				free(new_str);
-			}
 		}
 		else
 		{
@@ -77,9 +77,7 @@ char	*detect_dollar_sign(char *str, char **env)
 			{
 				j = 0;
 				while (str[i] != '\0' && str[i] != '$')
-				{
 					new_str[j++] = str[i++];
-				}
 				tmp = ft_strjoin(tmp, new_str);
 				free(new_str);
 			}
@@ -101,7 +99,8 @@ char	**expansor(char **str, t_tools *tools)
 		if (dollar_sign(str[i]) != 0 && quotes_dollar(str[i]))
 		{
 			tmp = detect_dollar_sign(str[i], tools->env);
-			str[i] = ft_strdup(tmp);
+			free(str[i]);
+			str[i] = tmp;
 		}
 		str[i] = delete_quotes(str[i]);
 		i++;
@@ -118,7 +117,8 @@ char	*expansor_str(char *str, t_tools *tools)
 	if (str && dollar_sign(str) != 0 && quotes_dollar(str))
 	{
 		tmp = detect_dollar_sign(str, tools->env);
-		str = ft_strdup(tmp);
+		free(str);
+		str = tmp;
 	}
 	str = delete_quotes(str);
 	return (str);
@@ -150,13 +150,11 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 char    **empty_str(char **str)
 {
     int     i;
-    char    **tmp;
     i = 0;
-    if (ft_strlen(str[0]) < 1)
+    if (str[0] && ft_strlen(str[0]) < 1)
     {
         while (str[i])
             i++;
-        tmp = (char **)ft_calloc(i - 1, sizeof(char *));
         i = 0;
         while (str[i])
         {
