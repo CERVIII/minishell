@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 14:09:25 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:06:47 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,39 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 	int		i;
 
 	i = 0;
-	cmd->str = expansor(cmd->str, tools);
-	tmp = cmd->redirections;
-	while (cmd->redirections)
+	while (cmd)
 	{
-		if (cmd->redirections->type != HERE_DOC)
-			cmd->redirections->token
-				= expansor_str(cmd->redirections->token, tools);
-		cmd->redirections = cmd->redirections->next;
+		cmd->str = expansor(cmd->str, tools);
+		tmp = cmd->redirections;
+		while (cmd->redirections)
+		{
+			if (cmd->redirections->type != HERE_DOC)
+				cmd->redirections->token
+					= expansor_str(cmd->redirections->token, tools);
+			cmd->redirections = cmd->redirections->next;
+		}
+		cmd->redirections = tmp;
+		cmd->str = empty_str(cmd->str);
+		cmd = cmd->next;
 	}
-	cmd->redirections = tmp;
-	cmd->str = empty_str(cmd->str);
 	return (cmd);
+}
+char    **empty_str(char **str)
+{
+    int     i;
+    char    **tmp;
+    i = 0;
+    if (ft_strlen(str[0]) < 1)
+    {
+        while (str[i])
+            i++;
+        tmp = (char **)ft_calloc(i - 1, sizeof(char *));
+        i = 0;
+        while (str[i])
+        {
+            str[i] = str[i + 1];
+            i++;
+        }
+    }
+    return (str);
 }

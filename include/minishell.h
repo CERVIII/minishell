@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/29 11:25:06 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:59:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdbool.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "lexer.h"

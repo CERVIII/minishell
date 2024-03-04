@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:23:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 12:28:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:05:04 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ int				dollar_sign(char *str);
 int				cmp_dollar(char *str, int *i, char flag);
 int				quotes_dollar(char *str);
 char			*delete_quotes(char *str);
+char			**empty_str(char **str);
+
 
 #endif
