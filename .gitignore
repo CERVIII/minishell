@@ -13,3 +13,4 @@ a.out*
 a.out
 .nfs*
 *.gch
+minishell_tester
