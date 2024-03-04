@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:48 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 11:47:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:54:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,5 @@ int	ft_cd(t_tools *tools, t_simple_cmds *simple_cmds)
 		update_pwd(tools);
 		update_env(tools);
 	}
-	else
-		ft_putendl_fd("Error: Too many arguments", STDERR_FILENO);
 	return (EXIT_SUCCESS);
 }

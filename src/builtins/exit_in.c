@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 12:04:28 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:53:13 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ void	ft_check_exit(char **str)
     }     
     else
     {
-        printf("minishell: exit: %s: numeric argument required\n", str[1]);
+        ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+        ft_putstr_fd( str[1], STDERR_FILENO);
+        ft_putendl_fd(": numeric argument required", STDERR_FILENO);
         code = 255;
+        g_error = 1;
     }
     printf("exit\n");
     exit(code);
@@ -74,7 +77,8 @@ int ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
     (void) tools;
 	if (simple_cmds->str[1] && simple_cmds->str[2] && !ft_all_char(simple_cmds->str))
     {
-        printf("exit: too many arguments\n");
+        ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
+        g_error = 1;
         return (EXIT_FAILURE);
     }
     ft_free_tools(tools);
