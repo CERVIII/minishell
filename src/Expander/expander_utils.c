@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/29 14:13:25 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:12:03 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ int	dollar_sign(char *str)
 	}
 	return (0);
 }
-
-/* Comprueba la primera comilla que se mande y si hay dentro de ellas $ 
-	Valores de retorno:
-		0 : Hay dolar entre comillas pero es simple y no tiene que expandir
-		1 : Hay dolar entre comillas dobles o sin comillas
-		-1: Hay dolar entre comillas pero es siple y no tiene que expandir
-*/
 
 int	cmp_dollar(char *str, int *i, char flag)
 {
