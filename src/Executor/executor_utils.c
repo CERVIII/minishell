@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 12:33:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:43:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-void handle_cmd(t_tools *tools)
+void	handle_cmd(t_tools *tools)
 {
 	int exit_code;
 	exit_code = 0;
@@ -63,6 +63,8 @@ int	pipe_wait(int *pid, int amount)
 		i++;
 	}
 	waitpid(pid[i], &status, 0);
+	if (WIFEXITED(status))
+		g_error = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
 

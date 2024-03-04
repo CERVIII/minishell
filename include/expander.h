@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:23:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/29 12:37:26 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:28:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char			*check_env(char *str, char **env, int *i);
 char			*detect_dollar_sign(char *str, char **env);
 char			**expansor(char **str, t_tools *tools);
 t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd);
+char			**empty_str(char **str);
 
 /* EXPANDER_UTILS.c */
 int				ft_strlenmod(char *str, int start);

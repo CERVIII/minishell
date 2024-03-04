@@ -6,14 +6,14 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 10:01:42 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:42:53 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in)
-{	
+void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
+{
 	if (cmd->prev)
 		dup2(fd_in, STDIN_FILENO);
 	close(pipe_fd[0]);
@@ -22,7 +22,7 @@ void	handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in)
 	close(pipe_fd[1]);
 	if (cmd->prev)
 		close(fd_in);
-	execute_one(tools);
+	execute_one(tool);
 }
 
 int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
@@ -39,13 +39,13 @@ int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
 	return (fd_in);
 }
 
-int execute(t_tools *tools)
+int	execute(t_tools *tools)
 {
-	int pipe_fd[2];
-	int fd_in;
+	int	pipe_fd[2];
+	int	fd_in;
 
 	fd_in = STDIN_FILENO;
-	while(tools->parser)
+	while (tools->parser)
 	{
 		if (tools->parser->next)
 			pipe(pipe_fd);
@@ -100,14 +100,14 @@ void	execute_single(t_tools *tools)
 		handle_cmd(tools);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		g_error = WEXITSTATUS(status);		
+		g_error = WEXITSTATUS(status);
 }
 
 int	before_execution(t_tools *tools)
 {
 	check_expander(tools, tools->parser);
 	if (tools->pipes == 0)
-		execute_single(tools);			 
+		execute_single(tools);
 	else
 	{
 		tools->pid = ft_calloc(sizeof(int), tools->pipes + 2);

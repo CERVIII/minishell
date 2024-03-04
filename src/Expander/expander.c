@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 11:10:49 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:09:25 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*check_env(char *str, char **env, int *i)
 		&& str[*i] != '"' && str[*i] != '$')
 		var[j++] = str[(*i)++];
 	var[j++] = '=';
-	tmp = ft_calloc(1024, sizeof(char));
+	tmp = NULL;
 	j = 0;
 	while (env[j])
 	{
@@ -56,7 +56,7 @@ char	*detect_dollar_sign(char *str, char **env)
 			free(new_str);
 			i += 2;
 		}
-		else if (str[i] == '$' && !str[i + 1])
+		else if (str[i] == '$' && (!str[i + 1] || str[i + 1] == ' ' || str[i + 1] == '\"'))
 		{
 			tmp = ft_strjoin(tmp, "$");
 			i++;
@@ -140,5 +140,6 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 		cmd->redirections = cmd->redirections->next;
 	}
 	cmd->redirections = tmp;
+	cmd->str = empty_str(cmd->str);
 	return (cmd);
 }
