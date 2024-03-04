@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 11:02:51 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:10:49 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ char	*detect_dollar_sign(char *str, char **env)
 	while (str[i])
 	{
 		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
- 		if (str[i] == '$' && str[i + 1] == '?')
+		if (str[i] == '$' && str[i + 1] == '?')
 		{
-			new_str = ft_itoa(g_error);		// cambiar por señal de error
+			new_str = ft_itoa(g_error);
 			tmp = ft_strjoin(tmp, new_str);
 			free(new_str);
 			i += 2;
