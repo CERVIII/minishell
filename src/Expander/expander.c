@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/29 14:53:42 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 11:10:49 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*check_env(char *str, char **env, int *i)
 	char	*var;
 	char	*tmp;
 	int		j;
-	int		k;
-	int		l;
 
 	*i += 1;
 	var = ft_calloc(ft_strlenmod(str, *i) + 2, sizeof(char));
@@ -32,15 +30,10 @@ char	*check_env(char *str, char **env, int *i)
 	while (env[j])
 	{
 		if (!ft_strncmp(var, env[j], (ft_strlen(var))))
-		{
-			l = ft_strlen(var);
-			k = 0;
-			while (env[j][l])
-				tmp[k++] = env[j][l++];
-			tmp[k] = '\0';
-		}
+			tmp = ft_strdup(ft_strchr(env[j], '=') + 1);
 		j++;
 	}
+	free(var);
 	return (tmp);
 }
 
@@ -56,9 +49,9 @@ char	*detect_dollar_sign(char *str, char **env)
 	while (str[i])
 	{
 		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
- 		if (str[i] == '$' && str[i + 1] == '?')
+		if (str[i] == '$' && str[i + 1] == '?')
 		{
-			new_str = ft_itoa(g_error);		// cambiar por señal de error
+			new_str = ft_itoa(g_error);
 			tmp = ft_strjoin(tmp, new_str);
 			free(new_str);
 			i += 2;
@@ -127,6 +120,7 @@ char	*expansor_str(char *str, t_tools *tools)
 		tmp = detect_dollar_sign(str, tools->env);
 		str = ft_strdup(tmp);
 	}
+	str = delete_quotes(str);
 	return (str);
 }
 
@@ -138,11 +132,13 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 	i = 0;
 	cmd->str = expansor(cmd->str, tools);
 	tmp = cmd->redirections;
-	while (tmp)
+	while (cmd->redirections)
 	{
-		if (tmp->type != HERE_DOC)
-			tmp->token = expansor_str(cmd->redirections->token, tools);
-		tmp = tmp->next;
+		if (cmd->redirections->type != HERE_DOC)
+			cmd->redirections->token
+				= expansor_str(cmd->redirections->token, tools);
+		cmd->redirections = cmd->redirections->next;
 	}
+	cmd->redirections = tmp;
 	return (cmd);
 }
