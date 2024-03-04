@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 12:33:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:45:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser)
 	return (EXIT_SUCCESS);
 }
 
-t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map)
+/* t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map)
 {
 	if (!map)
 		return (NULL);
 	while (map->prev != NULL)
 		map = map->prev;
 	return (map);
-}
+} */
 
 int	pipe_wait(int *pid, int amount)
 {
@@ -63,6 +63,8 @@ int	pipe_wait(int *pid, int amount)
 		i++;
 	}
 	waitpid(pid[i], &status, 0);
+	if (WIFEXITED(status))
+		g_error = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
 
@@ -80,4 +82,17 @@ void	execute_one(t_tools *tools)
 	else if (tools->parser->str[0][0])
 		exec_cmd(tools);
 	exit(0);
+}
+int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
+{
+	int	fd_in;
+
+	if (tools->heredoc)
+	{
+		close(end[0]);
+		fd_in = open(cmd->hd_file_name, O_RDONLY);
+	}
+	else
+		fd_in = end[0];
+	return (fd_in);
 }

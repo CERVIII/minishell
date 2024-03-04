@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:21:48 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:17:18 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	printf_args(int i, char **str)
 {
-    while (str[i])
-    {
-        printf("%s", str[i]);
-        if (str[i + 1])
-            printf(" ");
-        i++;
-    }
+     while (str[i])
+	{
+		ft_putstr_fd(str[i++], STDOUT_FILENO);
+		if (str[i])
+			ft_putchar_fd(' ', STDOUT_FILENO);
+	}
 }
 
 int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
@@ -39,10 +38,12 @@ int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
             j++;
         if (simple_cmds->str[i][j] == '\0')
             flag = true;
+        else
+            break ;
         i++;
     }
     printf_args(i, simple_cmds->str);
     if (flag == false)
-        printf("\n");
+        ft_putchar_fd('\n', STDOUT_FILENO);
     return (EXIT_SUCCESS);
-}
+} 
