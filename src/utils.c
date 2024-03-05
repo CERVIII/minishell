@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:19:54 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:29:33 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	save_pwd(t_tools *tools)
 	{
 		if (ft_strncmp(tools->env[i], "OLDPWD=", 7) == 0)
 			tools->old_pwd = ft_substr(tools->env[i], 7,
-				ft_strlen(tools->env[i]) - 7);
+					ft_strlen(tools->env[i]) - 7);
 		i++;
 	}
 	return (1);
@@ -30,7 +30,7 @@ int	save_pwd(t_tools *tools)
 
 char	**dup_matrix(char **str)
 {
-	char 	**dup;
+	char	**dup;
 	size_t	i;
 
 	i = 0;
@@ -45,7 +45,6 @@ char	**dup_matrix(char **str)
 	}
 	return (dup);
 }
-
 
 t_simple_cmds	*ft_mini_lstnew(char **content)
 {

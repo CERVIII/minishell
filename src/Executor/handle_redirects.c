@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 14:45:34 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:53:07 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int check_fd_out(t_token *redirection)
+int	check_fd_out(t_token *redirection)
 {
-	int fd;
+	int	fd;
 
 	if (redirection->type == RREDIR)
 		fd = open(redirection->token, O_CREAT | O_RDWR | O_APPEND, 0644);
@@ -25,8 +25,8 @@ int check_fd_out(t_token *redirection)
 
 int	ft_infile(char *str)
 {
-	int fd;
-	
+	int	fd;
+
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
@@ -45,7 +45,7 @@ int	ft_infile(char *str)
 
 int	ft_outfile(t_token *redirection)
 {
-	int fd;
+	int	fd;
 
 	fd = check_fd_out(redirection);
 	if (fd < 0)

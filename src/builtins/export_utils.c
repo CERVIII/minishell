@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/28 11:49:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:35:45 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_join_export(char **exp)
 	}
 }
 
-void	ft_update_var(char **env ,char *var)
+void	ft_update_var(char **env, char *var)
 {
 	int		i;
 	char	*aux;
@@ -47,7 +47,7 @@ void	ft_update_var(char **env ,char *var)
 				free(env[i]);
 				env[i] = ft_strdup(var);
 			}
-			if(ft_strchr(aux,  '='))
+			if (ft_strchr(aux, '='))
 				free(aux);
 			i++;
 		}

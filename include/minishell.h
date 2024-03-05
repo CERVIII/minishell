@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 14:59:29 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:31:22 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@
 # define PROMPT_MSG "\033[1;36m$minishell/ \033[0m"
 # define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
-
 int	g_error;
 
 typedef struct s_string_info
@@ -100,7 +99,7 @@ typedef struct s_tools
 	char					*pwd;
 	char					**env;
 	char					*old_pwd;
-	char 					**exp;
+	char					**exp;
 	int						input;
 	int						output;
 	bool					heredoc;
@@ -140,6 +139,5 @@ int				save_pwd(t_tools *tools);
 		/*	Signals	*/
 void			init_signals(void);
 void			rl_replace_line(const char *text, int clear_undo);
-
 
 #endif

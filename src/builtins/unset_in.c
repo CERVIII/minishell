@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   unset_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 11:54:18 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:33:04 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int ft_check_unset_exists(char **exp, char *var)
+int	ft_check_unset_exists(char **exp, char *var)
 {
 	int		i;
 	char	*var_name;
-	
+
 	i = 0;
 	while (exp[i])
 	{
 		if (ft_strchr(exp[i], '='))
 		{
 			var_name = ft_substr(exp[i], 0, ft_strlen(exp[i])
-				- ft_strlen(ft_strchr(exp[i], '=')));
+					- ft_strlen(ft_strchr(exp[i], '=')));
 			if (!ft_strncmp(var_name, var, ft_strlen(var_name)))
-				return (free(var_name),1);			
+				return (free(var_name), 1);
 		}
 		else
 		{
@@ -37,7 +37,7 @@ int ft_check_unset_exists(char **exp, char *var)
 	return (0);
 }
 
-char **ft_update(char **env, char **new_env, char *var)
+char	**ft_update(char **env, char **new_env, char *var)
 {
 	int		i;
 	int		j;
@@ -62,7 +62,7 @@ char **ft_update(char **env, char **new_env, char *var)
 	return (new_env);
 }
 
-char    **ft_del(char **str, char *var)
+char	**ft_del(char **str, char *var)
 {
 	char	**cpy;
 	int		i;
@@ -74,29 +74,23 @@ char    **ft_del(char **str, char *var)
 	if (!cpy)
 		return (NULL);
 	cpy = ft_update(str, cpy, var);
-/* 	i = 0;
-	while (cpy[i])
-	{
-		printf("-> %s\n", cpy[i]);
-		i++;
-	} */
 	free(str);
 	return (cpy);
 }
 
 int	ft_unset(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-    int     i;
-    
-    i = 1;
+	int	i;
+
+	i = 1;
 	while (simple_cmds->str[i])
 	{
-		if(ft_check_unset_exists(tools->exp, simple_cmds->str[i]))
+		if (ft_check_unset_exists(tools->exp, simple_cmds->str[i]))
 		{
-    		tools->exp = ft_del(tools->exp, simple_cmds->str[i]);
-    		tools->env = ft_del(tools->env, simple_cmds->str[i]);
+			tools->exp = ft_del(tools->exp, simple_cmds->str[i]);
+			tools->env = ft_del(tools->env, simple_cmds->str[i]);
 		}
 		i++;
 	}
-	return(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
