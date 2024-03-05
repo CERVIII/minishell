@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/05 10:20:10 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:11:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*check_env(char *str, char **env, int *i)
 	char	*var;
 	char	*tmp;
 	int		j;
+	int		k;
 
 	*i += 1;
 	var = ft_calloc(ft_strlenmod(str, *i) + 2, sizeof(char));
@@ -26,31 +27,36 @@ char	*check_env(char *str, char **env, int *i)
 		var[j++] = str[(*i)++];
 	var[j++] = '=';
 	tmp = NULL;
-	j = 0;
-	while (env[j])
+	k = 0;
+	while (env[k])
 	{
-		if (!ft_strncmp(var, env[j], (ft_strlen(var))))
+		if (!ft_strncmp(var, env[k], (ft_strlen(var))))
 		{
-			tmp = ft_strchr(env[j], '=') + 1;
+			tmp = ft_substr(env[k], j, ft_strlenmod(env[k], j));
 			break ;
 		}
-		j++;
+		k++;
 	}
 	free(var);
 	return (tmp);
 }
 
-char	*detect_dollar_sign(char *str, char **env)
+/* char	*detect_dollar_sign(char *str, char **env)
 {
 	int		i;
 	int		j;
 	char	*new_str;
 	char	*tmp;
 
-	tmp = "";
+	tmp = NULL;
 	i = 0;
 	while (str[i])
 	{
+		if (tmp)
+		{
+			printf("ENTTRAAA\n");
+			free(tmp);
+		}
 		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 		if (str[i] == '$' && str[i + 1] == '?')
 		{
@@ -59,7 +65,8 @@ char	*detect_dollar_sign(char *str, char **env)
 			free(new_str);
 			i += 2;
 		}
-		else if (str[i] == '$' && (!str[i + 1] || str[i + 1] == ' ' || str[i + 1] == '\"'))
+		else if (str[i] == '$'
+			&& (!str[i + 1] || str[i + 1] == ' ' || str[i + 1] == '\"'))
 		{
 			tmp = ft_strdup("$");
 			i++;
@@ -68,8 +75,7 @@ char	*detect_dollar_sign(char *str, char **env)
 			&& str[i + 1] != '\0')
 		{
 			new_str = check_env(str, env, &i);
-			if (new_str)
-				tmp = ft_strjoin(tmp, new_str);
+			tmp = ft_strjoin(tmp, new_str);
 		}
 		else
 		{
@@ -84,6 +90,28 @@ char	*detect_dollar_sign(char *str, char **env)
 			else
 				i++;
 		}
+	}
+	return (tmp);
+} */
+
+char	*detect_dollar_sign(char *str, char **env)
+{
+	int		i;
+	char	*tmp;
+	char	*new_str;
+
+	tmp = (char *)ft_calloc(1, sizeof(char));
+	i = 0;
+	while (str[i])
+	{
+		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
+		if (str[i] == '$' )
+			new_str = check_dolar(str, env, &i);
+		else
+			new_str = ft_memcpy(new_str, &str[i++], 1);
+		free(tmp);
+		tmp = ft_strjoin(tmp, new_str);
+		free(new_str);
 	}
 	return (tmp);
 }

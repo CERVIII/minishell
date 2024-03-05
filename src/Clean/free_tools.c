@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 18:37:35 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:21:51 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ int	ft_err(char *msg, int nb, t_tools *tools)
 
 void	free_tools(t_tools *tools)
 {
-	//t_token	*tmp;
-
-	//tmp = tools->lexer;
 	if (tools->arg)
 		free(tools->arg);
 	if (tools->lexer)
