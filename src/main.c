@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 11:04:41 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:10:39 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_tools	tools;
 
-	//atexit(leaks);
+	atexit(leaks);
 	g_error = 0;
 	if (argc != 1 || argv[1])
 	{

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:10:24 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 14:12:53 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:12:44 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**empty_str(char **str)
 	char	**tmp;
 
 	i = 0;
-	if (ft_strlen(str[0]) < 1)
+	if (str[0] && ft_strlen(str[0]) < 1)
 	{
 		while (str[i])
 			i++;
