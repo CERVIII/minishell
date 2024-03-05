@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 15:06:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:18:55 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,37 +55,20 @@ int	exec_cmd(t_tools *tools)
 	char	*path;
 	char	*route;
 	char	**cmd;
-	DIR 	*dir;
+
 	if (!(tools->parser->str[1]))
 		cmd = ft_split(tools->parser->str[0], ' ');
 	else
 		cmd = tools->parser->str;
-	//TODO: HACER BIEN
-	if (ft_strncmp(cmd[0], "./", 2) == 0 || cmd[0][0] == '/')
+	g_error = check_cmd(cmd);
+	if (g_error == 0)
 	{
-		dir = opendir(cmd[0]);
-		if (dir != NULL) {
-			closedir(dir);
-			ft_putendl_fd(" is a directory", STDERR_FILENO);
-			g_error = 126;
-			return (126);
-		}
-		else if ((access(cmd[0], F_OK) == 0) && (access(cmd[0], X_OK) == -1))
-		{
-			perror("Error");
-			g_error = 126;
-			return (126);
-		}
-		else
-		{
-			perror("Error");
-			g_error = 127;
-			return (127);
-		}
+		path = get_path(tools->env);
+		route = get_cmd_route(path, cmd[0]);
+		execve(route, cmd, tools->env);
 	}
-	path = get_path(tools->env);
-	route = get_cmd_route(path, cmd[0]);
-	execve(route, cmd, tools->env);
+	else
+		return (g_error);
 	return (ft_error_cmd(tools));
 }
 
@@ -94,7 +77,7 @@ void	execute_single(t_tools *tools)
 	int	pid;
 	int	status;
 
-	if (tools->parser->redirections > 0)
+	if (tools->parser->num_redirections > 0)
 		if (handle_redirects(tools->parser->redirections))
 			return ;
 	if (tools->parser->builtin)

@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/05 10:09:19 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:18:50 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	pipe_wait(int *pid, int amount)
 
 void	execute_one(t_tools *tools)
 {
-	if (tools->parser->redirections > 0)
+	if (tools->parser->num_redirections > 0)
 		if (handle_redirects(tools->parser->redirections))
 	{
 		g_error = 1;

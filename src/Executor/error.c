@@ -6,11 +6,40 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:04:32 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 12:46:18 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:16:52 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int check_cmd(char **cmd)
+{
+	DIR 	*dir;
+
+	if (ft_strncmp(cmd[0], "./", 2) == 0 || cmd[0][0] == '/')
+	{
+		dir = opendir(cmd[0]);
+		if (dir != NULL) {
+			closedir(dir);
+			ft_putendl_fd(" is a directory", STDERR_FILENO);
+			g_error = 126;
+			return (126);
+		}
+		else if ((access(cmd[0], F_OK) == 0) && (access(cmd[0], X_OK) == -1))
+		{
+			perror(cmd[0]);
+			g_error = 126;
+			return (126);
+		}
+		else if (access(cmd[0], F_OK) == -1)
+		{
+			perror(cmd[0]);
+			g_error = 127;
+			return (127);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	ft_error_cmd(t_tools *tools)
 {

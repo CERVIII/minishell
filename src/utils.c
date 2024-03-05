@@ -6,10 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 15:29:33 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:18:44 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft/libft.h"
 #include "../include/minishell.h"
 
 int	save_pwd(t_tools *tools)
