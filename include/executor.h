@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/05 10:18:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:14:46 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void			handle_cmd(t_tools *tools);
 int				ft_error_cmd(t_tools *tools);
 int				ft_error_export(char *str);
 int				check_cmd(char **cmd);
-int				check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd);
+int				check_fd_heredoc(t_tools *tools, int end[2],
+					t_simple_cmds *cmd);
 
 #endif

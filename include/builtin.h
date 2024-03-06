@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:49:38 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 15:13:55 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:19:13 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_echo(t_tools *tools, t_simple_cmds *simple_cmds);
 char	*ft_joinvar(char *str);
 int		check_if_nb(char *str);
 void	ft_join_export(char **exp);
-void	ft_update_var(char **exp, char *var);
+void	ft_update_var(char **exp, char *var, int i);
 int		ft_is_sorted(char **str);
 char	**ft_sort_export(char **str);
 void	ft_print_export(char **copy);

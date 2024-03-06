@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/05 13:21:51 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:21:51 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,3 @@ void	free_parser(t_simple_cmds *parser)
 	}
 	parser = NULL;
 }
-

@@ -6,10 +6,9 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/05 10:18:50 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:31:52 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/minishell.h"
 
@@ -44,15 +43,6 @@ int	ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser)
 	return (EXIT_SUCCESS);
 }
 
-/* t_simple_cmds	*ft_simple_cmdsfirst(t_simple_cmds *map)
-{
-	if (!map)
-		return (NULL);
-	while (map->prev != NULL)
-		map = map->prev;
-	return (map);
-} */
-
 int	pipe_wait(int *pid, int amount)
 {
 	int	i;
@@ -73,10 +63,12 @@ int	pipe_wait(int *pid, int amount)
 void	execute_one(t_tools *tools)
 {
 	if (tools->parser->num_redirections > 0)
-		if (handle_redirects(tools->parser->redirections))
 	{
-		g_error = 1;
-		exit(1);
+		if (handle_redirects(tools->parser->redirections))
+		{
+			g_error = 1;
+			exit(1);
+		}
 	}
 	if (tools->parser->builtin)
 		tools->parser->builtin(tools, tools->parser);
@@ -84,6 +76,7 @@ void	execute_one(t_tools *tools)
 		exec_cmd(tools);
 	exit(0);
 }
+
 int	check_fd_heredoc(t_tools *tools, int end[2], t_simple_cmds *cmd)
 {
 	int	fd_in;

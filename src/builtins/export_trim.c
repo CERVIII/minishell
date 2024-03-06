@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_trim.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:20:34 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/15 14:30:05 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:21:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ char	*ft_joinvar(char *str)
 	char	*join_2;
 	char	*aux;
 	char	*aux2;
-	
-	var_name = ft_substr(str, 0, ft_strlen(str) - ft_strlen(ft_strchr(str, '=')));
+
+	var_name = ft_substr(str, 0,
+			ft_strlen(str) - ft_strlen(ft_strchr(str, '=')));
 	aux = ft_strjoin(var_name, "=\"");
 	aux2 = ft_trim_quotes(ft_strchr(str, '=') + 1);
 	join = ft_strjoin(aux, aux2);
@@ -40,10 +41,4 @@ char	*ft_trim_quotes(char *str)
 
 	res = ft_strtrim(str, "\"");
 	return (res);
-}
-
-void	ft_update_both(char **env, char **exp, char *str)
-{
-	ft_update_var(env, str);
-	ft_update_var(exp, str);
 }

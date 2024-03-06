@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/05 11:03:36 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:29:36 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
 	execute_one(tool);
 }
 
-int execute(t_tools *tools)
+int	execute(t_tools *tools)
 {
 	int	pipe_fd[2];
 	int	fd_in;
@@ -48,7 +48,6 @@ int execute(t_tools *tools)
 	pipe_wait(tools->pid, tools->pipes);
 	return (EXIT_SUCCESS);
 }
-
 
 int	exec_cmd(t_tools *tools)
 {
@@ -112,4 +111,3 @@ int	before_execution(t_tools *tools)
 	}
 	return (EXIT_SUCCESS);
 }
-

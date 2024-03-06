@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:44:41 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/05 10:11:34 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:23:39 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ t_simple_cmds	*create_node_cmd(t_parser_tools *parser_tools)
 	redirection_add(parser_tools);
 	num_arg = count_arg(parser_tools->lexer);
 	str = (char **)ft_calloc(sizeof(char *), (num_arg + 1));
-	if (!str)
-		return (new_node_cmd(NULL, parser_tools)); //FALTA FUNCION DE ERROR
 	i = 0;
 	tmp = parser_tools->lexer;
 	while (num_arg > 0)

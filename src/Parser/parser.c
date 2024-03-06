@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/29 14:54:02 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:25:56 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	parser(t_tools *tools)
 		parser_tools = init_parser_tools(tools->lexer, tools);
 		node = create_node_cmd(&parser_tools);
 		if (!node)
-			return ;	//falta funcion error
+			return ;
 		if (!tools->parser)
 			tools->parser = node;
 		else

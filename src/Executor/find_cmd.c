@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 18:40:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:29:49 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*get_cmd_route(char *path, char	*cmd)
 	free (aux);
 	return (cmd_route);
 }
+
 char	*get_path(char **env)
 {
 	int		i;
