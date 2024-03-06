@@ -6,32 +6,11 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:10:24 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/05 15:02:22 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:59:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/* char	**empty_str(char **str)
-{
-	int		i;
-	char	**tmp;
-
-	i = 0;
-	if (str[0] && ft_strlen(str[0]) < 1)
-	{
-		while (str[i])
-			i++;
-		tmp = (char **)ft_calloc(i - 1, sizeof(char *));
-		i = 0;
-		while (str[i])
-		{
-			str[i] = str[i + 1];
-			i++;
-		}
-	}
-	return (str);
-} */
 
 char	**empty_str(char **str)
 {
@@ -56,7 +35,7 @@ char	*check_dolar(char *str, char **env, int *i)
 {
 	char	*new_str;
 
-	new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
+	new_str = NULL;
 	if (str[*i] == '$' && str[*i + 1] == '?')
 	{
 		new_str = ft_itoa(g_error);

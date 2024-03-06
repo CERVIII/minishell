@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/05 15:11:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:01:38 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,59 +41,6 @@ char	*check_env(char *str, char **env, int *i)
 	return (tmp);
 }
 
-/* char	*detect_dollar_sign(char *str, char **env)
-{
-	int		i;
-	int		j;
-	char	*new_str;
-	char	*tmp;
-
-	tmp = NULL;
-	i = 0;
-	while (str[i])
-	{
-		if (tmp)
-		{
-			printf("ENTTRAAA\n");
-			free(tmp);
-		}
-		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
-		if (str[i] == '$' && str[i + 1] == '?')
-		{
-			new_str = ft_itoa(g_error);
-			tmp = ft_strjoin(tmp, new_str);
-			free(new_str);
-			i += 2;
-		}
-		else if (str[i] == '$'
-			&& (!str[i + 1] || str[i + 1] == ' ' || str[i + 1] == '\"'))
-		{
-			tmp = ft_strdup("$");
-			i++;
-		}
-		else if (str[i] == '$' && str[i + 1] != '\'' && str[i + 1] != '\"'
-			&& str[i + 1] != '\0')
-		{
-			new_str = check_env(str, env, &i);
-			tmp = ft_strjoin(tmp, new_str);
-		}
-		else
-		{
-			if (str[i] != '$')
-			{
-				j = 0;
-				while (str[i] != '\0' && str[i] != '$')
-					new_str[j++] = str[i++];
-				tmp = ft_strjoin(tmp, new_str);
-				free(new_str);
-			}
-			else
-				i++;
-		}
-	}
-	return (tmp);
-} */
-
 char	*detect_dollar_sign(char *str, char **env)
 {
 	int		i;
@@ -104,11 +51,14 @@ char	*detect_dollar_sign(char *str, char **env)
 	i = 0;
 	while (str[i])
 	{
-		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
+		new_str = NULL;
 		if (str[i] == '$' )
 			new_str = check_dolar(str, env, &i);
 		else
-			new_str = ft_memcpy(new_str, &str[i++], 1);
+		{
+			new_str = ft_calloc(2, sizeof(char));
+			new_str[0] = str[i++];
+		}
 		free(tmp);
 		tmp = ft_strjoin(tmp, new_str);
 		free(new_str);
