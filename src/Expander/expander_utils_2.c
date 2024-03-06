@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:10:24 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 10:59:27 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 13:50:54 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ char	*check_dolar(char *str, char **env, int *i)
 		new_str = ft_itoa(g_error);
 		(*i) += 2;
 	}
-	else if (str[*i] == '$'
-		&& (!str[*i + 1] || str[*i + 1] == ' ' || str[*i + 1] == '\"'))
-	{
-		new_str = ft_strdup("$");
-		(*i)++;
-	}
-	else if (str[*i] == '$' && str[*i + 1] != '\'' && str[*i + 1] != '\"'
-		&& str[*i + 1] != '\0')
+	else if (str[*i] == '$' && str[*i + 1] != '\'' && str[*i + 1] != '\0'
+		&& ft_isalpha(str[*i + 2]) && str[*i + 1] != ' ')
 	{
 		new_str = check_env(str, env, i);
 		if (!new_str)
 			new_str = ft_strdup("");
+	}
+	else if (str[*i] == '$'
+		/* && (!str[*i + 1] || str[*i + 1] == ' ' || str[*i + 1] == '\"') */)
+	{
+		new_str = ft_strdup("$");
+		(*i)++;
 	}
 	return (new_str);
 }
