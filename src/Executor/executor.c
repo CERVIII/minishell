@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:29:36 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:04:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	execute(t_tools *tools)
 	{
 		if (tools->parser->next)
 			pipe(pipe_fd);
+		check_heredoc(tools, tools->parser);
 		ft_fork(tools, pipe_fd, fd_in, tools->parser);
 		close(pipe_fd[1]);
 		if (tools->parser->prev)
