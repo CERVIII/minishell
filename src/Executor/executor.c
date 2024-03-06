@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 14:59:20 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:03:36 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in)
-{	
+void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
+{
 	if (cmd->prev)
 		dup2(fd_in, STDIN_FILENO);
 	close(pipe_fd[0]);
@@ -22,16 +22,16 @@ void	handle_dup(t_simple_cmds *cmd, t_tools *tools, int pipe_fd[2], int fd_in)
 	close(pipe_fd[1]);
 	if (cmd->prev)
 		close(fd_in);
-	execute_one(tools);
+	execute_one(tool);
 }
 
 int execute(t_tools *tools)
 {
-	int pipe_fd[2];
-	int fd_in;
+	int	pipe_fd[2];
+	int	fd_in;
 
 	fd_in = STDIN_FILENO;
-	while(tools->parser)
+	while (tools->parser)
 	{
 		if (tools->parser->next)
 			pipe(pipe_fd);
@@ -55,37 +55,20 @@ int	exec_cmd(t_tools *tools)
 	char	*path;
 	char	*route;
 	char	**cmd;
-	DIR 	*dir;
+
 	if (!(tools->parser->str[1]))
 		cmd = ft_split(tools->parser->str[0], ' ');
 	else
 		cmd = tools->parser->str;
-	//TODO: HACER BIEN
-	if (ft_strncmp(cmd[0], "./", 2) == 0 || cmd[0][0] == '/')
+	g_error = check_cmd(cmd);
+	if (g_error == 0)
 	{
-		dir = opendir(cmd[0]);
-		if (dir != NULL) {
-			closedir(dir);
-			ft_putendl_fd(" is a directory", STDERR_FILENO);
-			g_error = 126;
-			return (126);
-		}
-		else if ((access(cmd[0], F_OK) == 0) && (access(cmd[0], X_OK) == -1))
-		{
-			perror("Error");
-			g_error = 126;
-			return (126);
-		}
-		else
-		{
-			perror("Error");
-			g_error = 127;
-			return (127);
-		}
+		path = get_path(tools->env);
+		route = get_cmd_route(path, cmd[0]);
+		execve(route, cmd, tools->env);
 	}
-	path = get_path(tools->env);
-	route = get_cmd_route(path, cmd[0]);
-	execve(route, cmd, tools->env);
+	else
+		return (g_error);
 	return (ft_error_cmd(tools));
 }
 
@@ -94,7 +77,7 @@ void	execute_single(t_tools *tools)
 	int	pid;
 	int	status;
 
-	if (tools->parser->redirections > 0)
+	if (tools->parser->num_redirections > 0)
 		if (handle_redirects(tools->parser->redirections))
 			return ;
 	if (tools->parser->builtin)
@@ -109,14 +92,14 @@ void	execute_single(t_tools *tools)
 		handle_cmd(tools);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		g_error = WEXITSTATUS(status);		
+		g_error = WEXITSTATUS(status);
 }
 
 int	before_execution(t_tools *tools)
 {
 	check_expander(tools, tools->parser);
 	if (tools->pipes == 0)
-		execute_single(tools);			 
+		execute_single(tools);
 	else
 	{
 		tools->pid = ft_calloc(sizeof(int), tools->pipes + 2);

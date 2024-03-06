@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   check_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:00:50 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 12:13:01 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:11:09 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	(*check_builtin(char *token))(t_tools *tools, t_simple_cmds *simple_cmds)
+int	(*check_built(char *token))(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	static void *builtins[7][2] = {
+	static void	*builtins[7][2] = {
 	{"echo", ft_echo},
 	{"cd", ft_cd},
 	{"pwd", ft_pwd},

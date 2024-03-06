@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 10:09:57 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:01:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ void	init_tools(t_tools *tools)
 
 void	minishell_loop(t_tools *tools)
 {
-	tools->arg = readline(PROMPT_MSG);
+	char	*tmp;
+
+	tmp = readline(PROMPT_MSG);
+	tools->arg = ft_strtrim(tmp, " \t\n\r");
 	if (!tools->arg)
 		exit(0);
 	if (!tools->arg[0])
 	{
+		free(tmp);
 		free(tools->arg);
 		minishell_loop(tools);
 	}

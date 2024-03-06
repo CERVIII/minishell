@@ -6,11 +6,29 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 12:38:41 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/26 17:09:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:56:06 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+char	*ft_cpys(char const *s1, char const *s2, char *str)
+{
+	while (*s1)
+	{
+		*str = *s1;
+		str++;
+		s1++;
+	}
+	while (*s2)
+	{
+		*str = *s2;
+		str++;
+		s2++;
+	}
+	*str = '\0';
+	return (str);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -32,18 +50,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	cstr = str;
-	while (*s1)
-	{
-		*str = *s1;
-		str++;
-		s1++;
-	}
-	while (*s2)
-	{
-		*str = *s2;
-		str++;
-		s2++;
-	}
-	*str = '\0';
+	str = ft_cpys(s1, s2, str);
 	return ((char *)cstr);
 }

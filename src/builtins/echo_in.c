@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:52 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/02/29 16:17:18 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:34:27 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	printf_args(int i, char **str)
 {
-     while (str[i])
+	while (str[i])
 	{
 		ft_putstr_fd(str[i++], STDOUT_FILENO);
 		if (str[i])
@@ -24,26 +24,27 @@ void	printf_args(int i, char **str)
 
 int	ft_echo(t_tools *tools, t_simple_cmds *simple_cmds)
 {
-	int     i;
-	int     j;
-    bool    flag;
-    i = 1;
-    
-    (void) tools;
-    flag = false;
-    while (simple_cmds->str[i] && simple_cmds->str[i][0] == '-' && simple_cmds->str[i][1] == 'n')
-    {
-        j = 1;
-        while (simple_cmds->str[i][j] == 'n')
-            j++;
-        if (simple_cmds->str[i][j] == '\0')
-            flag = true;
-        else
-            break ;
-        i++;
-    }
-    printf_args(i, simple_cmds->str);
-    if (flag == false)
-        ft_putchar_fd('\n', STDOUT_FILENO);
-    return (EXIT_SUCCESS);
-} 
+	int		i;
+	int		j;
+	bool	flag;
+
+	i = 1;
+	(void) tools;
+	flag = false;
+	while (simple_cmds->str[i] && simple_cmds->str[i][0] == '-'
+		&& simple_cmds->str[i][1] == 'n')
+	{
+		j = 1;
+		while (simple_cmds->str[i][j] == 'n')
+			j++;
+		if (simple_cmds->str[i][j] == '\0')
+			flag = true;
+		else
+			break ;
+		i++;
+	}
+	printf_args(i, simple_cmds->str);
+	if (flag == false)
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	return (EXIT_SUCCESS);
+}

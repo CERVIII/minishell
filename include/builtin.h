@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:49:38 by pcervill          #+#    #+#             */
-/*   Updated: 2024/02/28 18:05:56 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:13:55 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
 # include "minishell.h"
 
 		/*Built-ins*/
-int		(*check_builtin(char *tokens))(t_tools *tools, t_simple_cmds *simple_cmds);
+int		(*check_built(char *tokens))(t_tools *tool, t_simple_cmds *simple_cmds);
 int		ft_cd(t_tools *tools, t_simple_cmds *simple_cmds);
 int		ft_env(t_tools *tools, t_simple_cmds *simple_cmds);
 int		ft_pwd(t_tools *tools, t_simple_cmds *simple_cmds);

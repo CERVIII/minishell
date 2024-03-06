@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 14:40:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:01:38 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*check_env(char *str, char **env, int *i)
 	char	*var;
 	char	*tmp;
 	int		j;
+	int		k;
 
 	*i += 1;
 	var = ft_calloc(ft_strlenmod(str, *i) + 2, sizeof(char));
@@ -26,12 +27,15 @@ char	*check_env(char *str, char **env, int *i)
 		var[j++] = str[(*i)++];
 	var[j++] = '=';
 	tmp = NULL;
-	j = 0;
-	while (env[j])
+	k = 0;
+	while (env[k])
 	{
-		if (!ft_strncmp(var, env[j], (ft_strlen(var))))
-			tmp = ft_strdup(ft_strchr(env[j], '=') + 1);
-		j++;
+		if (!ft_strncmp(var, env[k], (ft_strlen(var))))
+		{
+			tmp = ft_substr(env[k], j, ft_strlenmod(env[k], j));
+			break ;
+		}
+		k++;
 	}
 	free(var);
 	return (tmp);
@@ -40,52 +44,24 @@ char	*check_env(char *str, char **env, int *i)
 char	*detect_dollar_sign(char *str, char **env)
 {
 	int		i;
-	int		j;
-	char	*new_str;
 	char	*tmp;
+	char	*new_str;
 
-	tmp = ft_strdup("");
+	tmp = (char *)ft_calloc(1, sizeof(char));
 	i = 0;
 	while (str[i])
 	{
-		new_str = ft_calloc((ft_strlen(str) + 1), sizeof(char));
-		if (str[i] == '$' && str[i + 1] == '?')
-		{
-			new_str = ft_itoa(g_error);
-			tmp = ft_strjoin(tmp, new_str);
-			free(new_str);
-			i += 2;
-		}
-		else if (str[i] == '$' && (!str[i + 1] || str[i + 1] == ' ' || str[i + 1] == '\"'))
-		{
-			tmp = ft_strjoin(tmp, "$");
-			i++;
-		}
-		else if (str[i] == '$' && str[i + 1] != '\'' && str[i + 1] != '\"'
-			&& str[i + 1] != '\0')
-		{
-			new_str = check_env(str, env, &i);
-			if (new_str)
-			{
-				tmp = ft_strjoin(tmp, new_str);
-				free(new_str);
-			}
-		}
+		new_str = NULL;
+		if (str[i] == '$' )
+			new_str = check_dolar(str, env, &i);
 		else
 		{
-			if (str[i] != '$')
-			{
-				j = 0;
-				while (str[i] != '\0' && str[i] != '$')
-				{
-					new_str[j++] = str[i++];
-				}
-				tmp = ft_strjoin(tmp, new_str);
-				free(new_str);
-			}
-			else
-				i++;
+			new_str = ft_calloc(2, sizeof(char));
+			new_str[0] = str[i++];
 		}
+		free(tmp);
+		tmp = ft_strjoin(tmp, new_str);
+		free(new_str);
 	}
 	return (tmp);
 }
@@ -101,7 +77,8 @@ char	**expansor(char **str, t_tools *tools)
 		if (dollar_sign(str[i]) != 0 && quotes_dollar(str[i]))
 		{
 			tmp = detect_dollar_sign(str[i], tools->env);
-			str[i] = ft_strdup(tmp);
+			free(str[i]);
+			str[i] = tmp;
 		}
 		str[i] = delete_quotes(str[i]);
 		i++;
@@ -118,7 +95,8 @@ char	*expansor_str(char *str, t_tools *tools)
 	if (str && dollar_sign(str) != 0 && quotes_dollar(str))
 	{
 		tmp = detect_dollar_sign(str, tools->env);
-		str = ft_strdup(tmp);
+		free(str);
+		str = tmp;
 	}
 	str = delete_quotes(str);
 	return (str);
@@ -146,23 +124,4 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 		cmd = cmd->next;
 	}
 	return (cmd);
-}
-char    **empty_str(char **str)
-{
-    int     i;
-    char    **tmp;
-    i = 0;
-    if (ft_strlen(str[0]) < 1)
-    {
-        while (str[i])
-            i++;
-        tmp = (char **)ft_calloc(i - 1, sizeof(char *));
-        i = 0;
-        while (str[i])
-        {
-            str[i] = str[i + 1];
-            i++;
-        }
-    }
-    return (str);
 }

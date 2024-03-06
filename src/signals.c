@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 10:34:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/01/25 17:00:55 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:30:11 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void sig_handler(int nb)
+void	sig_handler(int nb)
 {
 	if (nb == SIGINT)
 	{
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();	
+		rl_redisplay();
 	}
-} 
+}
 
-void	init_signals()
+void	init_signals(void)
 {
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
-  

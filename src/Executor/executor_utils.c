@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   executor_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 12:45:27 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:18:50 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-void handle_cmd(t_tools *tools)
+void	handle_cmd(t_tools *tools)
 {
-	int exit_code;
+	int	exit_code;
+
 	exit_code = 0;
 	if (tools->parser->str[0] && tools->parser->str[0][0])
 		exit_code = exec_cmd(tools);
@@ -24,7 +25,8 @@ void handle_cmd(t_tools *tools)
 
 int	ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser)
 {
-	static int i = 0;
+	static int	i = 0;
+
 	if (tools->reset == true)
 	{
 		i = 0;
@@ -68,15 +70,14 @@ int	pipe_wait(int *pid, int amount)
 	return (EXIT_SUCCESS);
 }
 
-
 void	execute_one(t_tools *tools)
 {
-	if (tools->parser->redirections > 0)
+	if (tools->parser->num_redirections > 0)
 		if (handle_redirects(tools->parser->redirections))
-		{
-			g_error = 1;
-			exit(1);
-		}
+	{
+		g_error = 1;
+		exit(1);
+	}
 	if (tools->parser->builtin)
 		tools->parser->builtin(tools, tools->parser);
 	else if (tools->parser->str[0][0])
