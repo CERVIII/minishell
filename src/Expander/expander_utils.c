@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/04 11:12:03 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:03:39 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,31 @@ int	cmp_dollar(char *str, int *i, char flag)
 	return (0);
 }
 
-int	quotes_dollar(char *str)
+int	quotes_dollar(char *str, int *i, int *j)
+{
+//	int	j;
+	int	double_q;
+	int	single_q;
+
+//	j = 0;
+	double_q = 0;
+	single_q = 0;
+	while (str[*j])
+	{
+		if (*j == *i && single_q == 0)
+			return (1);
+		if (str[*j] == '\"' && single_q == 0 && double_q == 0)
+			double_q = cmp_dollar(str, j, '\"');
+		if (str[*j] == '\'' && double_q == 0)
+			single_q = cmp_dollar(str, j, '\'');
+		if (single_q == -1)
+			return (0);
+		(*j)++;
+	}
+	return (1);
+}
+
+/* int	quotes_dollar(char *str)
 {
 	int	i;
 	int	double_q;
@@ -78,7 +102,7 @@ int	quotes_dollar(char *str)
 		i++;
 	}
 	return (1);
-}
+} */
 
 char	*delete_quotes(char *str)
 {

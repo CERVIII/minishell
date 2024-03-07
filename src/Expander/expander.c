@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 11:01:38 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:12:20 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,19 @@ char	*check_env(char *str, char **env, int *i)
 char	*detect_dollar_sign(char *str, char **env)
 {
 	int		i;
+	int		j;
 	char	*tmp;
 	char	*new_str;
 
 	tmp = (char *)ft_calloc(1, sizeof(char));
 	i = 0;
+	j = 0;
 	while (str[i])
 	{
 		new_str = NULL;
-		if (str[i] == '$' )
+		if (str[i] == '\'' || str[i] == '\"')
+			j = i;
+		if (str[i] == '$' && quotes_dollar(str, &i, &j))
 			new_str = check_dolar(str, env, &i);
 		else
 		{
@@ -74,7 +78,7 @@ char	**expansor(char **str, t_tools *tools)
 	i = 0;
 	while (str[i])
 	{
-		if (dollar_sign(str[i]) != 0 && quotes_dollar(str[i]))
+		if (dollar_sign(str[i]) != 0 /* && quotes_dollar(str[i]) */)
 		{
 			tmp = detect_dollar_sign(str[i], tools->env);
 			free(str[i]);
@@ -92,7 +96,7 @@ char	*expansor_str(char *str, t_tools *tools)
 	char	*tmp;
 
 	i = 0;
-	if (str && dollar_sign(str) != 0 && quotes_dollar(str))
+	if (str && dollar_sign(str) != 0 /* && quotes_dollar(str) */)
 	{
 		tmp = detect_dollar_sign(str, tools->env);
 		free(str);
