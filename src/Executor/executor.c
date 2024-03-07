@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 18:28:34 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:01:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	execute(t_tools *tools)
 		if (tools->parser->next)
 			pipe(pipe_fd);
 		check_heredoc(tools, tools->parser);
+		// printf("HD_executr: %s\n", tools->parser->hd_file_name);
 		ft_fork(tools, pipe_fd, fd_in, tools->parser);
 		close(pipe_fd[1]);
 		if (tools->parser->prev)
@@ -77,14 +78,17 @@ void	execute_single(t_tools *tools)
 	int	pid;
 	int	status;
 
-	if (tools->parser->num_redirections > 0)
-		if (handle_redirects(tools->parser->redirections))
-			return ;
 	if (tools->parser->builtin)
 	{
+		if (tools->parser->num_redirections > 0)
+		{
+			if (handle_redirects(tools->parser))
+				return ;
+		}
 		tools->parser->builtin(tools, tools->parser);
 		return ;
 	}
+	check_heredoc(tools, tools->parser);
 	pid = fork();
 	if (pid < 0)
 		perror("fork");

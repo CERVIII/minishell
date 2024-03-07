@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/03/05 13:08:35 by pcervill         ###   ########.fr        #
+#    Updated: 2024/03/07 10:51:07 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c \
 				Clean/free_tools.c \
 				borrar_al_final/print_tools.c \
 				Expander/expander.c Expander/expander_utils.c Expander/expander_utils_2.c \
-				Executor/executor.c Executor/executor_utils.c Executor/find_cmd.c Executor/handle_redirects.c Executor/error.c
+				Executor/executor.c Executor/executor_utils.c Executor/find_cmd.c Executor/handle_redirects.c Executor/error.c \
+				Executor/heredoc.c \
 
 OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 NAME		= minishell
