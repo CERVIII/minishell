@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/07 15:01:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:15:05 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,17 @@ void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
 
 int	execute(t_tools *tools)
 {
-	int	pipe_fd[2];
-	int	fd_in;
+	int		pipe_fd[2];
+	int		fd_in;
+	t_simple_cmds *aux;
 
 	fd_in = STDIN_FILENO;
+	aux = tools->parser;
 	while (tools->parser)
 	{
 		if (tools->parser->next)
 			pipe(pipe_fd);
 		check_heredoc(tools, tools->parser);
-		// printf("HD_executr: %s\n", tools->parser->hd_file_name);
 		ft_fork(tools, pipe_fd, fd_in, tools->parser);
 		close(pipe_fd[1]);
 		if (tools->parser->prev)
@@ -47,6 +48,7 @@ int	execute(t_tools *tools)
 		else
 			break ;
 	}
+	tools->parser = aux;
 	pipe_wait(tools->pid, tools->pipes);
 	return (EXIT_SUCCESS);
 }
@@ -102,6 +104,7 @@ void	execute_single(t_tools *tools)
 int	before_execution(t_tools *tools)
 {
 	check_expander(tools, tools->parser);
+	tools->n_heredoc = 0;
 	if (tools->pipes == 0)
 		execute_single(tools);
 	else
@@ -114,5 +117,7 @@ int	before_execution(t_tools *tools)
 		}
 		execute(tools);
 	}
+	if (tools->n_heredoc > 0)
+		delete_files(tools);
 	return (EXIT_SUCCESS);
 }

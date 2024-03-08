@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/07 15:17:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:15:07 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	check_fd_out(t_token *redirection)
 int	ft_infile(char *str)
 {
 	int	fd;
-	printf("AAAAAA: %s\n", str);
+
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error2");
+		perror("Error");
 		g_error = 1;
 		return (EXIT_FAILURE);
 	}

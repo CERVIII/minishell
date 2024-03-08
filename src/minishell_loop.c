@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/07 12:37:10 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:02:23 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_tools(t_tools *tools)
 	tools->parser = NULL;
 	tools->heredoc = false;
 	tools->reset = false;
+	tools->n_heredoc = 0;
 	init_signals();
 }
 
