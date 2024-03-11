@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/07 15:03:39 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:13:10 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,70 +39,18 @@ int	dollar_sign(char *str)
 	return (0);
 }
 
-int	cmp_dollar(char *str, int *i, char flag)
+int	cmp_quotes(char str, int flag)
 {
-	*i += 1;
-	while (str[*i] && str[*i] != flag)
-	{
-		if (str[*i] == '$')
-		{
-			while (str[*i + 1] != flag)
-				(*i)++;
-			if (flag == '\'')
-				return (-1);
-			return (1);
-		}
-		else
-			(*i)++;
-	}
-	return (0);
+	if (str == '\"' && flag == 0)
+		flag = 1;
+	else if (str == '\"' && flag == 1)
+		flag = 0;
+	if (str == '\'' && flag == 0)
+		flag = -1;
+	else if (str == '\'' && flag == -1)
+		flag = 0;
+	return (flag);
 }
-
-int	quotes_dollar(char *str, int *i, int *j)
-{
-//	int	j;
-	int	double_q;
-	int	single_q;
-
-//	j = 0;
-	double_q = 0;
-	single_q = 0;
-	while (str[*j])
-	{
-		if (*j == *i && single_q == 0)
-			return (1);
-		if (str[*j] == '\"' && single_q == 0 && double_q == 0)
-			double_q = cmp_dollar(str, j, '\"');
-		if (str[*j] == '\'' && double_q == 0)
-			single_q = cmp_dollar(str, j, '\'');
-		if (single_q == -1)
-			return (0);
-		(*j)++;
-	}
-	return (1);
-}
-
-/* int	quotes_dollar(char *str)
-{
-	int	i;
-	int	double_q;
-	int	single_q;
-
-	i = 0;
-	double_q = 0;
-	single_q = 0;
-	while (str[i])
-	{
-		if (str[i] == '\"' && single_q == 0 && double_q == 0)
-			double_q = cmp_dollar(str, &i, '\"');
-		if (str[i] == '\'' && double_q == 0)
-			single_q = cmp_dollar(str, &i, '\'');
-		if (single_q == -1)
-			return (0);
-		i++;
-	}
-	return (1);
-} */
 
 char	*delete_quotes(char *str)
 {

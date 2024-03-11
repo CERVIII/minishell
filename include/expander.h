@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:23:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/07 14:59:02 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:15:32 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,16 @@ typedef struct s_simple_cmds	t_simple_cmds;
 char			*check_env(char *str, char **env, int *i);
 char			*detect_dollar_sign(char *str, char **env);
 char			**expansor(char **str, t_tools *tools);
+char			*expansor_str(char *str, t_tools *tools);
 t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd);
 
 /* EXPANDER_UTILS.C */
 int				ft_strlenmod(char *str, int start);
 int				dollar_sign(char *str);
-int				cmp_dollar(char *str, int *i, char flag);
-//int				quotes_dollar(char *str);
-int				quotes_dollar(char *str, int *i, int *j);
+int				cmp_quotes(char str, int flag);
 char			*delete_quotes(char *str);
 
-/* EXPANDER_UTIS_2.C */
+/* EXPANDER_UTILS_2.C */
 char			**empty_str(char **str);
 char			*check_dolar(char *str, char **env, int *i);
 int				dollar_in_quotes(char *str, int *i, char flag);
