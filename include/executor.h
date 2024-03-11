@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/08 12:46:37 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:33:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int				check_fd_heredoc(t_tools *tools, int end[2],
 					t_simple_cmds *cmd);
 int				check_heredoc(t_tools *tools, t_simple_cmds *cmds);
 void			delete_files(t_tools *tools);
+void			sig_handler(int nb);
 
 #endif

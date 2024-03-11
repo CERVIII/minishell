@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/08 16:15:05 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:07:44 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	execute_single(t_tools *tools)
 int	before_execution(t_tools *tools)
 {
 	check_expander(tools, tools->parser);
-	tools->n_heredoc = 0;
 	if (tools->pipes == 0)
 		execute_single(tools);
 	else
@@ -117,7 +116,7 @@ int	before_execution(t_tools *tools)
 		}
 		execute(tools);
 	}
-	if (tools->n_heredoc > 0)
+	if (tools->n_heredoc + 1 > 0)
 		delete_files(tools);
 	return (EXIT_SUCCESS);
 }
