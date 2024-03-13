@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/11 15:07:44 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:22:48 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
 
 int	execute(t_tools *tools)
 {
-	int		pipe_fd[2];
-	int		fd_in;
-	t_simple_cmds *aux;
+	int				pipe_fd[2];
+	int				fd_in;
+	t_simple_cmds 	*aux;
 
 	fd_in = STDIN_FILENO;
 	aux = tools->parser;

@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/11 16:23:21 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:02:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_tools	tools;
 
-	atexit(leaks);
+	// atexit(leaks);
 	g_error = 0;
 	if (argc != 1 || argv[1])
 	{

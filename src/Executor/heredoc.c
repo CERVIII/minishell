@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/11 14:52:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:59:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,18 @@ void delete_files(t_tools *tools)
 	tools = aux;
 }
 
-int	handle_heredoc(t_tools *tools, t_token *heredoc, char *file)
+int	handle_heredoc(t_token *heredoc, char *file)
 {
 	int		fd;
 	char	*line;
 	int		line_len;
+	char	*key_word;
 
-	(void) tools;
+	key_word = delete_quotes(heredoc->token);
 	line = readline("heredoc > ");
-	line_len = ft_strlen(heredoc->token) + 1;
+	line_len = ft_strlen(key_word) + 1;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	while (line && ft_strncmp(heredoc->token, line, line_len + 1)/*  && tools->heredoc */)
+	while (line && ft_strncmp(key_word, line, line_len + 1) && g_error != -1)
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -55,13 +56,9 @@ int	handle_heredoc(t_tools *tools, t_token *heredoc, char *file)
 		line = readline("heredoc > ");
 	}
 	free(line);
-	if (!line)
-	{
-		ft_putstr_fd("\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
+	if (g_error == -1)
+		return (EXIT_SUCCESS);
 	close(fd);
-	tools->heredoc = true;
 	return (EXIT_SUCCESS);
 }
 
@@ -90,10 +87,9 @@ int	check_heredoc(t_tools *tools, t_simple_cmds *cmds)
 			if (cmds->hd_file_name)
 				free(cmds->hd_file_name);
 			cmds->hd_file_name = ft_heredoc_name(tools);
-			if (handle_heredoc(tools, cmds->redirections, cmds->hd_file_name) != 0)
+			if (handle_heredoc(cmds->redirections, cmds->hd_file_name) != 0)
 			{
 				g_error = 1;
-				free_tools(tools);
 				return (EXIT_FAILURE);
 			}
 		}
