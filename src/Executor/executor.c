@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/14 10:49:15 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:25:22 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute(t_tools *tools)
 {
 	int				pipe_fd[2];
 	int				fd_in;
-	t_simple_cmds 	*aux;
+	t_simple_cmds	*aux;
 
 	fd_in = STDIN_FILENO;
 	aux = tools->parser;
@@ -87,7 +87,7 @@ void	execute_single(t_tools *tools)
 			if (handle_redirects(tools->parser))
 				return ;
 		}
-		tools->parser->builtin(tools, tools->parser);
+		g_error = tools->parser->builtin(tools, tools->parser);
 		return ;
 	}
 	check_heredoc(tools, tools->parser);
