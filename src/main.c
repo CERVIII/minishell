@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/12 12:53:33 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:49:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
+/*
+	! >> "$H"OM"E" debería OME y hace vacío
+	! >> "$USER'$USER'"
+*/
 void	leaks(void)
 {
 	system("leaks -q minishell");

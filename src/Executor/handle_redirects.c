@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 17:53:07 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:47:50 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	ft_infile(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error");
+		perror("Error1");
 		g_error = 1;
 		return (EXIT_FAILURE);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
 	{
-		perror("Error");
+		perror("Error2");
 		return (EXIT_FAILURE);
 	}
 	close(fd);
@@ -54,7 +54,7 @@ int	ft_outfile(t_token *redirection)
 		g_error = 1;
 		return (EXIT_FAILURE);
 	}
-	if (dup2(fd, STDOUT_FILENO) < 0)
+	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
 	{
 		perror("Error");
 		return (EXIT_FAILURE);
@@ -63,26 +63,30 @@ int	ft_outfile(t_token *redirection)
 	return (EXIT_SUCCESS);
 }
 
-int	handle_redirects(t_token *redirects)
+int	handle_redirects(t_simple_cmds *cmds)
 {
 	t_token	*aux;
 
-	aux = redirects;
-	while (aux)
+	aux = cmds->redirections;
+	while (cmds->redirections)
 	{
-		if (aux->type == REDIR_IN)
+		if (cmds->redirections->type == REDIR_IN)
 		{
-			if (ft_infile(aux->token))
+			if (ft_infile(cmds->redirections->token))
 				return (EXIT_FAILURE);
 		}
-		else if (aux->type == REDIR_OUT || aux->type == RREDIR)
+		else if (cmds->redirections->type == REDIR_OUT || cmds->redirections->type == RREDIR)
 		{
-			if (ft_outfile(aux))
+			if (ft_outfile(cmds->redirections))
 				return (EXIT_FAILURE);
 		}
-		//TODO: <<
-		// if (aux->token == RREDIR)
-		aux = aux->next;
+		else if (cmds->redirections->type == HERE_DOC)
+		{
+			if (ft_infile(cmds->hd_file_name))
+				return (EXIT_FAILURE);
+		}
+		cmds->redirections = cmds->redirections->next;
 	}
+	cmds->redirections = aux;
 	return (EXIT_SUCCESS);
 }

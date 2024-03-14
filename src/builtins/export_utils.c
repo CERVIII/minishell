@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:18:39 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:02:46 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_update_var(char **env, char *var, int i)
 	{
 		var_aux = ft_substr(var, 0,
 				ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
-		while (env[i++])
+		while (env[++i])
 		{
 			if (ft_strchr(env[i], '='))
 				aux = ft_substr(env[i], 0,

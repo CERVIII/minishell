@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/12 12:22:32 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:49:15 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	execute(t_tools *tools)
 {
 	int				pipe_fd[2];
 	int				fd_in;
-	t_simple_cmds	*aux;
+	t_simple_cmds 	*aux;
 
 	fd_in = STDIN_FILENO;
 	aux = tools->parser;
@@ -37,7 +37,7 @@ int	execute(t_tools *tools)
 	{
 		if (tools->parser->next)
 			pipe(pipe_fd);
-//		check_heredoc(tools, tools->parser);
+		check_heredoc(tools, tools->parser);
 		ft_fork(tools, pipe_fd, fd_in, tools->parser);
 		close(pipe_fd[1]);
 		if (tools->parser->prev)
@@ -80,14 +80,17 @@ void	execute_single(t_tools *tools)
 	int	pid;
 	int	status;
 
-	if (tools->parser->num_redirections > 0)
-		if (handle_redirects(tools->parser->redirections))
-			return ;
 	if (tools->parser->builtin)
 	{
+		if (tools->parser->num_redirections > 0)
+		{
+			if (handle_redirects(tools->parser))
+				return ;
+		}
 		tools->parser->builtin(tools, tools->parser);
 		return ;
 	}
+	check_heredoc(tools, tools->parser);
 	pid = fork();
 	if (pid < 0)
 		perror("fork");
@@ -113,5 +116,7 @@ int	before_execution(t_tools *tools)
 		}
 		execute(tools);
 	}
+	if (tools->n_heredoc + 1 > 0)
+		delete_files(tools);
 	return (EXIT_SUCCESS);
 }

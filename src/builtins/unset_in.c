@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 15:33:04 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:46:36 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_check_unset_exists(char **exp, char *var)
 					- ft_strlen(ft_strchr(exp[i], '=')));
 			if (!ft_strncmp(var_name, var, ft_strlen(var_name)))
 				return (free(var_name), 1);
+			free(var_name);
 		}
 		else
 		{

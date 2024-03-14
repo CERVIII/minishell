@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 11:08:32 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:37:43 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ typedef struct s_tools
 	char					**exp;
 	int						input;
 	int						output;
-	bool					heredoc;
+	int						n_heredoc;
+	int						heredoc;
 	bool					reset;
 }	t_tools;
 

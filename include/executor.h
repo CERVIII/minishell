@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 11:14:46 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/11 11:33:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_tools			t_tools;
 
 	/*		Executor.c		*/
 int				before_execution(t_tools *tools);
-int				handle_redirects(t_token *redirects);
+int				handle_redirects(t_simple_cmds *cmds);
 char			*get_cmd_route(char *path, char	*cmd);
 char			*get_path(char **env);
 void			handle_dup(t_simple_cmds *cmd, t_tools *tools,
@@ -39,5 +39,8 @@ int				ft_error_export(char *str);
 int				check_cmd(char **cmd);
 int				check_fd_heredoc(t_tools *tools, int end[2],
 					t_simple_cmds *cmd);
+int				check_heredoc(t_tools *tools, t_simple_cmds *cmds);
+void			delete_files(t_tools *tools);
+void			sig_handler(int nb);
 
 #endif

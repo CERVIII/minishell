@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_loop.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 11:01:20 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:47:13 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_tools(t_tools *tools)
 	tools->parser = NULL;
 	tools->heredoc = false;
 	tools->reset = false;
+	tools->n_heredoc = 0;
 	init_signals();
 }
 
