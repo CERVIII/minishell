@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_in.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:48 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 15:05:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:32:49 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_cd(t_tools *tools, t_simple_cmds *simple_cmds)
 		res = chdir(simple_cmds->str[1]);
 		if (res != 0)
 		{
-			perror("cd");
+			perror("Error");
 			g_error = 1;
 		}
 		update_pwd(tools);

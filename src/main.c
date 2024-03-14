@@ -6,12 +6,15 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/13 16:02:27 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:10:48 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
+/*
+	! >> "$H"OM"E" debería OME y hace vacío
+	! >> "$USER'$USER'"
+*/
 void	leaks(void)
 {
 	system("leaks -q minishell");
