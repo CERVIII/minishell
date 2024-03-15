@@ -6,14 +6,11 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/13 17:59:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:34:07 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-//TODO: COMO GESTIONAR SEÑALES?
-//TODO: BORRAR archivos tmp
 
 void delete_files(t_tools *tools)
 {
@@ -44,12 +41,14 @@ int	handle_heredoc(t_token *heredoc, char *file)
 	int		line_len;
 	char	*key_word;
 
+	g_error = 1234;
 	key_word = delete_quotes(heredoc->token);
 	line = readline("heredoc > ");
 	line_len = ft_strlen(key_word) + 1;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	while (line && ft_strncmp(key_word, line, line_len + 1) && g_error != -1)
+	while (line && ft_strncmp(key_word, line, line_len + 1) && g_error == 1234)
 	{
+		signal(SIGINT, sig_handler);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);

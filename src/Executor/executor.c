@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/14 10:49:15 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:24:04 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	execute_single(t_tools *tools)
 			if (handle_redirects(tools->parser))
 				return ;
 		}
-		tools->parser->builtin(tools, tools->parser);
+		g_error = tools->parser->builtin(tools, tools->parser);
 		return ;
 	}
 	check_heredoc(tools, tools->parser);
