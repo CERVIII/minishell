@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 10:34:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/15 12:03:57 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:42:01 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	sig_handler(int nb)
 {
-	if (g_error == 1234)
+	(void) nb;
+	if (g_error == HEREDOC_CODE)
 	{
 		g_error = 1;
 		rl_replace_line("", 0);
@@ -26,7 +27,6 @@ void	sig_handler(int nb)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	(void) nb;
 }
 
 void	init_signals(void)

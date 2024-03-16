@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/14 14:24:04 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:52:32 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	execute_single(t_tools *tools)
 				return ;
 		}
 		g_error = tools->parser->builtin(tools, tools->parser);
+		dup2(tools->input, STDIN_FILENO);
+		dup2(tools->output, STDOUT_FILENO);
 		return ;
 	}
 	check_heredoc(tools, tools->parser);
@@ -116,7 +118,5 @@ int	before_execution(t_tools *tools)
 		}
 		execute(tools);
 	}
-	if (tools->n_heredoc + 1 > 0)
-		delete_files(tools);
 	return (EXIT_SUCCESS);
 }
