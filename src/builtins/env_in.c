@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:20:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/16 13:21:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_env(t_tools *tools, t_simple_cmds *simple_cmds)
 		ft_putstr_fd(simple_cmds->str[1], STDERR_FILENO);
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 		g_error = 127;
+		return (g_error);
 	}
 	return (EXIT_SUCCESS);
 }

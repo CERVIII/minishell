@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_in.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:18:56 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:04:28 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ int	ft_check_vars(char *cmds)
 	char	*aux;
 
 	i = 0;
-	if (ft_strchr(cmds + 1, '='))
+	if (ft_strchr(cmds, '='))
 	{
 		aux = ft_substr(cmds, 0, ft_strlen(cmds)
 				- ft_strlen(ft_strchr(cmds, '=')));
-		ft_check_vars(aux);
+		return(ft_check_vars(aux));
 		free (aux);
 	}
 	else
@@ -106,7 +106,7 @@ int	ft_check_vars(char *cmds)
 			i++;
 		}
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
 
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
@@ -132,7 +132,9 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 					tools->exp = ft_add(tools->exp, simple_cmds->str[i]);
 				}
 			}
+			else
+				return (EXIT_SUCCESS);				
 		}
 	}
-	return (1);
+	return (EXIT_FAILURE);
 }

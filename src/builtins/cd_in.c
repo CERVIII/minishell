@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:48 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/13 18:32:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:52:42 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_cd(t_tools *tools, t_simple_cmds *simple_cmds)
 		{
 			perror("Error");
 			g_error = 1;
+			return (EXIT_FAILURE);
 		}
 		update_pwd(tools);
 		update_env(tools);

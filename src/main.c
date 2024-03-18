@@ -6,15 +6,12 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/14 10:49:00 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:21:02 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-/*
-	! >> "$H"OM"E" debería OME y hace vacío
-	! >> "$USER'$USER'"
-*/
+
 void	leaks(void)
 {
 	system("leaks -q minishell");
@@ -24,7 +21,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_tools	tools;
 
-//	atexit(leaks);
+	atexit(leaks);
 	g_error = 0;
 	if (argc != 1 || argv[1])
 	{
