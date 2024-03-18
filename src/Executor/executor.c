@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/16 17:17:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:49:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,17 @@ void	execute_single(t_tools *tools)
 	int	pid;
 	int	status;
 
+	check_heredoc(tools, tools->parser);
+	if (tools->parser->num_redirections > 0)
+	{
+		if (handle_redirects(tools->parser))
+			return ;
+	}
 	if (tools->parser->builtin)
 	{
-		if (tools->parser->num_redirections > 0)
-		{
-			if (handle_redirects(tools->parser))
-				return ;
-		}
 		g_error = tools->parser->builtin(tools, tools->parser);
-		dup2(tools->input, STDIN_FILENO);
-		dup2(tools->output, STDOUT_FILENO);
 		return ;
 	}
-	check_heredoc(tools, tools->parser);
 	pid = fork();
 	if (pid < 0)
 		perror("fork");

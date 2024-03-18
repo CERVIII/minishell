@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/16 15:49:26 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:49:31 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	minishell_loop(t_tools *tools)
 	check_tokens(tools, &tools->lexer);
 	parser(tools);
 	before_execution(tools);
-	free_tools(tools);
 	dup2(tools->input, STDIN_FILENO);
 	dup2(tools->output, STDOUT_FILENO);
-	// minishell_loop(tools);
+	free_tools(tools);
 }
