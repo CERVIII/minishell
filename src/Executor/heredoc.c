@@ -6,13 +6,13 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/16 12:47:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:46:47 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void delete_files(t_tools *tools)
+void	delete_files(t_tools *tools)
 {
 	int		i;
 	char	*name;

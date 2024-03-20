@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/18 10:44:58 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:46:23 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ void	handle_cmd(t_tools *tools)
 	int	exit_code;
 
 	exit_code = 0;
-	// if (tools->parser->num_redirections > 0)
-	// 	// handle_redirects(tools->parser);
-	// 	if (handle_redirects(tools->parser))
-	// 		exit(1);
 	if (tools->parser->str[0] && tools->parser->str[0][0])
 		exit_code = exec_cmd(tools);
 	exit(exit_code);
