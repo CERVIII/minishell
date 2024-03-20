@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_in.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/04 17:43:47 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:41:17 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_free_tools(t_tools *tools)
 		i++;
 	}
 	i = 0;
-	free(tools->pwd);
-	free(tools->old_pwd);
+	if (tools->env[0])
+	(free(tools->pwd), free(tools->old_pwd));
 }
 
 void	ft_check_exit(char **str)
