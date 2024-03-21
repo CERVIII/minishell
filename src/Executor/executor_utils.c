@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/20 10:46:23 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/21 10:55:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int	ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser)
 		return (EXIT_FAILURE);
 	}
 	if (tools->pid[i] == 0)
-		handle_dup(parser, tools, pipe_fd, fd_in);
+		(signal(SIGQUIT, sig_handler),
+			handle_dup(parser, tools, pipe_fd, fd_in));
+
 	i++;
 	return (EXIT_SUCCESS);
 }
