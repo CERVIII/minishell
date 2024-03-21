@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/20 19:21:01 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/21 11:57:18 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_if_exists(char **export, char *var)
 				- ft_strlen(ft_strchr(var, '=')));
 		while (export[++i])
 		{
-			if (!ft_strncmp(var_name, export[i], ft_strlen(var_name)))
+			if (!ft_strncmp(var_name, export[i], ft_strlen(var_name) + 1))
 				return (free(var_name), 1);
 		}
 		free(var_name);
@@ -122,10 +122,8 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 			if (ft_check_vars(simple_cmds->str[i]) == 0)
 			{
 				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
-				{
 					(ft_update_var(tools->env, simple_cmds->str[i], i),
 						ft_update_var(tools->exp, simple_cmds->str[i], i));
-				}
 				else
 				{
 					if (ft_strchr(simple_cmds->str[i], '='))
