@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
+#    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
 #    Updated: 2024/03/20 19:21:12 by fdiaz-gu         ###   ########.fr        #
@@ -12,7 +12,7 @@
 
 CC			=	gcc
 
-CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra -g3 #-fsanitize=address
 EXTRAFLAGS	= -lreadline -lhistory -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 SRC_DIR			= ./src
