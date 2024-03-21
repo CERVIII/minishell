@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:04:32 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:28:34 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/16 16:41:38 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ int	ft_error_export(char *str)
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putendl_fd(": not a valid identifier", STDERR_FILENO);
 	g_error = 1;
-	return (0);
+	return (EXIT_FAILURE);
 }

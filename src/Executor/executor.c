@@ -80,22 +80,23 @@ void	execute_single(t_tools *tools)
 	int	pid;
 	int	status;
 
+	check_heredoc(tools, tools->parser);
+	if (tools->parser->num_redirections > 0)
+	{
+		if (handle_redirects(tools->parser))
+			return ;
+	}
 	if (tools->parser->builtin)
 	{
-		if (tools->parser->num_redirections > 0)
-		{
-			if (handle_redirects(tools->parser))
-				return ;
-		}
 		g_error = tools->parser->builtin(tools, tools->parser);
 		return ;
 	}
-	check_heredoc(tools, tools->parser);
 	pid = fork();
 	if (pid < 0)
 		perror("fork");
 	if (pid == 0)
-		handle_cmd(tools);
+		(signal(SIGQUIT, sig_handler), handle_cmd(tools));
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
 		g_error = WEXITSTATUS(status);
@@ -116,7 +117,5 @@ int	before_execution(t_tools *tools)
 		}
 		execute(tools);
 	}
-	if (tools->n_heredoc + 1 > 0)
-		delete_files(tools);
 	return (EXIT_SUCCESS);
 }

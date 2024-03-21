@@ -6,12 +6,11 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/08 16:06:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:47:46 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-//#include "../../include/clean.h"
 
 int	ft_err(char *msg, int nb, t_tools *tools)
 {
@@ -28,8 +27,11 @@ void	free_tools(t_tools *tools)
 		free_lexer(tools->lexer);
 	if (tools->parser)
 		free_parser(tools->parser);
+	if (tools->n_heredoc + 1 > 0)
+		delete_files(tools);
 	init_tools(tools);
 	tools->reset = true;
+	minishell_loop(tools);
 }
 
 void	free_lexer(t_token *lexer)

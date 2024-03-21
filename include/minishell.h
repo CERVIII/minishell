@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/12 12:37:43 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/16 12:42:50 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@
 
 # define PROMPT_MSG "\033[1;36m$minishell/ \033[0m"
 # define HEREDOC_MSG	"\033[1;34m> \033[0m"
+
+# define HEREDOC_CODE	300
 
 int	g_error;
 

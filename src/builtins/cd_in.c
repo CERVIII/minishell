@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:32:48 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/13 18:32:49 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:54:37 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@ int	update_pwd(t_tools *tools)
 {
 	char	*temp;
 
-	temp = ft_strdup(tools->pwd);
-	free(tools->old_pwd);
-	tools->old_pwd = temp;
-	free(tools->pwd);
-	tools->pwd = getcwd(NULL, sizeof(NULL));
+	if (tools->env[0] && tools->pwd)
+	{
+		temp = ft_strdup(tools->pwd);
+		free(tools->old_pwd);
+		tools->old_pwd = temp;
+		free(tools->pwd);
+		tools->pwd = getcwd(NULL, sizeof(NULL));
+	}
+	else
+	{
+		temp = tools->pwd;
+		tools->old_pwd = temp;
+		free(tools->pwd);
+		tools->pwd = getcwd(NULL, sizeof(NULL));
+	}
 	return (1);
 }
 
@@ -61,6 +71,7 @@ int	ft_cd(t_tools *tools, t_simple_cmds *simple_cmds)
 		{
 			perror("Error");
 			g_error = 1;
+			return (EXIT_FAILURE);
 		}
 		update_pwd(tools);
 		update_env(tools);
