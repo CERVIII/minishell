@@ -6,11 +6,32 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/16 16:46:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:02:19 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static int check_ambiguous(t_token *token)
+{
+	char	**aux;
+	int		i;
+
+	i = 0;
+	aux = ft_split(token->token, ' ');
+	while (aux[i])
+		i++;
+	i = 0;
+	while (aux[i])
+	{
+		free(aux[i]);
+		i++;
+	}
+	free(aux);
+	if (i >= 2)
+		return (1);
+	return (0);
+}
 
 int	check_fd_out(t_token *redirection)
 {
@@ -68,25 +89,26 @@ int	handle_redirects(t_simple_cmds *cmds)
 	t_token	*aux;
 
 	aux = cmds->redirections;
-	while (cmds->redirections)
+	while (aux)
 	{
-		if (cmds->redirections->type == REDIR_IN)
+		if (check_ambiguous(aux) != 0)
+			return (ft_redirect_error(aux->token));
+		if (aux->type == REDIR_IN)
 		{
-			if (ft_infile(cmds->redirections->token))
+			if (ft_infile(aux->token))
 				return (EXIT_FAILURE);
 		}
-		else if (cmds->redirections->type == REDIR_OUT || cmds->redirections->type == RREDIR)
+		else if (aux->type == REDIR_OUT || aux->type == RREDIR)
 		{
-			if (ft_outfile(cmds->redirections))
+			if (ft_outfile(aux))
 				return (EXIT_FAILURE);
 		}
-		else if (cmds->redirections->type == HERE_DOC)
+		else if (aux->type == HERE_DOC)
 		{
 			if (ft_infile(cmds->hd_file_name))
 				return (EXIT_FAILURE);
 		}
-		cmds->redirections = cmds->redirections->next;
+		aux = aux->next;
 	}
-	cmds->redirections = aux;
 	return (EXIT_SUCCESS);
 }
