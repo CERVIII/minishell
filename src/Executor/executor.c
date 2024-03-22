@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/22 11:27:40 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:08:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	exec_cmd(t_tools *tools)
 		execve(route, cmd, tools->env);
 	else
 		return (g_error);
-	return (free(cmd[0]), free(cmd), ft_error_cmd(tools));
+	return (free_str(cmd), ft_error_cmd(tools));
 }
 
 void	execute_single(t_tools *tools)

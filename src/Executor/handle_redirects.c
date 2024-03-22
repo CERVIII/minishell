@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/22 12:02:19 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/22 12:07:36 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ static int check_ambiguous(t_token *token)
 	aux = ft_split(token->token, ' ');
 	while (aux[i])
 		i++;
-	i = 0;
-	while (aux[i])
-	{
-		free(aux[i]);
-		i++;
-	}
-	free(aux);
+	free_str(aux);
 	if (i >= 2)
 		return (1);
 	return (0);
