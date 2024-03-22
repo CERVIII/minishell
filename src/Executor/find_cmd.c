@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:29:49 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:30:09 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ char	*get_cmd_route(char *path, char	*cmd)
 	possible_path = ft_split(aux, ':');
 	if (access(cmd, F_OK | X_OK) == 0)
 		return (cmd);
-	while (possible_path[++i])
+	while (possible_path[i])
 	{
 		aux_route = ft_strjoin(possible_path[i], "/");
 		cmd_route = ft_strjoin(aux_route, cmd);
 		if (access(cmd_route, F_OK | X_OK) != -1)
 			break ;
 		else
-			(free(aux_route), free(cmd_route));
+			(free(aux_route), free(cmd_route), free(possible_path[i]));
+		i++;
 	}
-	free (aux);
+	(free(possible_path), free(aux));
 	return (cmd_route);
 }
 

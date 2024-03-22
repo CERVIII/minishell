@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/14 14:25:22 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/22 11:27:40 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,13 @@ int	exec_cmd(t_tools *tools)
 	else
 		cmd = tools->parser->str;
 	g_error = check_cmd(cmd);
+	path = get_path(tools->env);
+	route = get_cmd_route(path, cmd[0]);
 	if (g_error == 0)
-	{
-		path = get_path(tools->env);
-		route = get_cmd_route(path, cmd[0]);
 		execve(route, cmd, tools->env);
-	}
 	else
 		return (g_error);
-	return (ft_error_cmd(tools));
+	return (free(cmd[0]), free(cmd), ft_error_cmd(tools));
 }
 
 void	execute_single(t_tools *tools)
