@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:10:24 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/07 13:11:16 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:44:08 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*check_dolar(char *str, char **env, int *i)
 		new_str = ft_strdup("$");
 		(*i)++;
 	}
-	else if (str[*i] == '$' && str[*i + 1] != '\'' && str[*i + 1] != '\0'
+	else if (str[*i] == '$' && str[*i + 1] != '\0'
 		&& str[*i + 1] != ' ')
 	{
 		new_str = check_env(str, env, i);
