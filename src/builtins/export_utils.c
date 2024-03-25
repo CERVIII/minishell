@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/21 18:00:37 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:58:32 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_join_export(char **exp)
 	i = 0;
 	while (exp[i])
 	{
-		// printf("EXP: %s\n", exp[i]);
 		if (ft_strchr(exp[i], '='))
 			exp[i] = ft_joinvar(exp[i]);
 		i++;

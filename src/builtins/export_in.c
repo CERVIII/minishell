@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/22 12:07:45 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:00:03 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_if_exists(char **export, char *var)
 				- ft_strlen(ft_strchr(var, '=')));
 		while (export[++i])
 		{
-			if (!ft_strncmp(var_name, export[i], ft_strlen(var_name) + 1))
+			if (!ft_strncmp(var_name, export[i], ft_strlen(var_name)))
 				return (free(var_name), 1);
 		}
 		free(var_name);
@@ -79,7 +79,7 @@ int	check_if_nb(char *str)
 		return (0);
 	return (1);
 }
-
+//TODO: dividir en 2 funciones
 int	ft_check_vars(char *cmds)
 {
 	int		i;
@@ -92,7 +92,7 @@ int	ft_check_vars(char *cmds)
 				- ft_strlen(ft_strchr(cmds, '=')));	
 		(ft_check_vars(aux), free(aux));		
 	}
-	else
+	else//TODO: Sacar esto fuera
 	{
 		if (!check_if_nb(cmds))
 			return (ft_error_export(cmds));
@@ -105,6 +105,7 @@ int	ft_check_vars(char *cmds)
 			i++;
 		}
 	}
+	printf("LIBRE\n");
 	return (EXIT_SUCCESS);
 }
 
@@ -119,18 +120,22 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 	{
 		while (simple_cmds->str[++i])
 		{
-			if (ft_check_vars(simple_cmds->str[i]) == 0)
+			if (ft_check_vars(simple_cmds->str[i]))
 			{
+				printf("BUENA\n");
 				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
 					(ft_update_var(tools->env, simple_cmds->str[i], i),
 						ft_update_var(tools->exp, simple_cmds->str[i], i));
 				else
 				{
+					printf("no exise\n");
 					if (ft_strchr(simple_cmds->str[i], '='))
 						tools->env = ft_add(tools->env, simple_cmds->str[i]);
 					tools->exp = ft_add(tools->exp, simple_cmds->str[i]);
 				}
-			}			
+			}
+			else
+				printf("malae\n");
 		}
 	}
 	return (EXIT_SUCCESS);
