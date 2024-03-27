@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 10:34:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/16 12:42:01 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:47:19 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	sig_handler(int nb)
 		return ;
 	}
 	printf("\n");
+	g_error = 1;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

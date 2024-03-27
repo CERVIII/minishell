@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 11:25:56 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/27 13:00:11 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,11 @@ void	parser_double_token(t_tools *tools, t_token *lexer)
 		ft_err("Syntax error near unexpected token '<<'\n",
 			STDERR_FILENO, tools);
 	else if (lexer->type == PIPE)
-		ft_err("Syntax error near unexpected token '|'\n",
-			STDERR_FILENO, tools);
+	{
+		g_error = 258;
+		 ft_err("Syntax error near unexpected token '|'\n",
+			258, tools);		
+	}
 }
 
 void	parser(t_tools *tools)
