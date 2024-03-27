@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/25 13:00:03 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:30:03 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_if_exists(char **export, char *var)
 				- ft_strlen(ft_strchr(var, '=')));
 		while (export[++i])
 		{
-			if (!ft_strncmp(var_name, export[i], ft_strlen(var_name)))
+			if (!ft_strcmp(var_name, export[i]))
 				return (free(var_name), 1);
 		}
 		free(var_name);
@@ -55,7 +55,7 @@ int	ft_check_if_exists(char **export, char *var)
 	{
 		while (export[++i])
 		{
-			if (!ft_strncmp(var, export[i], ft_strlen(var)))
+			if (!ft_strcmp(var, export[i]))
 				return (1);
 		}
 	}
@@ -67,7 +67,7 @@ int	check_if_nb(char *str)
 	int	i;	
 
 	i = 0;
-	while (str[i] == 32)
+	while (str[i] == ' ')
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 		i++;
@@ -79,34 +79,25 @@ int	check_if_nb(char *str)
 		return (0);
 	return (1);
 }
-//TODO: dividir en 2 funciones
-int	ft_check_vars(char *cmds)
+
+int	ft_split_vars(char *cmds)
 {
 	int		i;
+	int		res;
 	char	*aux;
 
 	i = 0;
+	res = 0;
 	if (ft_strchr(cmds, '='))
 	{
 		aux = ft_substr(cmds, 0, ft_strlen(cmds)
 				- ft_strlen(ft_strchr(cmds, '=')));	
-		(ft_check_vars(aux), free(aux));		
+		res = ft_check_vars(aux);
+		free(aux);
 	}
-	else//TODO: Sacar esto fuera
-	{
-		if (!check_if_nb(cmds))
-			return (ft_error_export(cmds));
-		else if (cmds[0] == '=')
-			return (ft_error_export(cmds));
-		while (cmds[i])
-		{
-			if (!ft_isalpha(cmds[i]) && cmds[i] != '_')
-				return (ft_error_export(cmds));
-			i++;
-		}
-	}
-	printf("LIBRE\n");
-	return (EXIT_SUCCESS);
+	else
+		res = ft_check_vars(cmds);
+	return (res);
 }
 
 int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
@@ -120,11 +111,10 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 	{
 		while (simple_cmds->str[++i])
 		{
-			if (ft_check_vars(simple_cmds->str[i]))
+			if (ft_split_vars(simple_cmds->str[i]) == 0)
 			{
-				printf("BUENA\n");
 				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
-					(ft_update_var(tools->env, simple_cmds->str[i], i),
+					(printf("Existe\n"), ft_update_var(tools->env, simple_cmds->str[i], i),
 						ft_update_var(tools->exp, simple_cmds->str[i], i));
 				else
 				{
@@ -134,8 +124,6 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 					tools->exp = ft_add(tools->exp, simple_cmds->str[i]);
 				}
 			}
-			else
-				printf("malae\n");
 		}
 	}
 	return (EXIT_SUCCESS);

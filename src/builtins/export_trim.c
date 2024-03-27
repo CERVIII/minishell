@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   export_trim.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:20:34 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:21:12 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:15:25 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	ft_check_vars(char *var)
+{
+	int	i;
+
+	i = 0;
+	if (!check_if_nb(var))
+		return (ft_error_export(var));
+	else if (var[0] == '=')
+		return (ft_error_export(var));
+	while (var[i])
+	{
+		if (!ft_isalpha(var[i]) && var[i] != '_')
+			return (ft_error_export(var));
+		i++;
+	}
+	return (0);
+}
 
 char	*ft_joinvar(char *str)
 {
@@ -42,3 +60,4 @@ char	*ft_trim_quotes(char *str)
 	res = ft_strtrim(str, "\"");
 	return (res);
 }
+
