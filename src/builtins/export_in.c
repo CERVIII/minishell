@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/27 12:30:03 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/03/28 13:12:46 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,10 @@ int	ft_export(t_tools *tools, t_simple_cmds *simple_cmds)
 			if (ft_split_vars(simple_cmds->str[i]) == 0)
 			{
 				if (ft_check_if_exists(tools->exp, simple_cmds->str[i]))
-					(printf("Existe\n"), ft_update_var(tools->env, simple_cmds->str[i], i),
+					(ft_update_var(tools->env, simple_cmds->str[i], i),
 						ft_update_var(tools->exp, simple_cmds->str[i], i));
 				else
 				{
-					printf("no exise\n");
 					if (ft_strchr(simple_cmds->str[i], '='))
 						tools->env = ft_add(tools->env, simple_cmds->str[i]);
 					tools->exp = ft_add(tools->exp, simple_cmds->str[i]);
