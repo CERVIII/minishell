@@ -6,13 +6,13 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/22 12:07:36 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:07:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int check_ambiguous(t_token *token)
+static int	check_ambiguous(t_token *token)
 {
 	char	**aux;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 11:00:50 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/08 16:15:48 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:05:06 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	(*check_built(char *token))(t_tools *tools, t_simple_cmds *simple_cmds)
 	{
 		if (token)
 		{
-			if (!ft_strncmp(builtins[i][0], token, ft_strlen((builtins[i][0])) + 1))
+			if (!ft_strncmp(builtins[i][0], token,
+				ft_strlen((builtins[i][0])) + 1))
 				return (builtins[i][1]);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/20 10:46:47 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:07:52 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	delete_files(t_tools *tools)
 	int		i;
 	char	*name;
 	char	*num;
-	t_tools *aux;
+	t_tools	*aux;
 
 	i = 0;
 	aux = tools;
-	while(i <= tools->n_heredoc)
+	while (i <= tools->n_heredoc)
 	{
 		num = ft_itoa(i);
 		name = ft_strjoin(".tmp_heredoc_", num);
@@ -46,7 +46,8 @@ int	handle_heredoc(t_token *heredoc, char *file)
 	line = readline("heredoc > ");
 	line_len = ft_strlen(key_word) + 1;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	while (line && ft_strncmp(key_word, line, line_len + 1) && g_error == HEREDOC_CODE)
+	while (line && ft_strncmp(key_word, line, line_len + 1)
+		&& g_error == HEREDOC_CODE)
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);

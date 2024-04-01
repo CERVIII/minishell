@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/28 13:12:46 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:05:26 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	ft_split_vars(char *cmds)
 	if (ft_strchr(cmds, '='))
 	{
 		aux = ft_substr(cmds, 0, ft_strlen(cmds)
-				- ft_strlen(ft_strchr(cmds, '=')));	
+				- ft_strlen(ft_strchr(cmds, '=')));
 		res = ft_check_vars(aux);
 		free(aux);
 	}

@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:20:34 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/27 12:15:25 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:05:33 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,3 @@ char	*ft_trim_quotes(char *str)
 	res = ft_strtrim(str, "\"");
 	return (res);
 }
-
