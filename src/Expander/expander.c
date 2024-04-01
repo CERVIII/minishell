@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/01 16:08:07 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 16:16:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*detect_dollar_sign(char *str, char **env)
 	flag = 0;
 	while (str[i])
 	{
-		new_str = NULL;
 		flag = cmp_quotes(str[i], flag);
 		if (str[i] == '$' && flag >= 0)
 			new_str = check_dolar(str, env, &i);
