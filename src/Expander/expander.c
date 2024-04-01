@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/01 16:16:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/01 17:47:12 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*detect_dollar_sign(char *str, char **env)
 		cpy = ft_strdup(tmp);
 		free(tmp);
 		tmp = ft_strjoin(cpy, new_str);
-		(free(cpy),	free(new_str));
+		(free(cpy), free(new_str));
 	}
 	return (tmp);
 }
