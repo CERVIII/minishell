@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/16 12:42:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/10 10:35:01 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,6 @@ int				save_pwd(t_tools *tools);
 		/*	Signals	*/
 void			init_signals(void);
 void			rl_replace_line(const char *text, int clear_undo);
+int				rl_clear_visible_line(void);
 
 #endif
