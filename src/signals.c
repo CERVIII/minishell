@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 10:34:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/10 12:13:44 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/10 12:21:47 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 void	sig_handler(int nb)
 {
+	struct termios	term;
 
 	(void) nb;
-   	struct termios term;
 	if (g_error == HEREDOC_CODE)
 	{
 		g_error = 1;
@@ -26,9 +26,9 @@ void	sig_handler(int nb)
 		ioctl(0, TIOCSTI, "\n");
 		return ;
 	}
-    tcgetattr(STDIN_FILENO, &term);
-    term.c_lflag &= ~ECHOCTL;
-    tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	printf("\n");
 	g_error = 1;
 	rl_on_new_line();
