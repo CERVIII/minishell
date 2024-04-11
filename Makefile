@@ -6,7 +6,7 @@
 #    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/04/09 18:41:09 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/04/11 11:02:50 by fdiaz-gu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_EXPANDER	= 	./src/Expander
 SRC_CLEAN		=	./src/Clean
 SRC_DELETE		=	./src/borrar_al_final
 
-SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c \
+SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c shlvl.c\
 				builtins/cd_in.c builtins/check_builtin.c builtins/echo_in.c \
 				builtins/env_in.c builtins/exit_in.c builtins/export_in.c \
 				builtins/export_trim.c builtins/export_utils.c builtins/pwd_in.c \

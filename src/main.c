@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/09 18:40:56 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:19:31 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ void	leaks(void)
 int	main(int argc, char **argv, char **envp)
 {
 	t_tools	tools;
+	char	**aux;
 
-	// atexit(leaks);
+	atexit(leaks);
 	g_error = 0;
 	if (argc != 1 || argv[1])
 	{
 		printf("This program does not accept arguments\n");
 		exit(0);
 	}
-	tools.env = dup_matrix(envp);
-	tools.exp = dup_matrix(envp);
+	aux = dup_matrix(envp);
+	increment_shlvl(aux);
+	tools.env = dup_matrix(aux);
+	tools.exp = dup_matrix(aux);
 	tools.input = dup(STDIN_FILENO);
 	tools.output = dup(STDOUT_FILENO);
 	save_pwd(&tools);

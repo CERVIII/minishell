@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/09 19:00:11 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/11 11:09:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
 {
 	if (cmd->prev)
-		dup2(fd_in, STDIN_FILENO);
+		if (dup2(fd_in, STDIN_FILENO) < 0)
+			perror("Error");
 	close(pipe_fd[0]);
 	if (cmd->next)
-		dup2(pipe_fd[1], STDOUT_FILENO);
+		if (dup2(pipe_fd[1], STDOUT_FILENO) < 0)
+			perror("Error");
 	close(pipe_fd[1]);
 	if (cmd->prev)
 		close(fd_in);
