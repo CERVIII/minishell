@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/11 11:02:34 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/11 12:23:08 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,6 @@ void			init_signals(void);
 void			rl_replace_line(const char *text, int clear_undo);
 
 		/*	SHLVL	*/
-void	increment_shlvl(char **env);
+void			increment_shlvl(char **env);
 
 #endif
