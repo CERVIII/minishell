@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/11 11:09:00 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:55:33 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	execute(t_tools *tools)
 		else
 			break ;
 	}
-	tools->parser = aux;
 	pipe_wait(tools->pid, tools->pipes);
+	tools->parser = aux;
 	return (EXIT_SUCCESS);
 }
 
