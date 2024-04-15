@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:09:52 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/18 10:47:46 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 11:56:34 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	free_tools(t_tools *tools)
 		free_parser(tools->parser);
 	if (tools->n_heredoc + 1 > 0)
 		delete_files(tools);
+	free(tools->pid);
 	init_tools(tools);
 	tools->reset = true;
 	minishell_loop(tools);
