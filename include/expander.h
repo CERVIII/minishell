@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:23:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/11 13:15:32 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:56:41 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_simple_cmds	t_simple_cmds;
 
 /* EXPANDER.C */
 char			*check_env(char *str, char **env, int *i);
-char			*detect_dollar_sign(char *str, char **env);
+char			*detect_dollar_sign(char *str, char **env, int g_error);
 char			**expansor(char **str, t_tools *tools);
 char			*expansor_str(char *str, t_tools *tools);
 t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd);
@@ -36,7 +36,7 @@ char			*delete_quotes(char *str);
 
 /* EXPANDER_UTILS_2.C */
 char			**empty_str(char **str);
-char			*check_dolar(char *str, char **env, int *i);
+char			*check_dolar(char *str, char **env, int *i, int g_error);
 int				dollar_in_quotes(char *str, int *i, char flag);
 
 #endif

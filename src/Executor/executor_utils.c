@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:31:03 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 11:55:56 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:58:05 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_fork(t_tools *tools, int pipe_fd[2], int fd_in, t_simple_cmds *parser)
 	return (EXIT_SUCCESS);
 }
 
-int	pipe_wait(int *pid, int amount)
+int	pipe_wait(t_tools *tools, int amount)
 {
 	int	i;
 	int	status;
@@ -52,12 +52,12 @@ int	pipe_wait(int *pid, int amount)
 	i = 0;
 	while (i < amount)
 	{
-		waitpid(pid[i], &status, 0);
+		waitpid(tools->pid[i], &status, 0);
 		i++;
 	}
-	waitpid(pid[i], &status, 0);
+	waitpid(tools->pid[i], &status, 0);
 	if (WIFEXITED(status))
-		g_error = WEXITSTATUS(status);
+		tools->g_error = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
 
@@ -68,9 +68,9 @@ void	execute_one(t_tools *tools)
 	exit_code = 0;
 	if (tools->parser->num_redirections > 0)
 	{
-		if (handle_redirects(tools->parser))
+		if (handle_redirects(tools->parser, tools->g_error))
 		{
-			g_error = 1;
+			tools->g_error = 1;
 			exit(1);
 		}
 	}

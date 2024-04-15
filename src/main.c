@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/11 11:19:31 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:11:15 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int argc, char **argv, char **envp)
 	char	**aux;
 
 	atexit(leaks);
-	g_error = 0;
 	if (argc != 1 || argv[1])
 	{
 		printf("This program does not accept arguments\n");

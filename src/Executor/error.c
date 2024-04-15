@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:04:32 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/01 16:06:05 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:59:47 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_redirect_error(char *token)
 	return (EXIT_FAILURE);
 }
 
-int	check_cmd(char **cmd)
+int	check_cmd(char **cmd, t_tools *tools)
 {
 	DIR	*dir;
 
@@ -29,21 +29,21 @@ int	check_cmd(char **cmd)
 		dir = opendir(cmd[0]);
 		if (dir != NULL)
 		{
-			(closedir(dir), ft_putendl_fd(" is a directory", STDERR_FILENO));
-			g_error = 126;
-			return (g_error);
+			closedir(dir), ft_putendl_fd(" is a directory", STDERR_FILENO);
+			tools->g_error = 126;
+			return (tools->g_error);
 		}
 		else if ((access(cmd[0], F_OK) == 0) && (access(cmd[0], X_OK) == -1))
 		{
 			perror(cmd[0]);
-			g_error = 126;
-			return (g_error);
+			tools->g_error = 126;
+			return (tools->g_error);
 		}
 		else if (access(cmd[0], F_OK) == -1)
 		{
 			perror(cmd[0]);
-			g_error = 127;
-			return (g_error);
+			tools->g_error = 127;
+			return (tools->g_error);
 		}
 	}
 	return (EXIT_SUCCESS);
@@ -57,8 +57,8 @@ int	ft_error_cmd(t_tools *tools, char **cmd)
 	ft_putstr_fd(tools->parser->str[0], STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
 	free_str(cmd);
-	g_error = 127;
-	return (g_error);
+	tools->g_error = 127;
+	return (tools->g_error);
 }
 
 int	ft_error_export(char *str)
@@ -66,6 +66,5 @@ int	ft_error_export(char *str)
 	ft_putstr_fd("export: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putendl_fd(": not a valid identifier", STDERR_FILENO);
-	g_error = 1;
 	return (EXIT_FAILURE);
 }

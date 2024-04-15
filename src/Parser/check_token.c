@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:50:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/27 12:56:44 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:17:52 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_broken_pipes(t_token **lst, t_tools *tools)
 			|| ((*lst)->next->type != 0
 				&& !((*lst)->next->type >= 2 && (*lst)->next->type <= 5))))
 	{
-		g_error = 258;
+		tools->g_error = 258;
 		ft_err("Syntax error near unexpected token '|'\n", 127, tools);
 		return (0);
 	}
@@ -42,7 +42,7 @@ void	check_tokens(t_tools *tools, t_token **lst)
 		return ;
 	if ((*lst)->type == 1)
 	{
-		g_error = 258;
+		tools->g_error = 258;
 		ft_err("Syntax error near unexpected token '|'", 127, tools);
 		minishell_loop(tools);
 	}

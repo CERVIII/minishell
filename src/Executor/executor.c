@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 11:55:33 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:07:12 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	execute(t_tools *tools)
 		else
 			break ;
 	}
-	pipe_wait(tools->pid, tools->pipes);
+	pipe_wait(tools, tools->pipes);
 	tools->parser = aux;
 	return (EXIT_SUCCESS);
 }
@@ -65,13 +65,13 @@ int	exec_cmd(t_tools *tools)
 		cmd = ft_split(tools->parser->str[0], ' ');
 	else
 		cmd = tools->parser->str;
-	g_error = check_cmd(cmd);
+	tools->g_error = check_cmd(cmd, tools);
 	path = get_path(tools->env);
 	route = get_cmd_route(path, cmd[0]);
-	if (g_error == 0)
+	if (tools->g_error == 0)
 		execve(route, cmd, tools->env);
 	else
-		return (g_error);
+		return (tools->g_error);
 	return (ft_error_cmd(tools, cmd));
 }
 
@@ -83,12 +83,12 @@ void	execute_single(t_tools *tools)
 	check_heredoc(tools, tools->parser);
 	if (tools->parser->num_redirections > 0)
 	{
-		if (handle_redirects(tools->parser))
+		if (handle_redirects(tools->parser, tools->g_error))
 			return ;
 	}
 	if (tools->parser->builtin)
 	{
-		g_error = tools->parser->builtin(tools, tools->parser);
+		tools->g_error = tools->parser->builtin(tools, tools->parser);
 		return ;
 	}
 	pid = fork();
@@ -99,7 +99,7 @@ void	execute_single(t_tools *tools)
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		g_error = WEXITSTATUS(status);
+		tools->g_error = WEXITSTATUS(status);
 }
 
 int	before_execution(t_tools *tools)

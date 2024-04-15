@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/01 16:07:52 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:53:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	delete_files(t_tools *tools)
 	tools = aux;
 }
 
-int	handle_heredoc(t_token *heredoc, char *file)
+int	handle_heredoc(t_token *heredoc, char *file, int g_error)
 {
 	int		fd;
 	char	*line;
@@ -86,9 +86,9 @@ int	check_heredoc(t_tools *tools, t_simple_cmds *cmds)
 			if (cmds->hd_file_name)
 				free(cmds->hd_file_name);
 			cmds->hd_file_name = ft_heredoc_name(tools);
-			if (handle_heredoc(cmds->redirections, cmds->hd_file_name) != 0)
+			if (handle_heredoc(cmds->redirections, cmds->hd_file_name, tools->g_error) != 0)
 			{
-				g_error = 1;
+				tools->g_error = 1;
 				free_tools(tools);
 				return (EXIT_FAILURE);
 			}

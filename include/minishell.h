@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/11 12:23:08 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:09:52 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@
 
 # define HEREDOC_CODE	300
 
-int	g_error;
-
 typedef struct s_string_info
 {
 	char	*s;
@@ -108,6 +106,7 @@ typedef struct s_tools
 	int						output;
 	int						n_heredoc;
 	int						heredoc;
+	int						g_error;
 	bool					reset;
 }	t_tools;
 

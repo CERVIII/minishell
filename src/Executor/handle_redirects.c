@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/01 16:07:00 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:58:40 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_fd_out(t_token *redirection)
 	return (fd);
 }
 
-int	ft_infile(char *str)
+int	ft_infile(char *str, int g_error)
 {
 	int	fd;
 
@@ -58,7 +58,7 @@ int	ft_infile(char *str)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_outfile(t_token *redirection)
+int	ft_outfile(t_token *redirection, int g_error)
 {
 	int	fd;
 
@@ -78,7 +78,7 @@ int	ft_outfile(t_token *redirection)
 	return (EXIT_SUCCESS);
 }
 
-int	handle_redirects(t_simple_cmds *cmds)
+int	handle_redirects(t_simple_cmds *cmds, int g_error)
 {
 	t_token	*aux;
 
@@ -89,17 +89,17 @@ int	handle_redirects(t_simple_cmds *cmds)
 			return (ft_redirect_error(aux->token));
 		if (aux->type == REDIR_IN)
 		{
-			if (ft_infile(aux->token))
+			if (ft_infile(aux->token, g_error))
 				return (EXIT_FAILURE);
 		}
 		else if (aux->type == REDIR_OUT || aux->type == RREDIR)
 		{
-			if (ft_outfile(aux))
+			if (ft_outfile(aux, g_error))
 				return (EXIT_FAILURE);
 		}
 		else if (aux->type == HERE_DOC)
 		{
-			if (ft_infile(cmds->hd_file_name))
+			if (ft_infile(cmds->hd_file_name, g_error))
 				return (EXIT_FAILURE);
 		}
 		aux = aux->next;

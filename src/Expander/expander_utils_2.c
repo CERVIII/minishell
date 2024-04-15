@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:10:24 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/21 14:44:08 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:54:49 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**empty_str(char **str)
 	return (str);
 }
 
-char	*check_dolar(char *str, char **env, int *i)
+char	*check_dolar(char *str, char **env, int *i, int g_error)
 {
 	char	*new_str;
 

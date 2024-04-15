@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/21 12:45:19 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:17:37 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_free_tools(t_tools *tools)
 	}
 }
 
-void	ft_check_exit(char **str)
+void	ft_check_exit(t_tools *tools, char **str)
 {
 	int	code;
 
@@ -59,7 +59,7 @@ void	ft_check_exit(char **str)
 		ft_putstr_fd(str[1], STDERR_FILENO);
 		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 		code = 255;
-		g_error = 1;
+		tools->g_error = 1;
 	}
 	printf("exit\n");
 	exit(code);
@@ -72,10 +72,10 @@ int	ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
 		&& !ft_all_char(simple_cmds->str))
 	{
 		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
-		g_error = 1;
+		tools->g_error = 1;
 		return (EXIT_FAILURE);
 	}
 	ft_free_tools(tools);
-	ft_check_exit(simple_cmds->str);
+	ft_check_exit(tools, simple_cmds->str);
 	return (EXIT_SUCCESS);
 }

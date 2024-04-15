@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/09 14:16:10 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 16:55:50 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*check_env(char *str, char **env, int *i)
 	return (tmp);
 }
 
-char	*detect_dollar_sign(char *str, char **env)
+char	*detect_dollar_sign(char *str, char **env, int g_error)
 {
 	int		i;
 	int		flag;
@@ -56,7 +56,7 @@ char	*detect_dollar_sign(char *str, char **env)
 	{
 		flag = cmp_quotes(str[i], flag);
 		if (str[i] == '$' && flag >= 0)
-			new_str = check_dolar(str, env, &i);
+			new_str = check_dolar(str, env, &i, g_error);
 		else
 		{
 			new_str = ft_calloc(2, sizeof(char));
@@ -80,7 +80,7 @@ char	**expansor(char **str, t_tools *tools)
 	{
 		if (dollar_sign(str[i]) != 0)
 		{
-			tmp = detect_dollar_sign(str[i], tools->env);
+			tmp = detect_dollar_sign(str[i], tools->env, tools->g_error);
 			free(str[i]);
 			str[i] = tmp;
 		}
@@ -98,7 +98,7 @@ char	*expansor_str(char *str, t_tools *tools)
 	i = 0;
 	if (str && dollar_sign(str) != 0)
 	{
-		tmp = detect_dollar_sign(str, tools->env);
+		tmp = detect_dollar_sign(str, tools->env, tools->g_error);
 		free(str);
 		str = tmp;
 	}
