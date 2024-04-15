@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:04:32 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 16:59:47 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:14:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_cmd(char **cmd, t_tools *tools)
 		dir = opendir(cmd[0]);
 		if (dir != NULL)
 		{
-			closedir(dir), ft_putendl_fd(" is a directory", STDERR_FILENO);
+			(closedir(dir), ft_putendl_fd(" is a directory", STDERR_FILENO));
 			tools->g_error = 126;
 			return (tools->g_error);
 		}

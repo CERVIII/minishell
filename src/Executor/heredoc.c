@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 17:12:31 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:15:43 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	check_heredoc(t_tools *tools, t_simple_cmds *cmds)
 			if (cmds->hd_file_name)
 				free(cmds->hd_file_name);
 			cmds->hd_file_name = ft_heredoc_name(tools);
-			if (handle_heredoc(cmds->redirections, cmds->hd_file_name, tools->g_error) != 0)
+			if (handle_heredoc(cmds->redirections, cmds->hd_file_name,
+					tools->g_error) != 0)
 			{
 				g_signal = 0;
 				tools->g_error = 1;
