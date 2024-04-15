@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 16:53:27 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:12:31 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	handle_heredoc(t_token *heredoc, char *file, int g_error)
 	int		line_len;
 	char	*key_word;
 
-	g_error = HEREDOC_CODE;
+	g_signal = HEREDOC_CODE;
 	key_word = delete_quotes(heredoc->token);
 	line = readline("heredoc > ");
 	line_len = ft_strlen(key_word) + 1;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	while (line && ft_strncmp(key_word, line, line_len + 1)
-		&& g_error == HEREDOC_CODE)
+		&& g_signal == HEREDOC_CODE)
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -88,6 +88,7 @@ int	check_heredoc(t_tools *tools, t_simple_cmds *cmds)
 			cmds->hd_file_name = ft_heredoc_name(tools);
 			if (handle_heredoc(cmds->redirections, cmds->hd_file_name, tools->g_error) != 0)
 			{
+				g_signal = 0;
 				tools->g_error = 1;
 				free_tools(tools);
 				return (EXIT_FAILURE);

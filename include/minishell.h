@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 17:09:52 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/15 17:11:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@
 # define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
 # define HEREDOC_CODE	300
+
+int	g_signal;
 
 typedef struct s_string_info
 {
