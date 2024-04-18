@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/18 13:23:52 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:25:01 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	*delete_quotes(char *str)
 	int		double_q;
 	char	*cpy;
 
-//TODO: mirar donde liberar
 	cpy = ft_strdup(str);
 	i = 0;
 	single_q = 0;
@@ -79,5 +78,5 @@ char	*delete_quotes(char *str)
 		else
 			i++;
 	}
-	return (cpy);
+	return (free(str), cpy);
 }

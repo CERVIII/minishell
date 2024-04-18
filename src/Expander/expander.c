@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/18 12:47:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:20:39 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ char	*expander_str(char *str, t_tools *tools)
 {
 	int		i;
 	char	*tmp;
+	char	*aux;
 
 	i = 0;
 	if (str && dollar_sign(str) != 0)
@@ -102,8 +103,8 @@ char	*expander_str(char *str, t_tools *tools)
 		free(str);
 		str = tmp;
 	}
-	str = delete_quotes(str);
-	return (str);
+	aux = delete_quotes(str);
+	return (aux);
 }
 
 t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)

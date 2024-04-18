@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/18 13:24:14 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:24:41 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	handle_heredoc(t_token *heredoc, char *file, int g_error, t_tools *tools)
 	char	*key_word;
 
 	g_signal = HEREDOC_CODE;
-	key_word = delete_quotes(heredoc->token);
-//	printf("key: %zu, line: %zu\n", ft_strlen(key_word), ft_strlen(heredoc->token));
+	key_word = delete_quotes(ft_strdup(heredoc->token));
 	if (ft_strlen(key_word) == ft_strlen(heredoc->token))
 		line = expander_str(readline("heredoc > "), tools);
 	else
@@ -53,15 +52,15 @@ int	handle_heredoc(t_token *heredoc, char *file, int g_error, t_tools *tools)
 	while (line && ft_strncmp(key_word, line, line_len + 1)
 		&& g_signal == HEREDOC_CODE)
 	{
-		(write(fd, line, ft_strlen(line)), write(fd, "\n", 1));
+		(write(fd, line, ft_strlen(line)), write(fd, "\n", 1), free(line));
 		if (ft_strlen(key_word) == ft_strlen(heredoc->token))
 			line = expander_str(readline("heredoc > "), tools);
 		else
 			line = readline("heredoc > ");
 	}
 	if (g_error == 1)
-		return (EXIT_FAILURE);
-	return (close(fd), EXIT_SUCCESS);
+		return ((free(line), free(key_word), EXIT_FAILURE));
+	return ((free(line), free(key_word), close(fd), EXIT_SUCCESS));
 }
 
 char	*ft_heredoc_name(t_tools *tools)
