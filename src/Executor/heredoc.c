@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 11:33:22 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 17:15:43 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:24:14 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	delete_files(t_tools *tools)
 	tools = aux;
 }
 
-int	handle_heredoc(t_token *heredoc, char *file, int g_error)
+int	handle_heredoc(t_token *heredoc, char *file, int g_error, t_tools *tools)
 {
 	int		fd;
 	char	*line;
@@ -43,22 +43,25 @@ int	handle_heredoc(t_token *heredoc, char *file, int g_error)
 
 	g_signal = HEREDOC_CODE;
 	key_word = delete_quotes(heredoc->token);
-	line = readline("heredoc > ");
+//	printf("key: %zu, line: %zu\n", ft_strlen(key_word), ft_strlen(heredoc->token));
+	if (ft_strlen(key_word) == ft_strlen(heredoc->token))
+		line = expander_str(readline("heredoc > "), tools);
+	else
+		line = readline("heredoc > ");
 	line_len = ft_strlen(key_word) + 1;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	while (line && ft_strncmp(key_word, line, line_len + 1)
 		&& g_signal == HEREDOC_CODE)
 	{
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
-		line = readline("heredoc > ");
+		(write(fd, line, ft_strlen(line)), write(fd, "\n", 1));
+		if (ft_strlen(key_word) == ft_strlen(heredoc->token))
+			line = expander_str(readline("heredoc > "), tools);
+		else
+			line = readline("heredoc > ");
 	}
-	free(line);
 	if (g_error == 1)
 		return (EXIT_FAILURE);
-	close(fd);
-	return (EXIT_SUCCESS);
+	return (close(fd), EXIT_SUCCESS);
 }
 
 char	*ft_heredoc_name(t_tools *tools)
@@ -87,7 +90,7 @@ int	check_heredoc(t_tools *tools, t_simple_cmds *cmds)
 				free(cmds->hd_file_name);
 			cmds->hd_file_name = ft_heredoc_name(tools);
 			if (handle_heredoc(cmds->redirections, cmds->hd_file_name,
-					tools->g_error) != 0)
+					tools->g_error, tools) != 0)
 			{
 				g_signal = 0;
 				tools->g_error = 1;

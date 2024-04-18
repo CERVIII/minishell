@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/11 13:13:10 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/18 13:23:52 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,30 @@ int	cmp_quotes(char str, int flag)
 
 char	*delete_quotes(char *str)
 {
-	int	i;
-	int	single_q;
-	int	double_q;
+	int		i;
+	int		single_q;
+	int		double_q;
+	char	*cpy;
 
+//TODO: mirar donde liberar
+	cpy = ft_strdup(str);
 	i = 0;
 	single_q = 0;
 	double_q = 0;
-	while (str[i])
+	while (cpy[i])
 	{
-		if (str[i] == '\"' && !single_q)
+		if (cpy[i] == '\"' && !single_q)
 		{
 			double_q = change_flag(double_q);
-			ft_strlcpy(&str[i], &str[i + 1], ft_strlen(str) - i);
+			ft_strlcpy(&cpy[i], &cpy[i + 1], ft_strlen(cpy) - i);
 		}
-		else if (str[i] == '\'' && !double_q)
+		else if (cpy[i] == '\'' && !double_q)
 		{
 			single_q = change_flag(single_q);
-			ft_strlcpy(&str[i], &str[i + 1], ft_strlen(str) - i);
+			ft_strlcpy(&cpy[i], &cpy[i + 1], ft_strlen(cpy) - i);
 		}
 		else
 			i++;
 	}
-	return (str);
+	return (cpy);
 }

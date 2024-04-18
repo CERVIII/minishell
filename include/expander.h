@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:23:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 16:56:41 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:54:00 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_simple_cmds	t_simple_cmds;
 /* EXPANDER.C */
 char			*check_env(char *str, char **env, int *i);
 char			*detect_dollar_sign(char *str, char **env, int g_error);
-char			**expansor(char **str, t_tools *tools);
-char			*expansor_str(char *str, t_tools *tools);
+char			**expander(char **str, t_tools *tools);
+char			*expander_str(char *str, t_tools *tools);
 t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd);
 
 /* EXPANDER_UTILS.C */

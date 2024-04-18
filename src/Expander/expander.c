@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 16:55:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:47:53 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*detect_dollar_sign(char *str, char **env, int g_error)
 	return (tmp);
 }
 
-char	**expansor(char **str, t_tools *tools)
+char	**expander(char **str, t_tools *tools)
 {
 	int		i;
 	char	*tmp;
@@ -90,7 +90,7 @@ char	**expansor(char **str, t_tools *tools)
 	return (str);
 }
 
-char	*expansor_str(char *str, t_tools *tools)
+char	*expander_str(char *str, t_tools *tools)
 {
 	int		i;
 	char	*tmp;
@@ -114,13 +114,13 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 	i = 0;
 	while (cmd)
 	{
-		cmd->str = expansor(cmd->str, tools);
+		cmd->str = expander(cmd->str, tools);
 		tmp = cmd->redirections;
 		while (cmd->redirections)
 		{
 			if (cmd->redirections->type != HERE_DOC)
 				cmd->redirections->token
-					= expansor_str(cmd->redirections->token, tools);
+					= expander_str(cmd->redirections->token, tools);
 			cmd->redirections = cmd->redirections->next;
 		}
 		cmd->redirections = tmp;
