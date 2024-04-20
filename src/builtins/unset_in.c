@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/21 17:55:07 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/20 11:52:06 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,10 @@ char	**ft_update(char **env, char **new_env, char *var)
 		else
 			aux = env[i];
 		if (ft_strcmp(var, aux) != 0)
-		{
 			new_env[j++] = env[i];
-			free(aux);
-		}
-		else
-			(free(aux), free(env[i]));
+		else if (ft_strchr(env[i], '='))
+			free(env[i]);
+		free(aux);
 		i++;
 	}
 	return (new_env);
