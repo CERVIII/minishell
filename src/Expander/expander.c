@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/18 15:20:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:49:55 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	**expander(char **str, t_tools *tools)
 			free(str[i]);
 			str[i] = tmp;
 		}
-		str[i] = delete_quotes(str[i]);
+		str[i] = delete_quotes(str[i], 0, 0);
 		i++;
 	}
 	return (str);
@@ -103,7 +103,7 @@ char	*expander_str(char *str, t_tools *tools)
 		free(str);
 		str = tmp;
 	}
-	aux = delete_quotes(str);
+	aux = delete_quotes(str, 0, 0);
 	return (aux);
 }
 

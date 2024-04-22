@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:40:28 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/11 12:22:53 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 11:28:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	increment_shlvl(char **env)
 	int		new_lvl;
 
 	i = 0;
+	if (!env[0])
+		return ;
 	while (env[i])
 	{
 		if (get_index_lvl(env[i]) == 0)
