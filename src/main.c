@@ -6,23 +6,17 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/20 11:52:29 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 10:19:44 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	leaks(void)
-{
-	system("leaks -q minishell");
-}
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_tools	tools;
 	char	**aux;
 
-	// atexit(leaks);
 	if (argc != 1 || argv[1])
 	{
 		printf("This program does not accept arguments\n");
