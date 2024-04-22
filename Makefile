@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+         #
+#    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/04/11 11:02:50 by fdiaz-gu         ###   ########.fr        #
+#    Updated: 2024/04/22 10:24:02 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRCS		=	main.c utils.c utils2.c signals.c minishell_loop.c shlvl.c\
 				Parser/check_token.c Parser/parser.c Parser/clean_lexer.c Parser/cmd_utils.c Parser/parser_utils.c Parser/redirections.c \
 				Quotes/quotes.c \
 				Clean/free_tools.c \
-				borrar_al_final/print_tools.c \
 				Expander/expander.c Expander/expander_utils.c Expander/expander_utils_2.c \
 				Executor/executor.c Executor/executor_utils.c Executor/find_cmd.c Executor/handle_redirects.c Executor/error.c \
 				Executor/heredoc.c \
