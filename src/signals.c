@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 10:34:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/23 12:16:06 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:18:27 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	sig_handler(int nb)
 		ioctl(0, TIOCSTI, "\n");
 		return ;
 	}
+	g_signal = 1;
 	tcgetattr(STDIN_FILENO, &term);
 	term.c_lflag &= ~ECHOCTL;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
