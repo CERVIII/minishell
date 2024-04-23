@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 17:07:12 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:20:08 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,15 @@ void	execute_single(t_tools *tools)
 		perror("fork");
 	if (pid == 0)
 		(signal(SIGQUIT, sig_handler), handle_cmd(tools));
-	signal(SIGINT, SIG_IGN);
-	waitpid(pid, &status, 0);
+	tools->g_error = 130;
+	(signal(SIGINT, SIG_IGN), waitpid(pid, &status, 0));
 	if (WIFEXITED(status))
 		tools->g_error = WEXITSTATUS(status);
 }
 
 int	before_execution(t_tools *tools)
 {
+	tools->g_error = g_signal;
 	check_expander(tools, tools->parser);
 	if (tools->pipes == 0)
 		execute_single(tools);

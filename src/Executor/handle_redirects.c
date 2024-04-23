@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:52:57 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/15 16:58:40 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:55:03 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_infile(char *str, int g_error)
 	{
 		perror("Error");
 		g_error = 1;
-		return (EXIT_FAILURE);
+		return (g_error);
 	}
 	if (dup2(fd, STDIN_FILENO) < 0)
 	{
@@ -67,7 +67,7 @@ int	ft_outfile(t_token *redirection, int g_error)
 	{
 		perror("Error");
 		g_error = 1;
-		return (EXIT_FAILURE);
+		return (g_error);
 	}
 	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
 	{

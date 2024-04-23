@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:01:49 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/22 15:58:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 13:11:44 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,21 @@ void	ft_update_var(char **env, char *var, int i)
 	i = -1;
 	if (ft_strchr(var, '='))
 	{
-		var_aux = ft_substr(var, 0,
-				ft_strlen(var) - ft_strlen(ft_strchr(var, '=')));
+		var_aux = ft_substr(var, 0, ft_strlen(var)
+				- ft_strlen(ft_strchr(var, '=')));
 		while (env[++i])
 		{
 			if (ft_strchr(env[i], '='))
 				aux = ft_substr(env[i], 0,
 						ft_strlen(env[i]) - ft_strlen(ft_strchr(env[i], '=')));
 			else
-				aux = env[i];
+				aux = ft_strdup(env[i]);
 			if (ft_strcmp(aux, var_aux) == 0)
 			{
 				free(env[i]);
 				env[i] = ft_strdup(var);
 			}
-			if (ft_strchr(aux, '='))
+			if (aux)
 				free(aux);
 		}
 		free(var_aux);

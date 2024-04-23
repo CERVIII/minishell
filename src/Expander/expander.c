@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:47:51 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/18 15:20:39 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:54:41 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	**expander(char **str, t_tools *tools)
 			free(str[i]);
 			str[i] = tmp;
 		}
-		str[i] = delete_quotes(str[i]);
+		str[i] = delete_quotes(str[i], 0, 0);
 		i++;
 	}
 	return (str);
@@ -92,27 +92,23 @@ char	**expander(char **str, t_tools *tools)
 
 char	*expander_str(char *str, t_tools *tools)
 {
-	int		i;
 	char	*tmp;
 	char	*aux;
 
-	i = 0;
 	if (str && dollar_sign(str) != 0)
 	{
 		tmp = detect_dollar_sign(str, tools->env, tools->g_error);
 		free(str);
 		str = tmp;
 	}
-	aux = delete_quotes(str);
+	aux = delete_quotes(str, 0, 0);
 	return (aux);
 }
 
 t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd)
 {
 	t_token	*tmp;
-	int		i;
 
-	i = 0;
 	while (cmd)
 	{
 		cmd->str = expander(cmd->str, tools);

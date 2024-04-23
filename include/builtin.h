@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 09:49:38 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/27 11:58:54 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:06:24 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	ft_print_export(char **copy);
 char	**ft_update_export(char **exp, char **new_exp, char *var);
 char	*ft_trim_quotes(char *str);
 char	**ft_update(char **env, char **new_env, char *var);
-int		ft_split_vars(char *cmds);
+int		ft_split_vars(char *cmds, t_tools *tools);
 int		ft_check_if_exists(char **export, char *var);
-int		ft_check_vars(char *var);
+int		ft_check_vars(char *var, t_tools *tools);
+int		ft_cmpvar(char **export, char *var);
 
 #endif

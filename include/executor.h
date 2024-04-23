@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:22:04 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 17:06:50 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:05:36 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int				ft_fork(t_tools *tools, int pipe_fd[2], int fd_in,
 int				pipe_wait(t_tools *tools, int amount);
 void			handle_cmd(t_tools *tools);
 int				ft_error_cmd(t_tools *tools, char **cmd);
-int				ft_error_export(char *str);
+int				ft_error_export(char *str, t_tools *tools);
 int				check_cmd(char **cmd, t_tools *tools);
 int				check_fd_heredoc(t_tools *tools, int end[2],
 					t_simple_cmds *cmd);

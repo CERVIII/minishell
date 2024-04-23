@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/20 11:52:06 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 11:58:59 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ int	ft_unset(t_tools *tools, t_simple_cmds *simple_cmds)
 	while (simple_cmds->str[i])
 	{
 		if (ft_check_unset_exists(tools->exp, simple_cmds->str[i]))
-		{
 			tools->exp = ft_del(tools->exp, simple_cmds->str[i]);
+		if (ft_check_unset_exists(tools->env, simple_cmds->str[i]))
 			tools->env = ft_del(tools->env, simple_cmds->str[i]);
-		}
 		i++;
 	}
 	return (EXIT_SUCCESS);

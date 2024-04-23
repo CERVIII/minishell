@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:02:28 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/15 16:18:00 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:32:29 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	parser_double_token(t_tools *tools, t_token *lexer)
 {
+	tools->g_error = 258;
 	if (lexer->type == REDIR_IN)
 		ft_err("Syntax error near unexpected token '<'\n",
 			STDERR_FILENO, tools);
@@ -28,7 +29,6 @@ void	parser_double_token(t_tools *tools, t_token *lexer)
 			STDERR_FILENO, tools);
 	else if (lexer->type == PIPE)
 	{
-		tools->g_error = 258;
 		ft_err("Syntax error near unexpected token '|'\n",
 			STDERR_FILENO, tools);
 	}

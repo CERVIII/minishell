@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:21:22 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/18 15:25:01 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:41:18 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,15 @@ int	cmp_quotes(char str, int flag)
 	return (flag);
 }
 
-char	*delete_quotes(char *str)
+char	*delete_quotes(char *str, int single_q, int double_q)
 {
 	int		i;
-	int		single_q;
-	int		double_q;
 	char	*cpy;
 
+	if (!str)
+		return (NULL);
 	cpy = ft_strdup(str);
 	i = 0;
-	single_q = 0;
-	double_q = 0;
 	while (cpy[i])
 	{
 		if (cpy[i] == '\"' && !single_q)

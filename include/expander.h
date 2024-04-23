@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:23:21 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/18 12:54:00 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:57:36 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_simple_cmds	*check_expander(t_tools *tools, t_simple_cmds *cmd);
 int				ft_strlenmod(char *str, int start);
 int				dollar_sign(char *str);
 int				cmp_quotes(char str, int flag);
-char			*delete_quotes(char *str);
+char			*delete_quotes(char *str, int single_q, int double_q);
 
 /* EXPANDER_UTILS_2.C */
 char			**empty_str(char **str);
