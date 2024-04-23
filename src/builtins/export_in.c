@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:33:36 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/22 16:07:05 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:54:19 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,9 @@ int	check_if_nb(char *str)
 
 int	ft_split_vars(char *cmds, t_tools *tools)
 {
-	int		i;
 	int		res;
 	char	*aux;
 
-	i = 0;
 	res = 0;
 	if (ft_strchr(cmds, '='))
 	{
