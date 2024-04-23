@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:34:18 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/20 11:55:23 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:22:05 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,21 @@ int	ft_all_char(char **str)
 	return (1);
 }
 
-void	ft_check_exit(t_tools *tools, char **str)
+void	ft_check_exit(t_tools *tools, char **str, int code)
 {
-	int	code;
-
 	if (!str[1])
 		code = 0;
 	else if (!check_if_nb(str[1]))
 	{
 		code = ft_atoi(str[1]);
 		if (code < 0)
-			code = 256 + code;
+		{
+			while (code < 0)
+				code = code + 256;
+		}
+		else
+			while (code > 0)
+				code = code - 256;
 	}
 	else
 	{
@@ -55,6 +59,9 @@ void	ft_check_exit(t_tools *tools, char **str)
 
 int	ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
 {
+	int	code;
+
+	code = 0;
 	(void) tools;
 	if (simple_cmds->str[1] && simple_cmds->str[2]
 		&& !ft_all_char(simple_cmds->str))
@@ -63,6 +70,6 @@ int	ft_exit(t_tools *tools, t_simple_cmds *simple_cmds)
 		tools->g_error = 1;
 		return (EXIT_FAILURE);
 	}
-	ft_check_exit(tools, simple_cmds->str);
+	ft_check_exit(tools, simple_cmds->str, code);
 	return (EXIT_SUCCESS);
 }
