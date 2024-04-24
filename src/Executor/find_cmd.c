@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/22 11:30:09 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:37:30 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_cmd_route(char *path, char	*cmd)
 	aux = ft_strtrim(path, "PATH=");
 	possible_path = ft_split(aux, ':');
 	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
+		return (free(aux), free_str(possible_path), cmd);
 	while (possible_path[i])
 	{
 		aux_route = ft_strjoin(possible_path[i], "/");
