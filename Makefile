@@ -6,15 +6,20 @@
 #    By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 09:52:26 by pcervill          #+#    #+#              #
-#    Updated: 2024/04/23 15:10:29 by pcervill         ###   ########.fr        #
+#    Updated: 2024/04/24 12:22:04 by pcervill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
 CFLAGS		= -Wall -Werror -Wextra -g3 #-fsanitize=address
-EXTRAFLAGS	= -lreadline -lhistory -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
+UNAME		:=	$(shell uname -s)
+ifeq ($(UNAME),Darwin)
+	EXTRAFLAGS	=	-lreadline -lhistory -L/Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
+else
+	EXTRAFLAGS = -lreadline -lhistory -L/usr/lib/x86_64-linux-gnu -I/usr/include/readline
+endif
 
 SRC_DIR			=	./src
 SRC_BUILTIN		=	./src/builtins
@@ -36,17 +41,18 @@ SRCS		=	main.c minishell_loop.c shlvl.c signals.c utils.c utils2.c \
 				Executor/find_cmd.c Executor/handle_redirects.c \
 				Executor/heredoc.c \
 				Expander/expander_utils_2.c Expander/expander_utils.c Expander/expander.c \
-				Lexer/check_input.cLexer/ft_split_cmd_aux_2.c Lexer/ft_split_cmd_aux.c \
+				Lexer/check_input.c Lexer/ft_split_cmd_aux_2.c Lexer/ft_split_cmd_aux.c \
 				Lexer/ft_split_cmd.c Lexer/lexer_utils.c Lexer/lexer.c \
 				Parser/check_token.c Parser/clean_lexer.c Parser/cmd_utils.c Parser/parser_utils.c Parser/parser.c Parser/redirections.c \
 				Quotes/quotes.c \
 
-OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
-NAME		= minishell
+OBJS_PATH = .objs
+OBJS		= $(addprefix $(OBJS_PATH)/, $(notdir $(SRCS:.c=.o)))
 
 LIBFT_PATH	=	./libft/
+LIBFT		=	-L $(LIBFT_PATH) $(LIBFT_PATH)libft.a
 
-OBJS_PATH = .objs
+NAME		= minishell
 
 all: $(NAME)
 	@echo " \033[32m[ OK ] | ✅ Minishell ready! ✅\033[0m"
@@ -86,7 +92,7 @@ $(NAME): $(OBJS)
 	@make bonus -C $(LIBFT_PATH) --silent
 	@echo " \033[32m[ OK ] | ✅ Libft ready! ✅\033[0m"
 	@echo " \033[33m[ .. ] | Compiling minishell..\033[0m"
-	@$(CC) -L $(LIBFT_PATH) -l ft $(CFLAGS) $(EXTRAFLAGS) $(OBJS)  -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(EXTRAFLAGS)
 
 clean:
 	@make clean -C $(LIBFT_PATH) --silent
