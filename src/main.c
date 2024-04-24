@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:46:02 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/22 16:12:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:37:34 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv, char **envp)
 	tools.input = dup(STDIN_FILENO);
 	tools.output = dup(STDOUT_FILENO);
 	save_pwd(&tools);
+	tools.g_error = 0;
 	init_tools(&tools);
 	minishell_loop(&tools);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 12:35:25 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/20 18:40:32 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:37:17 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	minishell_loop(t_tools *tools)
 	char	*tmp;
 
 	tmp = readline(PROMPT_MSG);
-	tools->arg = ft_strtrim(tmp, " \t\n\r");
-	if (!tools->arg)
+	if (!tmp)
 		exit(0);
-	if (!tools->arg[0])
+	tools->arg = ft_strtrim(tmp, " \t\n\r");
+	if (!tools->arg || !tools->arg[0])
 	{
 		free(tmp);
 		free(tools->arg);

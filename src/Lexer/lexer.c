@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:46:30 by pcervill          #+#    #+#             */
-/*   Updated: 2024/03/06 10:52:01 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:04:36 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	lexer(t_tools *tools)
 	char	*tmp;
 
 	tmp = ft_strtrim(tools->arg, " \t\n\r");
-	if (!tmp[0])
+	if (!tmp)
 		minishell_loop(tools);
 	free(tools->arg);
 	tools->arg = tmp;

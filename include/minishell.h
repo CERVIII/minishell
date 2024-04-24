@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/23 14:50:05 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:03:26 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 # include <termios.h>
+# include <sys/ioctl.h>
 # include "lexer.h"
 # include "quotes.h"
 # include "parser.h"
