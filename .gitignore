@@ -1,0 +1,7 @@
+.DS*
+*.o
+.objs/*
+minishell
+*.a
+*.gch
+.vscode

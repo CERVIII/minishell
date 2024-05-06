@@ -6,7 +6,7 @@
 /*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:06:35 by pcervill          #+#    #+#             */
-/*   Updated: 2024/04/24 10:12:02 by pcervill         ###   ########.fr       */
+/*   Updated: 2024/04/24 10:03:26 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 # define MINISHELL_H
 
 # include "../libft/libft.h"
-# include "lexer.h"
-# include "quotes.h"
-# include "parser.h"
-# include "clean.h"
-# include "borrar.h"
-# include "builtin.h"
-# include "executor.h"
-# include "expander.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
@@ -34,6 +26,14 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <sys/ioctl.h>
+# include "lexer.h"
+# include "quotes.h"
+# include "parser.h"
+# include "clean.h"
+# include "borrar.h"
+# include "builtin.h"
+# include "executor.h"
+# include "expander.h"
 
 # define NORMAL			"\033[0m"
 # define BLACK			"\033[30m"
@@ -67,7 +67,7 @@
 
 # define HEREDOC_CODE	300
 
-extern int	g_signal;
+int	g_signal;
 
 typedef struct s_string_info
 {

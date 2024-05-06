@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:55:21 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/24 10:42:36 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:21:18 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 void	handle_dup(t_simple_cmds *cmd, t_tools *tool, int pipe_fd[2], int fd_in)
 {
@@ -106,7 +106,7 @@ int	before_execution(t_tools *tools)
 {
 	if (g_signal == 1)
 	{
-		tools->g_error = 130;
+		tools->g_error = 1;
 		g_signal = 0;
 	}
 	check_expander(tools, tools->parser);

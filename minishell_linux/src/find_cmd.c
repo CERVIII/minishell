@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcervill <pcervill@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:41:01 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/04/24 10:37:30 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/04/24 11:21:38 by pcervill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../include/minishell.h"
 
 char	*get_cmd_route(char *path, char	*cmd)
 {
