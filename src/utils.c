@@ -6,7 +6,7 @@
 /*   By: fdiaz-gu <fdiaz-gu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:24:53 by fdiaz-gu          #+#    #+#             */
-/*   Updated: 2024/03/16 17:22:40 by fdiaz-gu         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:08:49 by fdiaz-gu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 
 int	save_pwd(t_tools *tools)
 {
-	int	i;
+	int		i;
+	char	*buffer;
+	size_t	size;
 
 	i = 0;
-	tools->pwd = getcwd(NULL, sizeof(NULL));
+	size = 1024;
+	buffer = malloc(size);
+	if (!buffer)
+		return (1);
+	tools->pwd = getcwd(buffer, size);	
 	while (tools->env[i])
 	{
 		if (ft_strncmp(tools->env[i], "OLDPWD=", 7) == 0)

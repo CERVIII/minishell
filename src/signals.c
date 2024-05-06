@@ -12,6 +12,7 @@
 
 #include "../include/minishell.h"
 
+int	g_signal;
 void	sig_handler(int nb)
 {
 	struct termios	term;

@@ -106,7 +106,7 @@ int	before_execution(t_tools *tools)
 {
 	if (g_signal == 1)
 	{
-		tools->g_error = 1;
+		tools->g_error = 130;
 		g_signal = 0;
 	}
 	check_expander(tools, tools->parser);
