@@ -71,7 +71,7 @@ int	exec_cmd(t_tools *tools)
 	if (tools->g_error == 0)
 		execve(route, cmd, tools->env);
 	else
-		return (tools->g_error);
+		return (free_str(cmd), tools->g_error);
 	return (ft_error_cmd(tools, cmd));
 }
 
@@ -106,7 +106,7 @@ int	before_execution(t_tools *tools)
 {
 	if (g_signal == 1)
 	{
-		tools->g_error = 1;
+		tools->g_error = 130;
 		g_signal = 0;
 	}
 	check_expander(tools, tools->parser);

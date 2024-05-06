@@ -24,7 +24,7 @@ char	*get_cmd_route(char *path, char	*cmd)
 	aux = ft_strtrim(path, "PATH=");
 	possible_path = ft_split(aux, ':');
 	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
+		return (free(aux), free_str(possible_path), cmd);
 	while (possible_path[i])
 	{
 		aux_route = ft_strjoin(possible_path[i], "/");

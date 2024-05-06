@@ -19,6 +19,7 @@ int	save_pwd(t_tools *tools)
 
 	i = 0;
 	tools->pwd = getcwd(NULL, sizeof(NULL));
+	// printf("");
 	while (tools->env[i])
 	{
 		if (ft_strncmp(tools->env[i], "OLDPWD=", 7) == 0)

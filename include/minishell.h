@@ -66,7 +66,7 @@
 
 # define HEREDOC_CODE	300
 
-int	g_signal;
+extern int	g_signal;
 
 typedef struct s_string_info
 {
